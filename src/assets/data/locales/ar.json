@@ -1,0 +1,214 @@
+{
+  "Dashboard": "الواجهة",
+  "KYC Process": "إعرف عميلك KYC",
+  "Operational Overview": "بيانات العمليات",
+  "Customer Directory": "سجل العملاء",
+  "All action": "جميع الإجراءات",
+  "Everyone": "الجميع",
+  "Newest": "التحديث",
+  "Business Directory": "سجل العمل",
+  "Financial": "مالي",
+  "Activity": "أنشطة",
+  "Configuration": "الإعدادات",
+  "Screening Priority": "أولويات المسح",
+  "Decision Criterion": "إعدادات الإجراءات",
+  "Simulation": "محاكاة",
+  "System Connectivity": "إتصال المنظومة",
+  "Database Connection": "إتصال قاعدة البيانات",
+  "Question":"سؤال",
+  "Manage License": "إعدادات رخص الإتشغيل",
+  "PROCEED TO ADD QUESTION": "تمت متابعة إضافة السؤال",
+  "Facing any issue? Contact us":"هل تواجه أي مشكلة؟ اتصل بنا",
+  "We are always happy to help!":"نحن دائما سعداء للمساعدة!", 
+  "Best way to get answer faster!":"أفضل طريقة للحصول على إجابة أسرع!",
+  "Key or License": "إخصة التشغيل",
+  "Welcome to NAfith! 👋🏻": "مرحبا بكم في نافذ",
+  "Please sign-in to your account and start the adventure": "الرجاء دخول الحساب والبدء",
+  "Email:": "الإيمييل:",
+  "Password:": "كلمة المرور:",
+  "Remember Me ?": "تذكرني؟",
+  "Forgot Password ?": "نسيت كلمة المرور؟",
+  "Log in": "الدخول",
+  "OTHER DETAILS": "تفاصيل أخرى",
+  "Each category (Basic, Professional, and Business) includes the four predefined roles shown below": "تتضمن كل فئة (أساسي ، محترف ، وعمل) الأدوار الأربعة المحددة مسبقًا الموضحة أدناه",
+  "Account Details & Screening Analysis": "تفاصيل الحساب وتحليل الفرز",
+  "Sign Up": "التسجيل",
+  "Source of Additional income, if any": "مصدر الدخل الإضافي إن وجد",
+  "Hits generated and the association with the customer": "تم إنشاء الزيارات والارتباط مع العميل",
+  "Adverse news and the association with the customer": "الأخبار السيئة والارتباط بالعميل",
+  "Source of Income": "مصدر الدخل",
+  "or": "أو",
+  "Account": "الحساب",
+  "Personal": "شخصي",
+  "Verification": "تأكيد",
+  "Account Details": "معلومات الحساب",
+  "Enter Information": "أدخل البيانات",
+  "Notify of completion": "تنبيه الإكتمال",
+  "Account Information": "معلومات الحساب",
+  "Enter Your Account Details": "أدخل معلومات حسابك",
+  "User Name:": "إسم المستخدم:",
+  "Confirm Password:": "تأكيد كلمة المرور:",
+  "Previous": "السابق",
+  "Next": "التالي",
+  "Personal Information": "البيانات الشخصية",
+  "Last Name:": "الإسم الأخير:",
+  "Country:": "البلد:",
+  "Nationality:": "الجنسية:",
+  "Birthday:": "تاريخ الميلاد:",
+  "Gender:": "الجنس:",
+  "Gender": "الجنس",
+  "Verify your email": "تأكيد البريد الإلكتروني",
+  "Account activation link sent to your email address: hello@example.com Please follow the link inside to continue.": "تم إرسال رابط تفعيل الحساب إلى بريدك الإلكتروني hello@example.com ، الرجاء المتابعة بضغط الرابط من بريدك الإلكتروني",
+  "Didn't get the mail?": "لم تستلم الإيميل؟",
+  "Resend": "إعادة الإرسال",
+  "Skip for Now": "التخطي مؤقتًا",
+  "FirstName LastName": "الإسم الأول الإسم الأخير",
+  "First Name": "الإسم الأول",
+  "Last Name": "الإسم الأخير",
+  "ID or Passport Number": "الهوية أو رقم الجواز",
+  "ID": "الهوية",
+  "Or": "أو",
+  "DATE": "تاريخ",
+  "Passport Number": "رقم الجواز",
+  "Date of Birth:": "تاريخ الميلاد:",
+  "Addresss:": "العنوان:",
+  "Address": "العنوان:",
+  "Detailed Report & Search Results": "التقارير المفصلة ونتائج البحث",
+  "Detailed Report": "التقارير المفصلة",
+  "Search Results": "نتائج البحث",
+  "Search HIT Assessment": "تقييم البحث",
+  "Filter by": "تصفية حسب",
+  "KYC Dashboard Analytics": "واجهة تحاليل KYC",
+  "Statistics": "الإحصائيات",
+  "System Vitals": "إحصاءات النظام",
+  "Customers Screened": "العملاء الممسوحين",
+  "Compliance rate": "نسبة الامتثال",
+  "Customers": "العملاء",
+  "Database Vitals": "إحصاءات قاعدة البيانات",
+  "Businesses": "الشركات",
+  "Transactions": "العمليات",
+  "Profile Details": "تفاصيل الملف الشخصي",
+  "KYC Screening": "مسح KYC",
+  "Screening Report": "تقرير المسح",
+  "Enhance Due Diligence": "العناية الواجبة المطورة",
+  "SAVE & CONTINUE": "حفظ ومتابعة",
+  "Transaction Reporting": "تقارير العمليات",
+  "Upload New Photo": "تحميل صورة جديدة",
+  "Reset": "إعادة ضبط",
+  "Scan details via OCR": "مسح المعلومات عبر OCR",
+  "Drop files here or click browse thorough your machine": "قم بإسقاط الملفات هنا أو انقر فوق تصفح شامل جهازك",
+  "ID Number:": "رقم الهوية:",
+  "Passport Number:": "رقم الجواز:",
+  "Allowed JPG, GIF or PNG. Max size of 800kB": "مسموح بتنسيق JPG أو GIF أو PNG. أقصى حجم 800 كيلو بايت",
+  "City, Country:": "المدينة، البلد:",
+  "City, Country": "المدينة، البلد:",
+  "Address, City, Country": "العنوان المدينة، البلد:",
+  "Content not available": "المحتوى غير متوفر",
+  "City": "المدينة",
+  "Country": "البلد",
+  "Action": "فعل",
+  "Save & Continue": "حفظ ومتابعة",
+  "Email or Contact Number": "رقم الاتصال أو الإيمييل",
+  "Save": "حفظ",
+  "Risk Level": "مستوى الخطر",
+  "Medium": "واسطة",
+  "&": "و",
+  "Continue": "متابعة",
+  "Loading": "تحميل",
+  "Upload Files": "تحميل الملفات",
+  "Drop files here or click to upload": "أفلت الملفات هنا أو انقر للتحميل.",
+  "Drop files here or click": "قم بإسقاط الملفات هنا أو انقر فوق",
+  "browse" : "تصفح",
+  "thorough your machine" : "شامل جهازك",
+  "Drop Files Here": "أفلت الملفات هنا",
+  "Click to Upload": "انقر للتحميل",
+  "Searching & Screening Data": "البحث ومسح البيانات",
+  "Searching": "البحث",
+  "DOWNLOAD PDF": "تحميل PDF",
+  "Screening": "الفحص",
+  "Data": "البيانات",
+  "Change Screening Priority": "تغيير أولوية الفحص",
+  "Enhance Due Diligence Questions": "تعزيز أسئلة العناية الواجبة",
+  "EDIT DETAILS": "تحرير التفاصيل",
+  "CANCEL SCREENING": "إلغاء الفحص",
+  "Are You Sure You Want to Cancel Screening?": "هل أنت متأكد أنك تريد إلغاء الفحص؟",
+  "Alert to Regulatory User": "تنبيه المستخدم التنظيمي",
+  "Cancel": "إلغاء",
+  "Upload business logo": "تحميل شعار المنشأة",
+  "Business Name:": "اسم المنشأة:",
+  "Registration Number:": "رقم التسجيل:",
+  "Phone:": "الهاتف:",
+  "Business Details:": "تفاصيل المنشأة:",
+  "Upload Store Front Image": "تحميل صورة واجهة المتجر",
+  "Upload Registration Document": "تحميل مستند التسجيل",
+  "Upload other Document": "تحميل مستند آخر",
+  "Create User": "إنشاء مستخدم",
+  "Manage Users": "إدارة المستخدمين",
+  "Manage Permissions": "إدارة الصلاحيات",
+  "Notify of Completion": "إخطار بالانتهاء",
+  "Enter Your Account Details here": "أدخل تفاصيل حسابك هنا",
+  "Profile Link": "رابط الملف الشخصي",
+  "Enter Your Personal Details": "أدخل بياناتك الشخصية",
+  "Enter Your Personal Information here": "أدخل معلوماتك الشخصية هنا",
+  "Drag and Drop here or click to upload": "قم بالسحب والإفلات هنا أو انقر للتحميل",
+  "Remove All": "حذف الكل",
+  "Export": "يصدّر",
+  "Search Customer": "البحث عن العملاء",
+  "STATUS": "حالة",
+  "CITY/COUNTRY": "مدينة بلد",
+  "GENDER": "جنس",
+  "NATIONALITY": "جنسية",
+  "CUSTOMER NAME": "اسم العميل",
+  "Customer Name": "اسم العميل",
+  "SCREEN A CUSTOMER" : "فحص العميل",
+  "Customer Screened" : "فحص العميل",
+  "ACTION": "فعل",
+  "BUSINESS NAME": "الاسم التجاري",
+  "License Details" : "تفاصيل الترخيص",
+  "EMAIL": "بريد إلكتروني",
+  "TRANSACTION NAME": "اسم المعاملة",
+  "TRANSACTION ID": "رقم المعاملة",
+  "WATCHLIST TYPE": "نوع قائمة المراقبة",
+  "HIT ASSESSMENT": "تقييم الضرب",
+  "Search Business": "بحث الأعمال",
+  "EDITOR": "محرر",
+  "Database Name & Alert ID": "اسم قاعدة البيانات ومعرف التنبيه",
+  "Enable/Disable": "مفعل وغير مفعل",
+  "Set priority": "يضع أولويات",
+  "SORT BY": "ترتيب حسب",
+  "MATCH RESULT": "نتيجة المباراة",
+  "System Connection":"إتصال المنظومة",
+  "SYSTEM NAME":"اسم النظام",
+  "Customer Database Record": "سجل قاعدة بيانات العملاء",
+  "SUBMIT": "يُقدِّم",
+  "RESET": "إعادة ضبط",
+  "CUSTOMER": "عميل",
+  "DETAILS": "تفاصيل",
+  "Simulation result": "نتيجة المحاكاة",
+  "ROLES & PERMISSIONS": "الأدوار والأذونات",
+  "HOME": "بيت",
+  "USER": "مستخدم",
+  "ROLE": "دور",
+  "LAST UPDATED": "آخر تحديث",
+  "Roles List": "قائمة الأدوار",
+  "A role provided access to predefined menus and features so that depending on assigned role an administrator can have access to what he need": "قدم أحد الأدوار الوصول إلى القوائم والميزات المحددة مسبقًا بحيث يعتمد ذلك علىالدور المعين الذي يمكن للمسؤول الوصول إليه إلى ما يحتاج إليه",
+  "Transaction name": "اسم المعاملة",
+  "Transaction id": "رقم المعاملة",
+  "Watchlist type": "نوع قائمة المراقبة",
+  "Hit Assessment": "تقييم الضربات",
+  "Downloaded": "تم التنزيل",
+  "Potential Positive": "إيجابي محتمل",
+  "False Positive": "إيجابية كاذبة",
+  "security database": "قاعدة بيانات الأمان",
+  "name": "اسم",
+  " Alert Date Priority (choose sorting priority)" : "أولوية تاريخ التنبيه (اختر أولوية الفرز)",
+  "Job Type (choose keywords)" : "نوع الوظيفة (اختر الكلمات الرئيسية)",
+  "Create A New User" : "قم بإنشاء مستخدم جديد",
+  "Permissions List" : "قائمة الأذونات",
+  "Search Permission" : "إذن البحث",
+  "Add Permission" : "إضافة الإذن",
+  "Assigned to" : "مخصص ل",
+  "NAME" : "اسم" ,
+  "Date Created" : "تاريخ الإنشاء",
+"Upload License" : "رخصة الرفع"
+}

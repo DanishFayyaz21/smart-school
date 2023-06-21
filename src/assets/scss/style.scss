@@ -1,0 +1,443 @@
+/*================================================================================
+	Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
+	Version: 2.0
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+.k_font {
+  // position: absolute;
+  height: 24px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  /* identical to box height, or 120% */
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.15px;
+  /* Blue/100 */
+  color: #0a1172;
+}
+
+.table_risk_handing {
+  width: 36px;
+  height: 24px;
+  left: 0px;
+  top: -1px;
+  background-color: red;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.25px;
+
+  /* Dark Grey/60 */
+
+  color: rgba(77, 75, 85, 0.6);
+}
+.table_risk_description {
+  width: 78px;
+  height: 25px;
+  left: 0px;
+  top: px;
+  margin-top: 3px;
+
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  /* or 167% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.25px;
+
+  /* Dark Grey/40 */
+
+  color: rgba(77, 75, 85, 0.4);
+}
+
+.table_customer_hading {
+  width: 134px;
+  height: 19px;
+  left: 0px;
+  top: 2px;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  /* or 150% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.25px;
+
+  /* Dark Grey/60 */
+
+  color: rgba(77, 75, 85, 0.6);
+}
+
+.table_status_verified {
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 2.70312px 0px 2.71875px;
+
+  width: 69.7px;
+  height: 24px;
+
+  /* Green/15 */
+
+  background: rgba(40, 199, 111, 0.15);
+  border-radius: 4px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.table_status_edd {
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 2.70312px 0px 2.71875px;
+
+  width: 46.7px;
+  height: 24px;
+
+  /* Red/15 */
+
+  background: rgba(234, 84, 85, 0.15);
+  border-radius: 4px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.table_status_secreenning {
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 2.70312px 0px 2.71875px;
+
+  width: 84.7px;
+  height: 24px;
+
+  /* Orange/15 */
+
+  background: rgba(255, 159, 67, 0.15);
+  border-radius: 4px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+.table_status_verified_child {
+  width: 50px;
+  height: 20px;
+
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+  /* identical to box height, or 115% */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.25px;
+  padding-left: 18px;
+
+  /* Green/100 */
+
+  color: #28c76f;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+.table_status_edd_child {
+  width: 27px;
+  height: 15px;
+  padding-left: 15px;
+  padding-top: 5px;
+
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 15px;
+  /* identical to box height, or 115% */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.25px;
+
+  /* Red/100 */
+
+  color: #ea5455;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.table_status_secreenning_child {
+  width: 65px;
+  height: 15px;
+
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+  /* identical to box height, or 115% */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.25px;
+  padding-left: 15px;
+
+  /* Orange/100 */
+
+  color: #ff9f43;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+.Card_1_hading {
+  width: 250px;
+  height: 25px;
+  left: 894px;
+  top: 119px;
+
+  font-weight: 500;
+  font-size: 20px;
+  line-height: px;
+  /* identical to box height, or 120% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.15px;
+
+  /* Blue/100 */
+
+  color: #0a1172;
+}
+.Card1_child1 {
+  width: 114px;
+  height: 19px;
+  left: 0px;
+  top: calc(50% - 19px / 2 - 0.5px);
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height, or 119% */
+
+  display: flex;
+  align-items: center;
+
+  /* Dark Grey/100 */
+
+  color: #4d4b55;
+}
+.Card1_child2 {
+  width: 128px;
+  height: 19px;
+  left: 0px;
+  top: calc(50% - 19px / 2 - 0.5px);
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height, or 119% */
+
+  display: flex;
+  align-items: center;
+
+  /* Dark Grey/100 */
+
+  color: #4d4b55;
+}
+.Card1_status {
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  // padding: 2.25px 2.25px;
+
+  width: 52.83px;
+  height: 24px;
+  // left: 120px;
+  // top: calc(50% - 24px/2);
+
+  /* Green/15 */
+
+  background: rgba(40, 199, 111, 0.15);
+  border-radius: 4px;
+}
+
+.Card1_status_child {
+  width: 33px;
+  height: 12px;
+  margin-right: 10px;
+  margin-top: 12px;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+  /* identical to box height, or 115% */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  /* Green/100 */
+
+  color: #28c76f;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+.Card2_icon {
+  width: 42px;
+  height: 42px;
+  left: 24px;
+//   top: 24px;
+  /* Green/15 */
+  background: rgba(40, 199, 111, 0.15);
+  border-radius: 21px;
+}
+.Card2_icon_body{	
+// margin-top: 20px;
+height: 40px;
+font-weight: bold;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.Card2_child{
+
+	width: 52px;
+	height: 24px;
+	left: 24px;
+	top: 80px;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 24px;
+	margin-top: 12px;
+	margin-left: 5px;
+	
+	/* identical to box height, or 120% */
+	
+	display: flex;
+	align-items: center;
+	
+	/* Dark Grey/100 */
+	
+	color: #4D4B55;
+	
+}
+.Card2_child1{
+	margin-left: 3px;
+}
+
+.text-center-responsive {
+	text-align: start;
+	@media (min-width: 200px) and (max-width: 500px)  {
+		text-align: center;
+	  }
+}
+.register_page_content{
+  margin-bottom: 120px;
+}
+.upload_pdf_heading{
+  
+font-weight: 900;
+font-size: 1rem;
+
+/* identical to box height, or 117% */
+
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+
+/* Blue/100 */
+
+color: #0A1172;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+}
+.pdf_upload_icon{
+  
+width: 60px;
+height: 60px;
+display: flex;
+align-items: center;
+justify-content: center;
+
+/* Blue/100 */
+
+background: #0A1172;
+box-shadow: 0px 4.5px 9px 3px rgba(51, 48, 60, 0.03), 0px 6px 9px rgba(51, 48, 60, 0.02), 0px 1.5px 6px 3px rgba(51, 48, 60, 0.01);
+border-radius: 9px;
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+}
+.pdf_upload_desc{
+  
+height: 5 px;
+font-weight: 400;
+font-size: 1rem;
+/* identical to box height, or 119% */
+
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+
+/* Dark Grey/60 */
+
+color: rgba(77, 75, 85, 0.6);
+
+/* Inside auto layout */
+flex: none;
+}
