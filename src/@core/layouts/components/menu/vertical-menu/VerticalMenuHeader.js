@@ -47,12 +47,13 @@ const VerticalMenuHeader = props => {
   }
 
   return (
-    <div className='navbar-header'>
-      <ul className='nav navbar-nav flex-row'>
+    <div className='navbar-header justify-content-center d-flex'>
+      <ul className='nav navbar-nav'>
         <li className='nav-item me-auto'>
           <NavLink to={user ? getHomeRouteForLoggedInUser(user.role) : '/'} className='navbar-brand'>
             <span className='brand-logo'>
-              <img src={themeConfig.app.appLogoImage} alt='logo' />
+              {/* <img src={themeConfig.app.appLogoImage} alt='logo' /> */}
+              <h1 className='pt-2'>LMS</h1>
             </span>
             {/* <h2 className='brand-text mb-0'>{themeConfig.app.appName}</h2> */}
           </NavLink>

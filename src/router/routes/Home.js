@@ -1,18 +1,18 @@
 // ** React Imports
 import { lazy } from 'react'
-import AccountTabContent from "../../views/home/kyc-process/AccountTabContent";
-import KycScreeningTabContent from "../../views/home/kyc-process/KycScreeningTabContent";
-import ScreeningReportTabContent from "../../views/home/kyc-process/ScreeningReportTabContent";
-import EnhanceDueDiligencyTabContent from "../../views/home/kyc-process/EnhanceDueDiligencyTabContent";
-import TransactionReportingTabContent from "../../views/home/kyc-process/TransactionReportingTabContent";
+import AccountTabContent from "../../views/admin/student/AccountTabContent";
+import KycScreeningTabContent from "../../views/admin/student/KycScreeningTabContent";
+import ScreeningReportTabContent from "../../views/admin/student/ScreeningReportTabContent";
+import EnhanceDueDiligencyTabContent from "../../views/admin/student/EnhanceDueDiligencyTabContent";
+import TransactionReportingTabContent from "../../views/admin/student/TransactionReportingTabContent";
 // import { Activity } from 'react-feather';
 
-const KYCProcess = lazy(() => import('../../views/home/kyc-process'))
-const OperationalOverview = lazy(() => import('../../views/home/operational-overview'))
-const CustomerDirectory = lazy(() => import('../../views/home/customer-directory'))
-const BusinessDirectory = lazy(() => import('../../views/home/business-directory'))
-const Activity = lazy(() => import('../../views/home/Activity'))
-const Finance = lazy(() => import('../../views/home/Finance'))
+const KYCProcess = lazy(() => import('../../views/admin/student'))
+const OperationalOverview = lazy(() => import('../../views/admin/operational-overview'))
+const CustomerDirectory = lazy(() => import('../../views/admin/customer-directory'))
+const BusinessDirectory = lazy(() => import('../../views/admin/business-directory'))
+const Activity = lazy(() => import('../../views/admin/Activity'))
+const Finance = lazy(() => import('../../views/admin/Finance'))
 // const People = lazy(() => import('../../views/home/people'))
 
 // const Todo = lazy(() => import('../../views/apps/todo'))
@@ -39,7 +39,7 @@ const Finance = lazy(() => import('../../views/home/Finance'))
 
 const HomeRoutes = [
   {
-    path: '/kyc-process',
+    path: '/student',
     element: <KYCProcess />,
     children: [
       {

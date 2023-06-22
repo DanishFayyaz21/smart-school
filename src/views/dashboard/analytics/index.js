@@ -14,7 +14,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import CustomerScreenedCard from "../../../@core/components/dashboard/CustomerScreenedCard";
 import SystemConnectivityCard from "../../../@core/components/dashboard/SystemConnectivityCard";
 import DashboardMainCard from "../../../@core/components/dashboard/DashboardMainCard";
-import Model from "../../home/customer-directory/Models/index";
+import Model from "../../admin/customer-directory/Models/index";
 import { useTranslation } from "react-i18next";
 
 const AnalyticsDashboard = () => {
