@@ -7,7 +7,7 @@ import EnhanceDueDiligencyTabContent from "../../views/admin/student/EnhanceDueD
 import TransactionReportingTabContent from "../../views/admin/student/TransactionReportingTabContent";
 // import { Activity } from 'react-feather';
 
-const KYCProcess = lazy(() => import('../../views/admin/student'))
+const StudentList = lazy(() => import('../../views/admin/student/list'))
 const OperationalOverview = lazy(() => import('../../views/admin/operational-overview'))
 const CustomerDirectory = lazy(() => import('../../views/admin/customer-directory'))
 const BusinessDirectory = lazy(() => import('../../views/admin/business-directory'))
@@ -40,7 +40,7 @@ const Finance = lazy(() => import('../../views/admin/Finance'))
 const HomeRoutes = [
   {
     path: '/student',
-    element: <KYCProcess />,
+    element: <StudentList />,
     children: [
       {
         path: 'account',

@@ -12,7 +12,7 @@ import UiElementRoutes from './UiElements'
 import ExtensionsRoutes from './Extensions'
 import PageLayoutsRoutes from './PageLayouts'
 import AuthenticationRoutes from './Authentication'
-import HomeRoutes from './Home'
+import AdminRoutes from './admin'
 import SystemConnectivityRoutes from './SystemConnectivity'
 
 // ** Layouts
@@ -55,7 +55,7 @@ const Routes = [
   ...FormRoutes,
   ...TablesRoutes,
   ...ChartsRoutes,
-  ...HomeRoutes,
+  ...AdminRoutes,
   ...configurationRoutes,
   ...rolesPermissionsRoutes,
   ...SystemConnectivityRoutes,

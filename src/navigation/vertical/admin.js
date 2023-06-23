@@ -14,7 +14,7 @@ export default [
       id: 'vertical_kyc_process',
       title: 'Students',
       icon: <IoPeople />,
-      navLink: '/student/account'
+      navLink: '/student'
 
       // children: [
       //   {
