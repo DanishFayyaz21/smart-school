@@ -139,7 +139,7 @@ const Login = () => {
       <div className="main bg-white">
          <div className="shadow bg-white p-2">
             <Link
-               className="brand-logo ps-3 my-2"
+               className="brand-logo text-center ps-3 my-0"
                to="/"
                onClick={(e) => e.preventDefault()}
             >
@@ -150,7 +150,7 @@ const Login = () => {
         >
          
         </Col> */}
-               <svg
+               {/* <svg
                   width="98"
                   height="30"
                   viewBox="0 0 98 30"
@@ -240,7 +240,8 @@ const Login = () => {
                      d="M93.8722 29.2145V24.8121H90.018V29.2145H86.6124V16.8711H90.018V21.8716H93.8722V16.8711H97.2779V29.2145H93.8722Z"
                      fill="#0A1172"
                   />
-               </svg>
+               </svg> */}
+            <h1>LMS</h1>
             </Link>
          </div>
          <Row>
@@ -263,7 +264,7 @@ const Login = () => {
                      className="fw-bold mb-1"
                      style={{ color: "rgba(10, 17, 114, 1)", fontSize: "20px" }}
                   >
-                    { t("Welcome to Nafith ! 👋🏻")}
+                    { t("Welcome to LMS ! 👋🏻")}
                   </CardTitle>
                   <CardText
                      className="mb-2"
