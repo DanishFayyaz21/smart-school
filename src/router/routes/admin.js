@@ -5,6 +5,7 @@ import KycScreeningTabContent from "../../views/admin/student/KycScreeningTabCon
 import ScreeningReportTabContent from "../../views/admin/student/ScreeningReportTabContent";
 import EnhanceDueDiligencyTabContent from "../../views/admin/student/EnhanceDueDiligencyTabContent";
 import TransactionReportingTabContent from "../../views/admin/student/TransactionReportingTabContent";
+import StudentView from '../../views/admin/student/view';
 // import { Activity } from 'react-feather';
 
 const StudentList = lazy(() => import('../../views/admin/student/list'))
@@ -41,28 +42,32 @@ const HomeRoutes = [
   {
     path: '/student',
     element: <StudentList />,
-    children: [
-      {
-        path: 'account',
-        element: <AccountTabContent />
-      },
-      {
-        path: 'screening',
-        element: <KycScreeningTabContent />
-      },
-      {
-        path: 'report',
-        element: <ScreeningReportTabContent />
-      },
-      {
-        path: 'diligence',
-        element: <EnhanceDueDiligencyTabContent />
-      },
-      {
-        path: 'transaction-report',
-        element: <TransactionReportingTabContent />
-      },
-    ]
+    // children: [
+    //   {
+    //     path: 'view/:id',
+    //     element: <StudentView />
+    //   },
+    //   {
+    //     path: 'screening',
+    //     element: <KycScreeningTabContent />
+    //   },
+    //   {
+    //     path: 'report',
+    //     element: <ScreeningReportTabContent />
+    //   },
+    //   {
+    //     path: 'diligence',
+    //     element: <EnhanceDueDiligencyTabContent />
+    //   },
+    //   {
+    //     path: 'transaction-report',
+    //     element: <TransactionReportingTabContent />
+    //   },
+    // ]
+  },
+  {
+    element: <StudentView/>,
+    path: '/student/view/:id'
   },
   {
     path: '/operational_overview',

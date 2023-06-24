@@ -64,6 +64,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const [data, setData] = useState(null)
   const [plan, setPlan] = useState('basic')
   const [role, setRole] = useState('subscriber')
+  const [formStatus, setFormStatus] = useState(1)
 
   // ** Store Vars
   const dispatch = useDispatch()
@@ -81,7 +82,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const onSubmit = data => {
     setData(data)
     if (checkIsValid(data)) {
-      toggleSidebar()
+      if (formStatus == 2)toggleSidebar()
       dispatch(
         addUser({
           role,
@@ -97,6 +98,8 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           country: data.country.value
         })
       )
+      setFormStatus(2)
+
     } else {
       for (const key in data) {
         if (data[key] === null) {
@@ -131,125 +134,226 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
       toggleSidebar={toggleSidebar}
       onClosed={handleSidebarClosed}
     >
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <div className='mb-1'>
-          <Label className='form-label' for='fullName'>
-            Full Name <span className='text-danger'>*</span>
-          </Label>
-          <Controller
-            name='fullName'
-            control={control}
-            render={({ field }) => (
-              <Input id='fullName' placeholder='John Doe' invalid={errors.fullName && true} {...field} />
-            )}
-          />
-        </div>
-        <div className='mb-1'>
-          <Label className='form-label' for='username'>
-            Username <span className='text-danger'>*</span>
-          </Label>
-          <Controller
-            name='username'
-            control={control}
-            render={({ field }) => (
-              <Input id='username' placeholder='johnDoe99' invalid={errors.username && true} {...field} />
-            )}
-          />
-        </div>
-        <div className='mb-1'>
-          <Label className='form-label' for='userEmail'>
-            Email <span className='text-danger'>*</span>
-          </Label>
-          <Controller
-            name='email'
-            control={control}
-            render={({ field }) => (
-              <Input
-                type='email'
-                id='userEmail'
-                placeholder='john.doe@example.com'
-                invalid={errors.email && true}
-                {...field}
-              />
-            )}
-          />
-          <FormText color='muted'>You can use letters, numbers & periods</FormText>
-        </div>
+      {formStatus == 1 &&
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <div><h1>Student details</h1></div>
+          <div className='mb-1'>
+            <Label className='form-label' for='fullName'>
+              Full Name <span className='text-danger'>*</span>
+            </Label>
+            <Controller
+              name='fullName'
+              control={control}
+              render={({ field }) => (
+                <Input id='fullName' placeholder='M John' invalid={errors.fullName && true} {...field} />
+              )}
+            />
+          </div>
+          <div className='mb-1'>
+            <Label className='form-label' for='username'>
+              Father Name <span className='text-danger'>*</span>
+            </Label>
+            <Controller
+              name='username'
+              control={control}
+              render={({ field }) => (
+                <Input id='username' placeholder='Doe' invalid={errors.username && true} {...field} />
+              )}
+            />
+          </div>
+          <div className='mb-1'>
+            <Label className='form-label' for='userEmail'>
+              Email <span className='text-danger'>*</span>
+            </Label>
+            <Controller
+              name='email'
+              control={control}
+              render={({ field }) => (
+                <Input
+                  type='email'
+                  id='userEmail'
+                  placeholder='john.doe@example.com'
+                  invalid={errors.email && true}
+                  {...field}
+                />
+              )}
+            />
+            <FormText color='muted'>You can use letters, numbers & periods</FormText>
+          </div>
 
-        <div className='mb-1'>
-          <Label className='form-label' for='contact'>
-            Contact <span className='text-danger'>*</span>
-          </Label>
-          <Controller
-            name='contact'
-            control={control}
-            render={({ field }) => (
-              <Input id='contact' placeholder='(397) 294-5153' invalid={errors.contact && true} {...field} />
-            )}
-          />
-        </div>
-        <div className='mb-1'>
-          <Label className='form-label' for='company'>
-            Company <span className='text-danger'>*</span>
-          </Label>
-          <Controller
-            name='company'
-            control={control}
-            render={({ field }) => (
-              <Input id='company' placeholder='Company Pvt Ltd' invalid={errors.company && true} {...field} />
-            )}
-          />
-        </div>
-        <div className='mb-1'>
-          <Label className='form-label' for='country'>
-            Country <span className='text-danger'>*</span>
-          </Label>
-          <Controller
-            name='country'
-            control={control}
-            render={({ field }) => (
-              // <Input id='country' placeholder='Australia' invalid={errors.country && true} {...field} />
-              <Select
-                isClearable={false}
-                classNamePrefix='select'
-                options={countryOptions}
-                theme={selectThemeColors}
-                className={classnames('react-select', { 'is-invalid': data !== null && data.country === null })}
-                {...field}
-              />
-            )}
-          />
-        </div>
-        <div className='mb-1'>
-          <Label className='form-label' for='user-role'>
-            User Role
-          </Label>
-          <Input type='select' id='user-role' name='user-role' value={role} onChange={e => setRole(e.target.value)}>
-            <option value='subscriber'>Subscriber</option>
-            <option value='editor'>Editor</option>
-            <option value='maintainer'>Maintainer</option>
-            <option value='author'>Author</option>
-            <option value='admin'>Admin</option>
-          </Input>
-        </div>
-        <div className='mb-1' value={plan} onChange={e => setPlan(e.target.value)}>
-          <Label className='form-label' for='select-plan'>
-            Select Plan
-          </Label>
-          <Input type='select' id='select-plan' name='select-plan'>
-            <option value='basic'>Basic</option>
-            <option value='enterprise'>Enterprise</option>
-            <option value='company'>Company</option>
-            <option value='team'>Team</option>
-          </Input>
-        </div>
-        <Button type='submit' className='me-1' color='primary'>
-          Submit
-        </Button>
-        <Button type='reset' color='secondary' outline onClick={toggleSidebar}>
-          Cancel
-        </Button>
-      </Form>
+          <div className='mb-1'>
+            <Label className='form-label' for='contact'>
+              Contact <span className='text-danger'>*</span>
+            </Label>
+            <Controller
+              name='contact'
+              control={control}
+              render={({ field }) => (
+                <Input id='contact' placeholder='(397) 294-5153' invalid={errors.contact && true} {...field} />
+              )}
+            />
+          </div>
+          <div className='mb-1'>
+            <Label className='form-label' for='company'>
+              CNIC/B-form <span className='text-danger'>*</span>
+            </Label>
+            <Controller
+              name='company'
+              control={control}
+              render={({ field }) => (
+                <Input id='company' placeholder='Company Pvt Ltd' invalid={errors.company && true} {...field} />
+              )}
+            />
+          </div>
+          <div className='mb-1'>
+            <Label className='form-label' for='country'>
+              Section <span className='text-danger'>*</span>
+            </Label>
+            <Controller
+              name='country'
+              control={control}
+              render={({ field }) => (
+                // <Input id='country' placeholder='Australia' invalid={errors.country && true} {...field} />
+                <Select
+                  isClearable={false}
+                  classNamePrefix='select'
+                  options={countryOptions}
+                  theme={selectThemeColors}
+                  className={classnames('react-select', { 'is-invalid': data !== null && data.country === null })}
+                  {...field}
+                />
+              )}
+            />
+          </div>
+          <div className='mb-1'>
+            <Label className='form-label' for='user-role'>
+              Class
+            </Label>
+            <Input type='select' id='user-role' name='user-role' value={role} onChange={e => setRole(e.target.value)}>
+              <option value='subscriber'>Subscriber</option>
+              <option value='editor'>Editor</option>
+              <option value='maintainer'>Maintainer</option>
+              <option value='author'>Author</option>
+              <option value='admin'>Admin</option>
+            </Input>
+          </div>
+          <div className='mb-1' value={plan} onChange={e => setPlan(e.target.value)}>
+            <Label className='form-label' for='select-plan'>
+              Status
+            </Label>
+            <Input type='select' id='select-plan' name='select-plan'>
+              <option value='basic'>Basic</option>
+              <option value='enterprise'>Enterprise</option>
+              <option value='company'>Company</option>
+              <option value='team'>Team</option>
+            </Input>
+          </div>
+          <Button type='submit' className='me-1' color='primary' >
+            Submit
+          </Button>
+          <Button type='reset' color='secondary' outline onClick={toggleSidebar}>
+            Cancel
+          </Button>
+        </Form>}
+
+      {formStatus == 2 &&
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <div><h1>Guardians details</h1></div>
+          <div className='mb-1'>
+            <Label className='form-label' for='fullName'>
+              Full Name <span className='text-danger'>*</span>
+            </Label>
+            <Controller
+              name='fullName'
+              control={control}
+              render={({ field }) => (
+                <Input id='fullName' placeholder='M John' invalid={errors.fullName && true} {...field} />
+              )}
+            />
+          </div>
+          <div className='mb-1'>
+            <Label className='form-label' for='username'>
+              Last Name <span className='text-danger'>*</span>
+            </Label>
+            <Controller
+              name='username'
+              control={control}
+              render={({ field }) => (
+                <Input id='username' placeholder='Doe' invalid={errors.username && true} {...field} />
+              )}
+            />
+          </div>
+          <div className='mb-1'>
+            <Label className='form-label' for='userEmail'>
+              Email <span className='text-danger'>*</span>
+            </Label>
+            <Controller
+              name='email'
+              control={control}
+              render={({ field }) => (
+                <Input
+                  type='email'
+                  id='userEmail'
+                  placeholder='john.doe@example.com'
+                  invalid={errors.email && true}
+                  {...field}
+                />
+              )}
+            />
+            <FormText color='muted'>You can use letters, numbers & periods</FormText>
+          </div>
+
+          <div className='mb-1'>
+            <Label className='form-label' for='contact'>
+              Contact <span className='text-danger'>*</span>
+            </Label>
+            <Controller
+              name='contact'
+              control={control}
+              render={({ field }) => (
+                <Input id='contact' placeholder='(397) 294-5153' invalid={errors.contact && true} {...field} />
+              )}
+            />
+          </div>
+          <div className='mb-1'>
+            <Label className='form-label' for='company'>
+              CNIC<span className='text-danger'>*</span>
+            </Label>
+            <Controller
+              name='company'
+              control={control}
+              render={({ field }) => (
+                <Input id='company' placeholder='00000-0000000-0' invalid={errors.company && true} {...field} />
+              )}
+            />
+          </div>
+          <div className='mb-1'>
+            <Label className='form-label' for='country'>
+              Relation with Student <span className='text-danger'>*</span>
+            </Label>
+            <Controller
+              name='country'
+              control={control}
+              render={({ field }) => (
+                // <Input id='country' placeholder='Australia' invalid={errors.country && true} {...field} />
+                <Select
+                  isClearable={false}
+                  classNamePrefix='select'
+                  options={countryOptions}
+                  theme={selectThemeColors}
+                  className={classnames('react-select', { 'is-invalid': data !== null && data.country === null })}
+                  {...field}
+                />
+              )}
+            />
+          </div>
+          <Button type='submit' className='me-1' color='primary'>
+            Submit
+          </Button>
+          <Button type='reset' color='secondary' outline onClick={toggleSidebar}>
+            Cancel
+          </Button>
+        </Form>}
     </Sidebar>
   )
 }

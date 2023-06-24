@@ -3,7 +3,7 @@ import { ButtonGroup, FormGroup, Progress } from "reactstrap";
 import { CiExport } from "react-icons/ci";
 import { TbEdit } from "react-icons/tb";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { ToggleButton } from "reactstrap";
+// import { ToggleButton } from "reactstrap";
 import {
    Row,
    Col,
@@ -26,22 +26,22 @@ const ScreeningPriority = () => {
    const ScreeningData = [
       {
          name: "Lorem ipsum dolor sit amet, consectetur elit",
-         enable: <ToggleButton />,
+         // enable: <ToggleButton />,
          setpriority: "High",
       },
       {
          name: "Lorem ipsum dolor sit amet, consectetur elit",
-         enable: <ToggleButton />,
+         // enable: <ToggleButton />,
          setpriority: "Medium",
       },
       {
          name: "Lorem ipsum dolor sit amet, consectetur elit",
-         enable: <ToggleButton />,
+         // enable: <ToggleButton />,
          setpriority: "Low",
       },
       {
          name: "Lorem ipsum dolor sit amet, consectetur elit",
-         enable: <ToggleButton />,
+         // enable: <ToggleButton />,
          setpriority: "High",
       },
    ];
