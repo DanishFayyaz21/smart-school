@@ -25,17 +25,17 @@ const Notifications = () => {
     <Card>
       <CardBody>
         <CardTitle className='mb-50' tag='h4'>
-          Notifications
+          Attendence
         </CardTitle>
-        <p className='mb-0'>Change to notification settings, the user will get the update</p>
+        {/* <p className='mb-0'>Change to notification settings, the user will get the update</p> */}
       </CardBody>
       <Table className='text-nowrap text-center border-bottom' responsive>
         <thead>
           <tr>
-            <th className='text-start'>Type</th>
-            <th>✉️ Email</th>
-            <th>🖥 Browser</th>
-            <th>👩🏻‍💻 App</th>
+            <th className='text-start'>Date</th>
+            <th>✉️ Present</th>
+            <th>🖥 Absent</th>
+            <th>👩🏻‍💻 Leave</th>
           </tr>
         </thead>
         <tbody>

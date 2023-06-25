@@ -259,7 +259,7 @@ const UserInfoCard = ({ selectedUser }) => {
         <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
         <ModalBody className='px-sm-5 pt-50 pb-5'>
           <div className='text-center mb-2'>
-            <h1 className='mb-1'>Edit User Information</h1>
+            <h1 className='mb-1'>Edit Student Information</h1>
             <p>Updating user details will receive a privacy audit.</p>
           </div>
           <Form onSubmit={handleSubmit(onSubmit)}>

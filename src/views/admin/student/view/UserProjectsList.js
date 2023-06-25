@@ -138,7 +138,7 @@ const UserProjectsList = () => {
   const [detail, setDetail] = useState(false)
   return (
     <Card>
-      <CardHeader tag='h4'>General Performance
+      <CardHeader tag='h4'>Acadmic Performance
         <Button type='submit' className='me-1' color='primary' onClick={() => setDetail(!detail)} >
           {detail ? "Hide details" : "View details"}
         </Button>

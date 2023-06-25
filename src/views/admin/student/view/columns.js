@@ -38,37 +38,14 @@ const invoiceStatusObj = {
 // ** Table columns
 export const columns = [
   {
-    name: 'Subject',
+    name: 'Assesment Name',
     sortable: true,
     sortField: 'id',
     minWidth: '107px',
     selector: row => row.id,
     cell: row => <Link className='fw-bolder' to={`/apps/invoice/preview/${row.id}`}>{`#${row.id}`}</Link>
   },
-  {
-    name: "Type",
-    minWidth: '102px',
-    sortable: true,
-    sortField: 'invoiceStatus',
-    selector: row => row.invoiceStatus,
-    cell: row => {
-      const color = invoiceStatusObj[row.invoiceStatus] ? invoiceStatusObj[row.invoiceStatus].color : 'primary',
-        Icon = invoiceStatusObj[row.invoiceStatus] ? invoiceStatusObj[row.invoiceStatus].icon : Edit
-      return (
-        <Fragment>
-          <Avatar color={color} icon={<Icon size={14} />} id={`av-tooltip-${row.id}`} />
-          <UncontrolledTooltip placement='top' target={`av-tooltip-${row.id}`}>
-            <span className='fw-bold'>{row.invoiceStatus}</span>
-            <br />
-            <span className='fw-bold'>Balance:</span> {row.balance}
-            <br />
-            <span className='fw-bold'>Due Date:</span> {row.dueDate}
-          </UncontrolledTooltip>
-        </Fragment>
-      )
-    }
-  },
-
+ 
   {
     name: 'Total Marks',
     sortable: true,

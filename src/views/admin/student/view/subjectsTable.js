@@ -41,14 +41,6 @@ import {
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
-// ** Table Header
-const CustomHeader = ({ store, toggleSidebar, handlePerPage, rowsPerPage, handleFilter, searchTerm }) => {
-  return (
-    <Button className='add-new-user' color='primary' onClick={toggleSidebar}>
-      Add Assesment
-    </Button>
-  )
-}
 
 const SubjectTable = () => {
   // ** Store Vars
@@ -250,7 +242,6 @@ const SubjectTable = () => {
         <div className='react-dataTable'>
           <DataTable
             noHeader
-            subHeader
             sortServer
             pagination
             responsive
@@ -261,16 +252,6 @@ const SubjectTable = () => {
             className='react-dataTable'
             paginationComponent={CustomPagination}
             data={dataToRender()}
-            subHeaderComponent={
-              <CustomHeader
-                store={store}
-                searchTerm={searchTerm}
-                rowsPerPage={rowsPerPage}
-                handleFilter={handleFilter}
-                handlePerPage={handlePerPage}
-                toggleSidebar={toggleSidebar}
-              />
-            }
           />
         </div>
       </Card>

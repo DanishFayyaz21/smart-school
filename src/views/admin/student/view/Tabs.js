@@ -8,22 +8,22 @@ import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap'
 import { User, Lock, Bookmark, Bell, Link } from 'react-feather'
 
 // ** User Components
-import InvoiceList from './InvoiceList'
 import SecurityTab from './SecurityTab'
-import Connections from './Connections'
-import BillingPlanTab from './BillingTab'
-import UserTimeline from './UserTimeline'
 import Notifications from './Notifications'
 import UserProjectsList from './UserProjectsList'
+import UserInfoCard from './UserInfoCard'
+import { useSelector } from 'react-redux'
 
 const UserTabs = ({ active, toggleTab }) => {
+  const store = useSelector(state => state.users)
+
   return (
     <Fragment>
       <Nav pills className='mb-2'>
         <NavItem>
           <NavLink active={active === '1'} onClick={() => toggleTab('1')}>
             <User className='font-medium-3 me-50' />
-            <span className='fw-bold'>Account</span>
+            <span className='fw-bold'>Acadmics</span>
           </NavLink>
         </NavItem>
         <NavItem>
@@ -38,13 +38,6 @@ const UserTabs = ({ active, toggleTab }) => {
             <span className='fw-bold'>Attendence</span>
           </NavLink>
         </NavItem>
-        {/* <NavItem>
-          <NavLink active={active === '4'} onClick={() => toggleTab('4')}>
-            <Link className='font-medium-3 me-50' />
-            <span className='fw-bold'>Connections</span>
-          </NavLink>
-        </NavItem> */}
-
         <NavItem>
           <NavLink active={active === '4'} onClick={() => toggleTab('4')}>
             <Lock className='font-medium-3 me-50' />
@@ -55,18 +48,18 @@ const UserTabs = ({ active, toggleTab }) => {
       <TabContent activeTab={active}>
         <TabPane tabId='1'>
           <UserProjectsList />
-          <UserTimeline />
-          <InvoiceList />
         </TabPane>
         <TabPane tabId='2'>
-          <BillingPlanTab />
-        </TabPane>
+          {/* <BillingPlanTab /> */}
+          <div className='d-flex flex-wrap gap-2'>
+          <UserInfoCard selectedUser={store.selectedUser} />
+          <UserInfoCard selectedUser={store.selectedUser} />
+        
+          </div>
+          </TabPane>
         <TabPane tabId='3'>
           <Notifications />
         </TabPane>
-        {/* <TabPane tabId='4'>
-          <Connections />
-        </TabPane> */}
         <TabPane tabId='4'>
           <SecurityTab />
         </TabPane>
