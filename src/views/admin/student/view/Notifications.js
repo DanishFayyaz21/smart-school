@@ -1,5 +1,6 @@
 // ** Reactstrap Imports
-import { Card, CardTitle, CardBody, Table, Input, Button } from 'reactstrap'
+import { Card, CardTitle, CardBody, Table, Col, Input, Button, Label } from 'reactstrap'
+import { selectThemeColors } from '@utils'
 
 const typesArr = [
   {
@@ -21,18 +22,28 @@ const typesArr = [
 ]
 
 const Notifications = () => {
+
+
   return (
     <Card>
       <CardBody>
         <CardTitle className='mb-50' tag='h4'>
           Attendence
         </CardTitle>
-        {/* <p className='mb-0'>Change to notification settings, the user will get the update</p> */}
+        <Col md='4'>
+          <Label for='role-select'>Select Date</Label>
+          <Input
+            type='date'
+            isClearable={false}
+            className='react-select'
+            theme={selectThemeColors}
+          />
+        </Col>
       </CardBody>
       <Table className='text-nowrap text-center border-bottom' responsive>
         <thead>
           <tr>
-            <th className='text-start'>Date</th>
+            <th className='text-start'>Student</th>
             <th>✉️ Present</th>
             <th>🖥 Absent</th>
             <th>👩🏻‍💻 Leave</th>

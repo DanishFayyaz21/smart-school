@@ -1,12 +1,6 @@
 // ** React Imports
 import { lazy } from 'react'
-import AccountTabContent from "../../views/admin/student/AccountTabContent";
-import KycScreeningTabContent from "../../views/admin/student/KycScreeningTabContent";
-import ScreeningReportTabContent from "../../views/admin/student/ScreeningReportTabContent";
-import EnhanceDueDiligencyTabContent from "../../views/admin/student/EnhanceDueDiligencyTabContent";
-import TransactionReportingTabContent from "../../views/admin/student/TransactionReportingTabContent";
 import StudentView from '../../views/admin/student/view';
-// import { Activity } from 'react-feather';
 
 const StudentList = lazy(() => import('../../views/admin/student/list'))
 const OperationalOverview = lazy(() => import('../../views/admin/operational-overview'))
@@ -89,11 +83,7 @@ const HomeRoutes = [
     path:'/activities',
     element:<Activity />
   }
-  // ,
-  // {
-  //   path:'/people',
-  //   element:<People />
-  // }
+ 
 ]
 
 export default HomeRoutes
