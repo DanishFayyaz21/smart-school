@@ -1,5 +1,5 @@
 // ** Reactstrap Imports
-import { Card, CardHeader, Progress } from 'reactstrap'
+import { Button, Card, CardHeader, NavLink, Progress } from 'reactstrap'
 
 // ** Third Party Components
 import { ChevronDown } from 'react-feather'
@@ -17,6 +17,8 @@ import sketchLabel from '@src/assets/images/icons/brands/sketch-label.png'
 
 // ** Styles
 import '@styles/react/libs/tables/react-dataTable-component.scss'
+import { useState } from 'react'
+import SubjectTable from './subjectsTable'
 
 const projectsArr = [
   {
@@ -133,10 +135,15 @@ export const columns = [
 ]
 
 const UserProjectsList = () => {
+  const [detail, setDetail] = useState(false)
   return (
     <Card>
-      <CardHeader tag='h4'>Acadamic Performance</CardHeader>
-      <div className='react-dataTable user-view-account-projects'>
+      <CardHeader tag='h4'>General Performance
+        <Button type='submit' className='me-1' color='primary' onClick={() => setDetail(!detail)} >
+          {detail ? "Hide details" : "View details"}
+        </Button>
+      </CardHeader>
+      {!detail ? <div className='react-dataTable user-view-account-projects'>
         <DataTable
           noHeader
           responsive
@@ -145,7 +152,7 @@ const UserProjectsList = () => {
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
         />
-      </div>
+      </div> : <SubjectTable />}
     </Card>
   )
 }
