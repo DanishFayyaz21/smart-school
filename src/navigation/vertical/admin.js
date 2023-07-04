@@ -49,6 +49,13 @@ export default [
       //   }
       // ]
     },
+    
+    {
+      id: 'teachers',
+      title: 'Teacher',
+      icon: <TbMessages />,
+      navLink: '/teachers'
+    },
     {
       id: 'vertical_operational_overview',
       title: 'Operational Overview',

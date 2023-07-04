@@ -6,7 +6,7 @@ export default [
     id: 'dashboards',
     title: 'Dashboard',
     icon: <TbSmartHome size={20} />,
-    navLink: '/dashboard'
+    navLink: '/dashboard',
     // children: [
     //   {
     //     id: 'analyticsDash',
@@ -21,5 +21,12 @@ export default [
     //     navLink: '/dashboard/ecommerce'
     //   }
     // ]
+  },
+  {
+    id: 'profile',
+    title: 'Profile',
+    icon: <TbSmartHome size={20} />,
+    navLink: '/pages/profile'
+    
   }
 ]

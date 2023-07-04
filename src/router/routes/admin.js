@@ -1,8 +1,10 @@
 // ** React Imports
 import { lazy } from 'react'
 import StudentView from '../../views/admin/student/view';
+import TeacherView from '../../views/admin/teacher/view';
 
 const StudentList = lazy(() => import('../../views/admin/student/list'))
+const TeachersList = lazy(() => import('../../views/admin/teacher/list'))
 const OperationalOverview = lazy(() => import('../../views/admin/operational-overview'))
 const CustomerDirectory = lazy(() => import('../../views/admin/customer-directory'))
 const BusinessDirectory = lazy(() => import('../../views/admin/business-directory'))
@@ -62,6 +64,14 @@ const HomeRoutes = [
   {
     element: <StudentView/>,
     path: '/student/view/:id'
+  },
+  {
+    path: '/teachers',
+    element: <TeachersList />
+  },
+  {
+    element: <TeacherView/>,
+    path: '/teacher/view/:id'
   },
   {
     path: '/operational_overview',
