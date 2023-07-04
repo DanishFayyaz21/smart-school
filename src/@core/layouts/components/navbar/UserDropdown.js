@@ -48,7 +48,7 @@ const UserDropdown = () => {
         <Avatar img={userAvatar} imgHeight='40' imgWidth='40' status='online' />
       </DropdownToggle>
       <DropdownMenu end>
-        <DropdownItem tag={Link} to='/pages/profile'>
+        <DropdownItem tag={Link} to='/profile'>
           <User size={14} className='me-75' />
           <span className='align-middle'>Profile </span>
         </DropdownItem>
@@ -65,7 +65,7 @@ const UserDropdown = () => {
           <span className='align-middle'>Chats</span>
         </DropdownItem>
         <DropdownItem divider />
-        <DropdownItem tag={Link} to='/pages/account-settings'>
+        <DropdownItem tag={Link} to='/account-settings'>
           <Settings size={14} className='me-75' />
           <span className='align-middle'>Settings</span>
         </DropdownItem>
