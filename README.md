@@ -1,1 +1,1 @@
-# kyc_frontend
+# LMS_frontend
