@@ -4,19 +4,19 @@ import { TbToggleLeft } from 'react-icons/tb'
 
 export default [
   {
-    header: 'Configuration'
+    header: 'Student'
   },
   {
     id: 'vertical_screening_priority',
     title: 'Screening Priority',
-    icon: <AiOutlineIdcard/>,
+    icon: <AiOutlineIdcard />,
     navLink: '/screening_priority'
   },
   {
     id: 'vertical_decision_criterion',
-    title: 'Decision Criterion',
+    title: 'Attendence',
     icon: <BsGrid />,
-    navLink: '/decision_criterion'
+    navLink: '/attendence'
   },
   {
     id: 'vertical_simulation',

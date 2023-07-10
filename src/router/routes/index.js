@@ -27,7 +27,7 @@ import PrivateRoute from '@components/routes/PrivateRoute'
 
 // ** Utils
 import { isObjEmpty } from '@utils'
-import configurationRoutes from './Configuration'
+import studentRoutes from './student'
 import rolesPermissionsRoutes from './RolesPermissions'
 import keyLicenseRoutes from './Key-License'
 
@@ -56,11 +56,11 @@ const Routes = [
   ...TablesRoutes,
   ...ChartsRoutes,
   ...AdminRoutes,
-  ...configurationRoutes,
+  ...studentRoutes,
   ...rolesPermissionsRoutes,
   ...SystemConnectivityRoutes,
   ...keyLicenseRoutes
-  
+
 ]
 
 const getRouteMeta = route => {
@@ -97,7 +97,7 @@ const MergeLayoutRoutes = (layout, defaultLayout) => {
             // eslint-disable-next-line multiline-ternary
             isObjEmpty(route.element.props) && isBlank === false
               ? // eslint-disable-next-line multiline-ternary
-                LayoutWrapper
+              LayoutWrapper
               : Fragment
 
           route.element = (

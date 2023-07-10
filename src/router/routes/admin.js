@@ -9,7 +9,6 @@ const OperationalOverview = lazy(() => import('../../views/admin/operational-ove
 const CustomerDirectory = lazy(() => import('../../views/admin/customer-directory'))
 const BusinessDirectory = lazy(() => import('../../views/admin/business-directory'))
 const Activity = lazy(() => import('../../views/admin/Activity'))
-const Finance = lazy(() => import('../../views/admin/Finance'))
 // const People = lazy(() => import('../../views/home/people'))
 
 // const Todo = lazy(() => import('../../views/apps/todo'))
@@ -84,10 +83,6 @@ const HomeRoutes = [
   {
     path:'/business_directory',
     element:<BusinessDirectory />
-  },
-  {
-    path:'/finance',
-    element:<Finance/>
   },
   {
     path:'/activities',

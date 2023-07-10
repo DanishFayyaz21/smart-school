@@ -8,7 +8,7 @@ import charts from "./charts";
 import dashboards from "./dashboards";
 import uiElements from "./ui-elements";
 import admin from "./admin";
-import configuration from "./configuration";
+import student from "./student";
 import roles_permissions from "./roles_permissions";
 import system_connectivity from "./system_connectivity";
 import manage_license from "./manage_license";
@@ -19,7 +19,7 @@ import manage_license from "./manage_license";
 
 export default [
     ...dashboards,
-    ...admin, ...configuration, ...roles_permissions,
+    ...admin, ...student, ...roles_permissions,
     ...system_connectivity, ...manage_license, ...apps, ...pages, ...uiElements, ...forms,
     ...tables, ...charts, ...others]
 

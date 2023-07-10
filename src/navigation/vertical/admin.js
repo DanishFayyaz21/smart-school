@@ -79,11 +79,5 @@ export default [
       title: 'Activity',
       icon: <HiOutlineClipboardList />,
       navLink: '/activities'
-    },
-    {
-      id: 'vertical_finance',
-      title: 'Financial',
-      icon: <TbChartHistogram />,
-      navLink: '/finance'
-    },   
+    }
 ]
