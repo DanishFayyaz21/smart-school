@@ -1,4 +1,4 @@
-import { AiOutlineIdcard } from "react-icons/ai"
+import { CiViewTimeline } from "react-icons/ci"
 import { BsGrid } from 'react-icons/bs'
 import { TbToggleLeft } from 'react-icons/tb'
 
@@ -7,21 +7,21 @@ export default [
     header: 'Student'
   },
   {
-    id: 'vertical_screening_priority',
-    title: 'Screening Priority',
-    icon: <AiOutlineIdcard />,
-    navLink: '/screening_priority'
+    id: 'timeTable',
+    title: 'Time Table',
+    icon: <CiViewTimeline />,
+    navLink: '/time-table'
   },
   {
-    id: 'vertical_decision_criterion',
+    id: 'attendence',
     title: 'Attendence',
     icon: <BsGrid />,
     navLink: '/attendence'
   },
   {
-    id: 'vertical_simulation',
-    title: 'Simulation',
+    id: 'grades',
+    title: 'Grades',
     icon: <TbToggleLeft />,
-    navLink: '/simulation'
+    navLink: '/grades'
   }
 ]

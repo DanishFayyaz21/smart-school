@@ -1,5 +1,7 @@
 // ** Icons Import
 import { TbSmartHome } from 'react-icons/tb'
+import { BsPersonExclamation } from 'react-icons/bs'
+import { FiSettings } from 'react-icons/fi'
 
 export default [
   {
@@ -11,13 +13,13 @@ export default [
   {
     id: 'profile',
     title: 'Profile',
-    icon: <TbSmartHome size={20} />,
+    icon: <BsPersonExclamation size={20} />,
     navLink: '/profile' 
   },
   {
     id: 'accountSettings',
     title: 'Account Settings',
-    icon: <TbSmartHome size={20} />,
+    icon: <FiSettings size={20} />,
     navLink: '/account-settings' 
   }
 ]

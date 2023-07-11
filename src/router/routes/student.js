@@ -2,21 +2,21 @@ import { lazy } from 'react'
 
 
 
-const ScreeningPriority = lazy(() => import('../../views/student/screening-priority'))
 const Attendence = lazy(() => import('../../views/student/attendence'))
 const Simulation = lazy(() => import('../../views/student/simulation'))
+const Calendar = lazy(() => import('../../views/student/calendar'))
 
 const configurationRoutes = [
     {
-        path: '/screening_priority',
-        element: <ScreeningPriority />
+        path: '/time-table',
+        element: <Calendar />
     },
     {
         path: '/attendence',
         element: <Attendence />
     },
     {
-        path: '/simulation',
+        path: '/grades',
         element: <Simulation />
     },
 
