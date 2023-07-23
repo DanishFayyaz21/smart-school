@@ -15,6 +15,12 @@ export default [
     id: 'vertical_manage_permissions',
     title: 'Attendence',
     icon: <TbLock />,
-    navLink: '/manage_permissions'
+    navLink: '/teacher-attendence'
   },
+  {
+    id: 'classes',
+    title: 'classes',
+    icon: <TbLock />,
+    navLink: '/classes'
+  }
 ]

@@ -9,7 +9,7 @@ import dashboards from "./dashboards";
 import uiElements from "./ui-elements";
 import admin from "./admin";
 import student from "./student";
-import roles_permissions from "./roles_permissions";
+import teacher from "./teacher";
 import system_connectivity from "./system_connectivity";
 import manage_license from "./manage_license";
 
@@ -19,7 +19,7 @@ import manage_license from "./manage_license";
 
 export default [
     ...dashboards,
-    ...admin, ...student, ...roles_permissions,
+    ...admin, ...student, ...teacher,
     ...system_connectivity, ...manage_license, ...apps, ...pages, ...uiElements, ...forms,
     ...tables, ...charts, ...others]
 
@@ -28,7 +28,7 @@ export default [
 //    ...dashboards,
 //    ...home,
 //    ...configuration,
-//    ...roles_permissions,
+//    ...teacher,
 //    ...system_connectivity,
 //    ...manage_license,
 // ];

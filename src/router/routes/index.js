@@ -28,7 +28,7 @@ import PrivateRoute from '@components/routes/PrivateRoute'
 // ** Utils
 import { isObjEmpty } from '@utils'
 import studentRoutes from './student'
-import rolesPermissionsRoutes from './RolesPermissions'
+import teacherRoutes from './teacher'
 import keyLicenseRoutes from './Key-License'
 
 const getLayout = {
@@ -57,7 +57,7 @@ const Routes = [
   ...ChartsRoutes,
   ...AdminRoutes,
   ...studentRoutes,
-  ...rolesPermissionsRoutes,
+  ...teacherRoutes,
   ...SystemConnectivityRoutes,
   ...keyLicenseRoutes
 
