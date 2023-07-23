@@ -3,17 +3,17 @@ import { TbLock } from 'react-icons/tb'
 
 export default [
   {
-    header: 'Roles & permissions'
+    header: 'Teacher'
   },
   {
     id: 'vertical_manage_users',
-    title: 'Manage Users',
+    title: 'Time Table',
     icon: <FiUser/>,
     navLink: '/manage_users'
   },
   {
     id: 'vertical_manage_permissions',
-    title: 'Manage Permissions',
+    title: 'Attendence',
     icon: <TbLock />,
     navLink: '/manage_permissions'
   },
