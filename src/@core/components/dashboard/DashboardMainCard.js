@@ -16,7 +16,7 @@ const DashboardMainCard = () => {
                </div>
                <div className="text-center-responsive">
                   <p className="fs-4 fw-bolder">
-                    {t("KYC Dashboard Analytics")} 
+                    {t("LMS Dashboard")} 
                      </p>
                   <p className="fw-light" style={{fontSize: '0.875rem'}}>
                      You have done <strong>57.6%</strong> more sales today

@@ -129,7 +129,7 @@ const AnalyticsDashboard = () => {
             style={{ marginTop: "3rem", backgroundColor: "#FFFFFF" }}
           >
             <div>
-              <span className="k_font  fw-bold">{t("KYC Process")}</span>
+              <span className="k_font  fw-bold">{t("LMS Process")}</span>
             </div>
 
             <div>
@@ -146,8 +146,8 @@ const AnalyticsDashboard = () => {
             <Table responsive>
               <thead>
                 <tr>
-                  <th scope="col">{t("Customer Name")}</th>
-                  <th scope="col">{t("Risk Level")}</th>
+                  <th scope="col">{t("Student Name")}</th>
+                  <th scope="col">{t("Class Level")}</th>
                   <th scope="col">{t("STATUS")}</th>
                   <th scope="col" style={{ minWidth: "120px" }}>
                     {t("ACTION")}

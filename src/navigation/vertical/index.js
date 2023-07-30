@@ -20,8 +20,9 @@ import manage_license from "./manage_license";
 export default [
     ...dashboards,
     ...admin, ...student, ...teacher,
-    ...system_connectivity, ...manage_license, ...apps, ...pages, ...uiElements, ...forms,
-    ...tables, ...charts, ...others]
+    // ...system_connectivity, ...manage_license, ...apps, ...pages, ...uiElements, ...forms,
+    // ...tables, ...charts, ...others
+]
 
 // Production Navigations
 // export default [

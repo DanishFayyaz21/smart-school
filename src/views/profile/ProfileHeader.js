@@ -19,11 +19,11 @@ const ProfileHeader = ({ data }) => {
       <div className='position-relative'>
         <div className='profile-img-container d-flex align-items-center'>
           <div className='profile-img'>
-            <img className='rounded img-fluid' src={data.avatar} alt='Card image' />
+            <img className='rounded img-fluid' src="https://media.licdn.com/dms/image/D4D03AQFo0YE26wITKA/profile-displayphoto-shrink_800_800/0/1690618481074?e=1696464000&v=beta&t=ER8XskbX_xeAtDErBvGYJl5TZXXbjaZztPLsHkNNIAg" alt='Card image' />
           </div>
           <div className='profile-title ms-3'>
-            <h2 className='text-white'>{data.username}</h2>
-            <p className='text-white'>{data.designation}</p>
+            <h2 className='text-white'>Muhammad Danish</h2>
+            <p className='text-white'>Software Engineer</p>
           </div>
         </div>
       </div>
