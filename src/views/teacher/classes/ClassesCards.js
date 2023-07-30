@@ -250,7 +250,7 @@ const ClassesCards = () => {
         {data.map((item, index) => {
           return (
             <Col key={index} xl={4} md={6}>
-              <Link to="/apps/kanban">
+              <Link to="/classes/subject">
                 <Card>
                   <CardBody>
                     <div className='d-flex justify-content-between'>

@@ -14,7 +14,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import CustomerScreenedCard from "../../../@core/components/dashboard/CustomerScreenedCard";
 import SystemConnectivityCard from "../../../@core/components/dashboard/SystemConnectivityCard";
 import DashboardMainCard from "../../../@core/components/dashboard/DashboardMainCard";
-import Model from "../../admin/customer-directory/Models/index";
+
 import { useTranslation } from "react-i18next";
 
 const AnalyticsDashboard = () => {
@@ -136,7 +136,6 @@ const AnalyticsDashboard = () => {
               {/* <Button style={{ background: "rgba(10, 17, 114, 1)" }}>
                 SCREEN A CUSTOMER
               </Button> */}
-              <Model />
             </div>
           </div>
         </Col>
