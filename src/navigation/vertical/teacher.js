@@ -9,7 +9,7 @@ export default [
     id: 'vertical_manage_users',
     title: 'Time Table',
     icon: <FiUser/>,
-    navLink: '/manage_users'
+    navLink: '/teacher/time-table'
   },
   {
     id: 'vertical_manage_permissions',
@@ -19,7 +19,7 @@ export default [
   },
   {
     id: 'classes',
-    title: 'classes',
+    title: 'Classes',
     icon: <TbLock />,
     navLink: '/classes'
   }

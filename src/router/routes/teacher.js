@@ -1,14 +1,14 @@
 import { lazy } from 'react'
-const ManageUsers = lazy(() => import('../../views/teacher/manage-users'))
+const TimeTable = lazy(() => import('../../views/teacher/timetable'))
 const ManagePermissions = lazy(() => import('../../views/teacher/manage-permissions'))
 const Attendence = lazy(() => import('../../views/teacher/attendence'))
 const Classes = lazy(() => import('../../views/teacher/classes'))
 
 
-const rolesPermissionsRoutes = [
+const Teacher = [
     {
-        path: '/manage_users',
-        element: <ManageUsers />
+        path: '/teacher/time-table',
+        element: <TimeTable />
     },
     {
         path: '/teacher-attendence',
@@ -20,4 +20,4 @@ const rolesPermissionsRoutes = [
     }
 ]
 
-export default rolesPermissionsRoutes
+export default Teacher

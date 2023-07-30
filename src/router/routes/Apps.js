@@ -2,7 +2,6 @@
 import { lazy } from 'react'
 import { Navigate } from 'react-router-dom'
 
-const Chat = lazy(() => import('../../views/apps/chat'))
 const Todo = lazy(() => import('../../views/apps/todo'))
 const Email = lazy(() => import('../../views/apps/email'))
 const Kanban = lazy(() => import('../../views/apps/kanban'))
@@ -53,14 +52,6 @@ const AppRoutes = [
   {
     element: <Email />,
     path: '/apps/email/:filter'
-  },
-  {
-    path: '/apps/chat',
-    element: <Chat />,
-    meta: {
-      appLayout: true,
-      className: 'chat-application'
-    }
   },
   {
     element: <Todo />,

@@ -12,12 +12,6 @@ export default [
     navLink: '/apps/email'
   },
   {
-    id: 'chat',
-    title: 'Chat',
-    icon: <MessageSquare size={20} />,
-    navLink: '/apps/chat'
-  },
-  {
     id: 'todo',
     title: 'Todo',
     icon: <CheckSquare size={20} />,

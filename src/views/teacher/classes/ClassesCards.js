@@ -209,7 +209,7 @@ const rolesArr = [
   'Payroll'
 ]
 
-const RoleCards = () => {
+const ClassesCards = () => {
   // ** States
   const [show, setShow] = useState(false)
   const [modalType, setModalType] = useState('Add New')
@@ -250,33 +250,35 @@ const RoleCards = () => {
         {data.map((item, index) => {
           return (
             <Col key={index} xl={4} md={6}>
-              <Card>
-                <CardBody>
-                  <div className='d-flex justify-content-between'>
-                    <span>{`Total ${item.totalUsers} users`}</span>
-                    <AvatarGroup data={item.users} />
-                  </div>
-                  <div className='d-flex justify-content-between align-items-end mt-1 pt-25'>
-                    <div className='role-heading'>
-                      <h4 className='fw-bolder'>{item.title}</h4>
-                      <Link
-                        to='/'
-                        className='role-edit-modal'
-                        onClick={e => {
-                          e.preventDefault()
-                          setModalType('Edit')
-                          setShow(true)
-                        }}
-                      >
-                        <small className='fw-bolder'>Edit Role</small>
+              <Link to="/apps/kanban">
+                <Card>
+                  <CardBody>
+                    <div className='d-flex justify-content-between'>
+                      <span>{`Total ${item.totalUsers} users`}</span>
+                      <AvatarGroup data={item.users} />
+                    </div>
+                    <div className='d-flex justify-content-between align-items-end mt-1 pt-25'>
+                      <div className='role-heading'>
+                        <h4 className='fw-bolder'>{item.title}</h4>
+                        <Link
+                          to='/'
+                          className='role-edit-modal'
+                          onClick={e => {
+                            e.preventDefault()
+                            setModalType('Edit')
+                            setShow(true)
+                          }}
+                        >
+                          <small className='fw-bolder'>Edit Role</small>
+                        </Link>
+                      </div>
+                      <Link to='' className='text-body' onClick={e => e.preventDefault()}>
+                        <Copy className='font-medium-5' />
                       </Link>
                     </div>
-                    <Link to='' className='text-body' onClick={e => e.preventDefault()}>
-                      <Copy className='font-medium-5' />
-                    </Link>
-                  </div>
-                </CardBody>
-              </Card>
+                  </CardBody>
+                </Card>
+              </Link>
             </Col>
           )
         })}
@@ -401,4 +403,4 @@ const RoleCards = () => {
   )
 }
 
-export default RoleCards
+export default ClassesCards
