@@ -5,6 +5,8 @@ import TeacherView from '../../views/admin/teacher/view';
 
 const StudentList = lazy(() => import('../../views/admin/student/list'))
 const TeachersList = lazy(() => import('../../views/admin/teacher/list'))
+const AssignClasses = lazy(() => import('../../views/admin/assignClasses'))
+const TimeTable = lazy(() => import('../../views/admin/timetable'))
 const HomeRoutes = [
   {
     path: '/student',
@@ -21,6 +23,15 @@ const HomeRoutes = [
   {
     element: <TeacherView />,
     path: '/teacher/view/:id'
+  },
+  {
+    element: <AssignClasses />,
+    path: '/assign-classes'
+  },
+
+  {
+    element: <TimeTable/>,
+    path: '/admin/time-table'
   },
 
 ]
