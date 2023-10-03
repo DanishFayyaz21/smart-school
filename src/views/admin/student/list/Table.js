@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState, useEffect } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 
 // ** Invoice List Sidebar
 import Sidebar from './Sidebar'
@@ -8,38 +8,42 @@ import Sidebar from './Sidebar'
 import { columns } from './columns'
 
 // ** Store & Actions
-import { getAllData, getData } from '../store'
 import { useDispatch, useSelector } from 'react-redux'
+import { getAllData, getData } from '../store'
 
 // ** Third Party Components
-import Select from 'react-select'
-import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import { ChevronDown, Share, Printer, FileText, File, Grid, Copy } from 'react-feather'
+import { ChevronDown, Copy, Edit, File, FileText, Grid, MoreVertical, Printer, Share, Trash } from 'react-feather'
+import ReactPaginate from 'react-paginate'
+import Select from 'react-select'
 
 // ** Utils
 import { selectThemeColors } from '@utils'
 
 // ** Reactstrap Imports
 import {
-  Row,
-  Col,
+  Badge,
+  Button,
   Card,
+  CardBody,
+  CardHeader,
+  CardTitle,
+  Col,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
   Input,
   Label,
-  Button,
-  CardBody,
-  CardTitle,
-  CardHeader,
-  DropdownMenu,
-  DropdownItem,
-  DropdownToggle,
+  Row,
+  Table,
   UncontrolledDropdown
 } from 'reactstrap'
 
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
+import { get } from '../../../../services'
+import MySpinner from '../../../components/Mycomponents/MySpinner'
 
 // ** Table Header
 const CustomHeader = ({ store, toggleSidebar, handlePerPage, rowsPerPage, handleFilter, searchTerm }) => {
@@ -179,6 +183,33 @@ const UsersList = () => {
   const [CurrentClass, setCurrentClass] = useState({ value: '', label: 'Select Class' })
   const [currentPlan, setCurrentPlan] = useState({ value: '', label: 'Select Section' })
   const [currentStatus, setCurrentStatus] = useState({ value: '', label: 'Select Status', number: 0 })
+
+  
+  const [data, setData] = useState([]);
+  const [isLoader, setIsLoader] = useState(false);
+
+  const fetchDataSearch = async (searchText) => {
+    setIsLoader(true);
+    try {
+      const response = await get(`/get-all-students`);
+
+      console.log('khvhjvhv ', response)
+
+      // if (response.data?.success) {
+      setData(response.data.data.students);
+      setIsLoader(false);
+      // }
+    } catch (error) {
+      if (error) {
+        setIsLoader(false);
+      }
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchDataSearch(); // Initial API call when the component loads
+  }, []);
 
   // ** Function to toggle sidebar
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
@@ -457,6 +488,126 @@ const UsersList = () => {
             }
           />
         </div>
+      </Card>
+        
+        {/* Students Listing */}
+      <Card>
+        <Table responsive>
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Gender</th>
+              <th>Class</th>
+              <th>Section</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {!isLoader &&
+              data?.map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <td>
+                    <div class="avatar me-1" width="32" height="32"><img class="" src="/src/assets/images/avatars/9.png" alt="avatarImg" height="32" width="32" /></div>
+                      <span className="align-middle fw-bold">
+                        {item.firstName + " " + item.lastName}
+                      </span>
+                    </td>
+                    <td>{item.gender}</td>
+                    <td>
+                      {item.studentclass}
+                    </td>
+                    <td>
+                      {item.role == "Admin" || item.role == "Consumer"
+                        ? item.role
+                        : item.vendor_type}
+                    </td>
+                    <td>
+                      <Badge
+                        color={`${
+                          item.status ? "success" : "danger"
+                        } `}
+                      >
+                        {item.status}
+                      </Badge>
+                    </td>
+
+                    <td>
+                      <UncontrolledDropdown>
+                        <DropdownToggle
+                          className="icon-btn hide-arrow"
+                          color="transparent"
+                          size="sm"
+                          caret
+                        >
+                          <MoreVertical size={15} />
+                        </DropdownToggle>
+                        <DropdownMenu>
+                          <DropdownItem onClick={() => handleEditUser(item)}>
+                            <Edit className="me-50" size={15} />
+                            <span className="align-middle">Edit</span>
+                          </DropdownItem>
+                          <DropdownItem
+                            href="/"
+                            onClick={(e) => e.preventDefault()}
+                          >
+                            <Trash className="me-50" size={15} />{" "}
+                            <span
+                              className="align-middle"
+                              onClick={() => {
+                                setUserId(item._id);
+                                setBasicModal(true);
+                              }}
+                            >
+                              Delete
+                            </span>
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </UncontrolledDropdown>
+                    </td>
+                  </tr>
+                );
+              })}
+            {isLoader && (
+              <tr>
+                <td colSpan={11}>
+                  <div
+                    style={{
+                      display: "grid",
+                      placeItems: "center",
+                      height: "40vh",
+                    }}
+                  >
+                    {/* <Spinner color="black" /> */}
+                    <MySpinner />
+                  </div>
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
+
+        {/* Display pagination */}
+        {/* <div className="d-flex justify-content-end mt-3">
+          <ReactPaginate
+            pageCount={totalPages}
+            pageRangeDisplayed={5}
+            marginPagesDisplayed={2}
+            previousLabel={"Previous"}
+            nextLabel={"Next"}
+            breakLabel={"..."}
+            onPageChange={handlePaginationChange}
+            containerClassName={"pagination justify-content-center"}
+            activeClassName={"active"}
+            previousClassName={"page-item"}
+            nextClassName={"page-item"}
+            pageClassName={"page-item"}
+            pageLinkClassName={"page-link"}
+            previousLinkClassName={"page-link"}
+            nextLinkClassName={"page-link"}
+          />
+        </div> */}
       </Card>
 
       <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
