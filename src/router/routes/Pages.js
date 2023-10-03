@@ -18,8 +18,13 @@ const NotAuthorized = lazy(() => import('../../views/pages/misc/NotAuthorized'))
 const KnowledgeBase = lazy(() => import('../../views/pages/knowledge-base/KnowledgeBase'))
 const KnowledgeBaseCategory = lazy(() => import('../../views/pages/knowledge-base/KnowledgeBaseCategory'))
 const KBCategoryQuestion = lazy(() => import('../../views/pages/knowledge-base/KnowledgeBaseCategoryQuestion'))
+const MyUsersList = lazy(() => import('../../views/pages/MyUsers/MyUsersList'))
 
 const PagesRoutes = [
+  {
+    path: '/pages/myUsersList',
+    element: <MyUsersList />
+  },
   {
     path: '/pages/profile',
     element: <Profile />

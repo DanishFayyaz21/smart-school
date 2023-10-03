@@ -52,6 +52,7 @@ import { LoginUserAsync } from "../../redux/slices/auth/loginSlice";
 import { useTranslation } from "react-i18next";
 import { defaultValuesLogin } from "./defaultValues";
 import { post } from "../../services";
+import { login } from "../../redux/authentication";
 
 const ToastContent = ({ t, name, role }) => {
    return (
@@ -89,7 +90,8 @@ const Login = () => {
       formState: { errors, dirtyFields, isValid },
    } = useForm({ mode: "onChange", resolver: yupResolver(LoginSchema) });
 
-   const onSubmit = async (data) => {
+   const onSubmit = async (values) => {
+      console.log("ksssssssssssssss", values)
       // if (Object.values(data).every((field) => field.length > 0)) {
       //    useJwt
       //       .login({ email: data.email, password: data.password })
@@ -127,30 +129,44 @@ const Login = () => {
       // }
       try {
 
-         const res = await post("login", data)
-         if (res.data.status == 200) {
-            const logindata = {
-               ...res?.data?.data.user,
-               accessToken: res?.data?.data.token,
-               refreshToken: res?.data?.data.token,
-            };
-            dispatch(handleLogin(logindata))
-            ability.update([
-               {
-                  "action": "manage",
-                  "subject": "all"
-               }
-            ]);
-            navigate(getHomeRouteForLoggedInUser(res?.data?.data?.user?.role));
-            // navigate("/");
-            toast((t) => (
-               <ToastContent
-                  t={t}
-                  role={res?.data?.data?.user?.role}
-                  name={res?.data?.data?.user?.fullName || res?.data?.data?.user?.user_name}
-               />
-            ));
-         }
+         const res = await dispatch(login(values)).unwrap();
+         console.log("ssssssssssssssssss", res.data)
+         const data = {
+            ...res.data.user,
+            ability: [{ action: "manage", subject: "all" }],
+            accessToken: res.data.token,
+            refreshToken: res.data.token,
+         };
+         dispatch(handleLogin(data));
+         ability.update([{ action: "manage", subject: "all" }]);
+
+         navigate(getHomeRouteForLoggedInUser("admin"));
+         dispatch(setToastMessage({ message: res?.message, success: true }));
+
+         // const res = await post("login", data)
+         // if (res.data.status == 200) {
+         //    const logindata = {
+         //       ...res?.data?.data.user,
+         //       accessToken: res?.data?.data.token,
+         //       refreshToken: res?.data?.data.token,
+         //    };
+         //    dispatch(handleLogin(logindata))
+         //    ability.update([
+         //       {
+         //          "action": "manage",
+         //          "subject": "all"
+         //       }
+         //    ]);
+         //    navigate(getHomeRouteForLoggedInUser(res?.data?.data?.user?.role));
+         //    // navigate("/");
+         //    toast((t) => (
+         //       <ToastContent
+         //          t={t}
+         //          role={res?.data?.data?.user?.role}
+         //          name={res?.data?.data?.user?.fullName || res?.data?.data?.user?.user_name}
+         //       />
+         //    ));
+         // }
 
       }
       catch (err) {

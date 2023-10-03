@@ -13,7 +13,17 @@ const initialUser = () => {
   return item ? JSON.parse(item) : {};
 };
 
-
+export const login = createAsyncThunk(
+  "user/login",
+  async (body, { rejectWithValue, dispatch }) => {
+    try {
+      const { data } = await post("/login", body);
+      return data;
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
 
 
 
@@ -33,6 +43,14 @@ export const authSlice = createSlice({
       localStorage.setItem(config.storageTokenKeyName, JSON.stringify(action.payload.accessToken))
       localStorage.setItem(config.storageRefreshTokenKeyName, JSON.stringify(action.payload.refreshToken))
     },
+    // handleLogin: (state, action) => {
+    //   state.userData = action.payload
+    //   state[config.storageTokenKeyName] = action.payload[config.storageTokenKeyName]
+    //   state[config.storageRefreshTokenKeyName] = action.payload[config.storageRefreshTokenKeyName]
+    //   localStorage.setItem('userData', JSON.stringify(action.payload))
+    //   localStorage.setItem(config.storageTokenKeyName, JSON.stringify(action.payload.accessToken))
+    //   localStorage.setItem(config.storageRefreshTokenKeyName, JSON.stringify(action.payload.refreshToken))
+    // },
     handleLogout: (state) => {
       state.userData = {};
       state[config.storageTokenKeyName] = null;
@@ -42,6 +60,28 @@ export const authSlice = createSlice({
       localStorage.removeItem(config.storageTokenKeyName);
       localStorage.removeItem(config.storageRefreshTokenKeyName);
     },
+  },
+
+  extraReducers: (builder) => {
+    builder.addCase(login.pending, (state, action) => {
+      state.loading = true;
+    });
+
+    builder.addCase(login.fulfilled, (state, action) => {
+      console.log("kkkkkkkkkkkkkkkkkkk.........", action)
+      if (action.payload.success) {
+        state.message = action.payload.message;
+        state.user = action.payload.data.user;
+        localStorage.setItem("token", JSON.stringify(action.payload.data.token));
+      }
+      state.loading = false;
+    });
+
+
+    builder.addCase(login.rejected, (state, action) => {
+      state.loading = false;
+    });
+
   },
 });
 

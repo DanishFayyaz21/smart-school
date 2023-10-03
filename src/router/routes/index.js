@@ -2,34 +2,31 @@
 import { Fragment } from 'react'
 
 // ** Routes Imports
-import AppRoutes from './Apps'
-import FormRoutes from './Forms'
-import PagesRoutes from './Pages'
+// import AppRoutes from './Apps'
+// import AuthenticationRoutes from './Authentication'
+// import ChartsRoutes from './Charts'
+// import DashboardRoutes from './Dashboards'
+// import MyDashboardRoutes from './MyDashboards'
+// import ExtensionsRoutes from './Extensions'
+// import FormRoutes from './Forms'
+// import PageLayoutsRoutes from './PageLayouts'
+// import PagesRoutes from './Pages'
 import TablesRoutes from './Tables'
-import ChartsRoutes from './Charts'
-import DashboardRoutes from './Dashboards'
 import UiElementRoutes from './UiElements'
-import ExtensionsRoutes from './Extensions'
-import PageLayoutsRoutes from './PageLayouts'
-import AuthenticationRoutes from './Authentication'
-import AdminRoutes from './admin'
-import SystemConnectivityRoutes from './SystemConnectivity'
 
 // ** Layouts
 import BlankLayout from '@layouts/BlankLayout'
-import VerticalLayout from '@src/layouts/VerticalLayout'
-import HorizontalLayout from '@src/layouts/HorizontalLayout'
 import LayoutWrapper from '@src/@core/layouts/components/layout-wrapper'
+import HorizontalLayout from '@src/layouts/HorizontalLayout'
+import VerticalLayout from '@src/layouts/VerticalLayout'
 
 // ** Route Components
-import PublicRoute from '@components/routes/PublicRoute'
 import PrivateRoute from '@components/routes/PrivateRoute'
+import PublicRoute from '@components/routes/PublicRoute'
 
 // ** Utils
 import { isObjEmpty } from '@utils'
-import studentRoutes from './student'
-import teacherRoutes from './teacher'
-import keyLicenseRoutes from './Key-License'
+import MyRoutes from './MyRoutes'
 
 const getLayout = {
   blank: <BlankLayout />,
@@ -45,22 +42,18 @@ const DefaultRoute = '/dashboard'
 
 // ** Merge Routes
 const Routes = [
-  ...AuthenticationRoutes,
-  ...DashboardRoutes,
-  ...AppRoutes,
-  ...PagesRoutes,
-  ...UiElementRoutes,
-  ...ExtensionsRoutes,
-  ...PageLayoutsRoutes,
-  ...FormRoutes,
-  ...TablesRoutes,
-  ...ChartsRoutes,
-  ...AdminRoutes,
-  ...studentRoutes,
-  ...teacherRoutes,
-  ...SystemConnectivityRoutes,
-  ...keyLicenseRoutes
-
+  // ...AuthenticationRoutes,
+  // ...DashboardRoutes,
+  // ...AppRoutes,
+  // ...PagesRoutes,
+  // ...UiElementRoutes,
+  // ...ExtensionsRoutes,
+  // ...PageLayoutsRoutes,
+  // ...FormRoutes,
+  // ...TablesRoutes,
+  // ...ChartsRoutes,
+  ...MyRoutes,
+  // ...MyDashboardRoutes
 ]
 
 const getRouteMeta = route => {
@@ -97,7 +90,7 @@ const MergeLayoutRoutes = (layout, defaultLayout) => {
             // eslint-disable-next-line multiline-ternary
             isObjEmpty(route.element.props) && isBlank === false
               ? // eslint-disable-next-line multiline-ternary
-              LayoutWrapper
+                LayoutWrapper
               : Fragment
 
           route.element = (
@@ -134,4 +127,5 @@ const getRoutes = layout => {
   return AllRoutes
 }
 
-export { DefaultRoute, TemplateTitle, Routes, getRoutes }
+export { DefaultRoute, Routes, TemplateTitle, getRoutes }
+

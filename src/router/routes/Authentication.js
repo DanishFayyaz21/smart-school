@@ -1,10 +1,11 @@
 // ** React Imports
 import { lazy } from 'react'
-const Login = lazy(() => import('../../views/auth/Login'))
+
+const Login = lazy(() => import('../../views/pages/authentication/Login'))
 const LoginBasic = lazy(() => import('../../views/pages/authentication/LoginBasic'))
 const LoginCover = lazy(() => import('../../views/pages/authentication/LoginCover'))
 
-const Register = lazy(() => import('../../views/auth/Register'))
+const Register = lazy(() => import('../../views/pages/authentication/Register'))
 const RegisterBasic = lazy(() => import('../../views/pages/authentication/RegisterBasic'))
 const RegisterCover = lazy(() => import('../../views/pages/authentication/RegisterCover'))
 const RegisterMultiSteps = lazy(() => import('../../views/pages/authentication/register-multi-steps'))
@@ -21,11 +22,6 @@ const VerifyEmailCover = lazy(() => import('../../views/pages/authentication/Ver
 
 const TwoStepsBasic = lazy(() => import('../../views/pages/authentication/TwoStepsBasic'))
 const TwoStepsCover = lazy(() => import('../../views/pages/authentication/TwoStepsCover'))
-
-const Accounts = lazy(() => import( '../../views/components/registerstep/Accounts')) 
-const Personal = lazy(() => import( '../../views/components/registerstep/Personal')) 
-const Upload = lazy(() => import( '../../views/components/registerstep/Upload')) 
-const VerifyEmail = lazy(() => import( '../../views/components/registerstep/VerifyEmail')) 
 
 const AuthenticationRoutes = [
   {
@@ -54,24 +50,6 @@ const AuthenticationRoutes = [
   {
     path: '/register',
     element: <Register />,
-    children: [
-      {
-        path: 'account-details',
-        element: <Accounts />
-      },
-      {
-        path: 'personal-details',
-        element: <Personal />
-      },
-      {
-        path: 'upload-items',
-        element: <Upload />
-      },
-      {
-        path: 'verify-email',
-        element: <VerifyEmail />
-      },
-    ],
     meta: {
       layout: 'blank',
       publicRoute: true,

@@ -1,7 +1,3 @@
-
-// export default Router
-
-
 // ** Router imports
 import { lazy } from 'react'
 
@@ -28,20 +24,17 @@ const NotAuthorized = lazy(() => import('../views/pages/misc/NotAuthorized'))
 const Router = () => {
   // ** Hooks
   const { layout } = useLayout()
-console.log("layout",layout)
+
   const allRoutes = getRoutes(layout)
   const getHomeRoute = () => {
     const user = getUserData()
-
     if (user) {
-      console.log("iffffffff", getHomeRouteForLoggedInUser(user.role))
       return getHomeRouteForLoggedInUser(user.role)
     } else {
-      console.log("else")
       return '/login'
     }
   }
-  console.log("bbbbbbbbbbbbbbbb", getHomeRoute())
+
   const routes = useRoutes([
     {
       path: '/',
@@ -65,10 +58,8 @@ console.log("layout",layout)
     },
     ...allRoutes
   ])
-  console.log("all routes", allRoutes)
 
   return routes
 }
 
 export default Router
-
