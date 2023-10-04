@@ -16,7 +16,7 @@ import { Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
 
 // ** Renders Client Columns
 const renderClient = row => {
-  if (row.avatar.length) {
+  if (row?.avatar?.length) {
     return <Avatar className='me-1' img={row.avatar} width='32' height='32' />
   } else {
     return (
@@ -81,13 +81,14 @@ export const columns = [
     cell: row => (
       <div className='d-flex justify-content-left align-items-center'>
         {renderClient(row)}
+
         <div className='d-flex flex-column'>
           <Link
             to={`/teacher/view/${row.id}`}
             className='user_name text-truncate text-body'
             onClick={() => store.dispatch(getUser(row.id))}
           >
-            <span className='fw-bolder'>{row.fullName}</span>
+            <span className='fw-bolder'>{row.firstName + " " + row.lastName}</span>
           </Link>
           <small className='text-truncate text-muted mb-0'>{row.email}</small>
         </div>
@@ -95,12 +96,16 @@ export const columns = [
     )
   },
   {
-    name: 'Gender',
+    name: 'Designation',
     sortable: true,
     minWidth: '172px',
-    sortField: 'role',
-    selector: row => row.role,
-    cell: row => renderRole(row)
+    sortField: 'designation',
+    selector: row => row.designation,
+    cell: row => (<div className='d-flex justify-content-left align-items-center'>
+
+      <p className='text-truncate text-muted mb-0'>{row.designation}</p>
+
+    </div >)
   },
   {
     name: 'Class Assigned',
@@ -111,12 +116,12 @@ export const columns = [
     cell: row => <span className='text-capitalize'>{row.currentPlan}</span>
   },
   {
-    name: 'Designation',
+    name: 'Gender',
     minWidth: '230px',
     sortable: true,
     sortField: 'billing',
-    selector: row => row.billing,
-    cell: row => <span className='text-capitalize'>{row.billing}</span>
+    selector: row => row.gender,
+    cell: row => <span className='text-capitalize'>{row.gender}</span>
   },
   {
     name: 'Status',
