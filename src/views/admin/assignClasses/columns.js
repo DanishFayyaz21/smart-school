@@ -73,63 +73,65 @@ const statusObj = {
 
 export const columns = [
   {
-    name: 'Name',
+    name: 'Class',
     sortable: true,
     minWidth: '297px',
-    sortField: 'fullName',
+    sortField: 'Class',
     selector: row => row.fullName,
     cell: row => (
       <div className='d-flex justify-content-left align-items-center'>
-        {renderClient(row)}
+        {/* {renderClient(row)} */}
         <div className='d-flex flex-column'>
           <Link
             to={`/apps/user/view/${row.id}`}
             className='user_name text-truncate text-body'
             onClick={() => store.dispatch(getUser(row.id))}
           >
-            <span className='fw-bold'>{row.fullName}</span>
+            <span className='fw-bold'>{row.name}</span>
           </Link>
-          <small className='text-truncate text-muted mb-0'>{row.email}</small>
+          {/* <small className='text-truncate text-muted mb-0'>{row.email}</small> */}
         </div>
       </div>
     )
   },
   {
-    name: 'Role',
+    name: 'Department',
     sortable: true,
     minWidth: '172px',
     sortField: 'role',
     selector: row => row.role,
-    cell: row => renderRole(row)
+    cell: row => <div>
+      coming soon..
+    </div>
   },
   {
-    name: 'Plan',
+    name: 'Subjects',
     sortable: true,
     minWidth: '138px',
     sortField: 'currentPlan',
     selector: row => row.currentPlan,
-    cell: row => <span className='text-capitalize'>{row.currentPlan}</span>
+    cell: row => <span className='text-capitalize'>{row?.subject?.length}</span>
   },
   {
-    name: 'Billing',
+    name: 'Students',
     sortable: true,
     minWidth: '230px',
     sortField: 'billing',
     selector: row => row.billing,
-    cell: row => <span className='text-capitalize'>{row.billing}</span>
+    cell: row => <span className='text-capitalize'>{row?.students?.length}</span>
   },
-  {
-    name: 'Status',
-    sortable: true,
-    minWidth: '138px',
-    sortField: 'status',
-    selector: row => row.status,
-    cell: row => (
-      <Badge className='text-capitalize' color={statusObj[row.status]} pill>
-        {row.status}
-      </Badge>
-    )
-  },
+  // {
+  //   name: '',
+  //   sortable: true,
+  //   minWidth: '138px',
+  //   sortField: 'status',
+  //   selector: row => row.status,
+  //   cell: row => (
+  //     <Badge className='text-capitalize' color={statusObj[row.status]} pill>
+  //       {row.status}
+  //     </Badge>
+  //   )
+  // },
   {
     name: 'Actions',
     minWidth: '100px',

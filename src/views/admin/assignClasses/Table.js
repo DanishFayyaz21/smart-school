@@ -14,10 +14,12 @@ import { ChevronDown } from 'react-feather'
 import DataTable from 'react-data-table-component'
 
 // ** Reactstrap Imports
-import { Card, Input, Row, Col } from 'reactstrap'
+import { Card, Input, Row, Col, Button } from 'reactstrap'
 
 // ** Styles
 import '@styles/react/libs/tables/react-dataTable-component.scss'
+import { getAllClasses } from '../../../redux/slices/classSlice'
+import AddClassModal from '../../../components/addClassModal'
 
 // ** Bootstrap Checkbox Component
 const BootstrapCheckbox = forwardRef((props, ref) => (
@@ -27,7 +29,8 @@ const BootstrapCheckbox = forwardRef((props, ref) => (
 ))
 
 // ** Table Header
-const CustomHeader = ({ plan, handlePlanChange, handlePerPage, rowsPerPage, handleFilter, searchTerm }) => {
+const CustomHeader = ({ setAddClassModal, addClassModal, plan, handlePlanChange, handlePerPage, rowsPerPage, handleFilter, searchTerm }) => {
+
   return (
     <div className='invoice-list-table-header w-100 me-1 ms-50 mt-2 mb-75'>
       <Row>
@@ -72,6 +75,7 @@ const CustomHeader = ({ plan, handlePlanChange, handlePerPage, rowsPerPage, hand
             <option value='enterprise'>Enterprise</option>
             <option value='team'>Team</option>
           </Input>
+          <Button className='mx-2' color='primary' onClick={() => setAddClassModal(true)}>Add New Class</Button>
         </Col>
       </Row>
     </div>
@@ -82,7 +86,7 @@ const Table = () => {
   // ** Store Vars
   const dispatch = useDispatch()
   const store = useSelector(state => state.users)
-
+  const { allclasses } = useSelector((state) => state.classSlice)
   // ** States
   const [plan, setPlan] = useState('')
   const [sort, setSort] = useState('desc')
@@ -90,6 +94,7 @@ const Table = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [sortColumn, setSortColumn] = useState('id')
+  const [addClassModal, setAddClassModal] = useState(false)
 
   // ** Get data on mount
   useEffect(() => {
@@ -235,9 +240,13 @@ const Table = () => {
     )
   }
 
+  useEffect(() => {
+    dispatch(getAllClasses())
+  }, [])
   return (
     <Card>
       <div className='react-dataTable react-dataTable-selectable-rows'>
+        {console.log("data................", allclasses, dataToRender())}
         <DataTable
           noHeader
           subHeader
@@ -247,13 +256,15 @@ const Table = () => {
           paginationServer
           columns={columns}
           onSort={handleSort}
-          data={dataToRender()}
+          data={allclasses || []}
           sortIcon={<ChevronDown />}
           paginationComponent={CustomPagination}
           selectableRowsComponent={BootstrapCheckbox}
           className='react-dataTable'
           subHeaderComponent={
             <CustomHeader
+              addClassModal={addClassModal}
+              setAddClassModal={setAddClassModal}
               plan={plan}
               searchTerm={searchTerm}
               rowsPerPage={rowsPerPage}
@@ -264,6 +275,7 @@ const Table = () => {
           }
         />
       </div>
+      <AddClassModal show={addClassModal} setShow={setAddClassModal} />
     </Card>
   )
 }
