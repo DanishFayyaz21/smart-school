@@ -1,5 +1,5 @@
 // ** React Import
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // ** Custom Components
 import Sidebar from '@components/sidebar'
@@ -17,9 +17,11 @@ import { Button, Label, FormText, Form, Input } from 'reactstrap'
 
 // ** Store & Actions
 import { addUser } from '../store'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { post } from '../../../../utility/Axios'
 import { getAllTeachers } from '../../../../redux/slices/auth/userSlice'
+import { getAllClasses } from '../../../../redux/slices/classSlice'
+import { getClassSubjects } from '../../../../redux/slices/subjectSlice'
 
 const defaultValues = {
   designation: "",
@@ -33,6 +35,7 @@ const defaultValues = {
   lastName: "",
   gender: "",
   password: "",
+  class: ""
   // role: "teacher" //Admin, Student, Teacher, Parent,SubAdmin
 }
 
@@ -86,6 +89,8 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const [plan, setPlan] = useState('basic')
   const [role, setRole] = useState('subscriber')
   const [formStatus, setFormStatus] = useState(1)
+  const { allclasses } = useSelector((state) => state.classSlice)
+  const { classesSubject } = useSelector((state) => state.subject)
 
   // ** Store Vars
   const dispatch = useDispatch()
@@ -97,10 +102,21 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     setError,
     handleSubmit,
     reset,
+    watch,
     formState: { errors }
   } = useForm({ defaultValues })
 
   // ** Function to handle form submit
+  // console.log("waaaaaaaaaa", watch())
+  const getSubjects = async () => {
+    const data = watch()
+    const classes = data.class.map(item => item.value)
+    dispatch(getClassSubjects(JSON.stringify(classes)))
+
+  }
+  useEffect(() => {
+    getSubjects()
+  }, [watch()])
   const onSubmit = async (data) => {
     setData(data)
     if (checkIsValid(data)) {
@@ -121,13 +137,13 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
       //   })
       // )
       // setFormStatus(2)
-      console.log("xxxxxxxxxxxxxx", data)
+      // console.log("xxxxxxxxxxxxxx", data)
       const formData = {
         ...data,
         designation: data.designation.value,
         country: data.country.value,
         gender: data.gender.value,
-        // country: data.country.value,
+        class: data.class.map(item => item.value),
         role: "Teacher"
       }
       try {
@@ -164,6 +180,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     setPlan('basic')
   }
 
+
+  useEffect(() => {
+    dispatch(getAllClasses())
+  }, [])
   return (
     <Sidebar
       size='lg'
@@ -338,13 +358,64 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <Label className='form-label' for='user-role'>
               Class
             </Label>
-            <Input type='select' id='user-role' name='user-role' value={role} onChange={e => setRole(e.target.value)}>
-              <option value='subscriber'>Subscriber</option>
-              <option value='editor'>Editor</option>
-              <option value='maintainer'>Maintainer</option>
-              <option value='author'>Author</option>
-              <option value='admin'>Admin</option>
-            </Input>
+            {/* {console.log("classssssssssssss", allclasses.map(item => item.name))} */}
+            <Controller
+              name='class'
+              control={control}
+              render={({ field }) => (
+                // <Input id='gender' placeholder='Australia' invalid={errors.gender && true} {...field} />
+                <Select
+                  isMulti={true}
+                  isClearable={false}
+                  classNamePrefix='select'
+                  options={allclasses.length > 0 && allclasses.map((item) => {
+                    return { label: item.name, value: item._id }
+                  })}
+                  theme={selectThemeColors}
+                  className={classnames('react-select', { 'is-invalid': data !== null && data.class === null })}
+                  {...field}
+                // onChange={(selectedOption) => {
+                //   // console.log("dddddddddddddddddddddddddddddd", selectedOption)
+                //   // Here, you can run your function when a class is selected.
+                //   // `selectedOption` contains the selected class's value.
+                //   // For example, you can call a function like handleClassSelection(selectedOption);
+
+                //   // Example:
+                //   // handleClassSelection(selectedOption);
+                // }}
+                />
+              )}
+            />
+
+          </div>
+
+          <div className='mb-1'>
+            <Label className='form-label' for='user-role'>
+              Subjects
+            </Label>
+            {/* {console.log("classssssssssssss", allclasses.map(item => item.name))} */}
+            <Controller
+              name='class'
+              control={control}
+              render={({ field }) => (
+                // <Input id='gender' placeholder='Australia' invalid={errors.gender && true} {...field} />
+                <Select
+                  isMulti={true}
+                  isClearable={false}
+                  classNamePrefix='select'
+                  // options={classesSubject.length > 0 && allclasses.map((item) => {
+                  // return { label: {`${item.name}-${item.name}`}, value: item._id }
+                  // })}
+
+                  onChange={(e) => console.log("eeeeeeeeeeeeeeeeee", e)}
+                  onInputChange={(e) => console.log(".........eeeeeeeeeeeeeeeeee", e)}
+                  theme={selectThemeColors}
+                  className={classnames('react-select', { 'is-invalid': data !== null && data.class === null })}
+                  {...field}
+                />
+              )}
+            />
+
           </div>
           <div className='mb-1' value={plan} onChange={e => setPlan(e.target.value)}>
             <Label className='form-label' for='select-plan'>

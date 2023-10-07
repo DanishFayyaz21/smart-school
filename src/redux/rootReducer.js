@@ -22,9 +22,11 @@ import roleSlice from './slices/role/roleSlice'
 import permissionSlice from './slices/permission/permissionSlice'
 import userSlice from './slices/auth/userSlice';
 import classSlice from "./slices/classSlice"
+import subject from "./slices/subjectSlice"
 
 const rootReducer = {
   classSlice,
+  subject,
   auth,
   todo,
   chat,
