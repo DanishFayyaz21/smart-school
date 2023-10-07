@@ -26,7 +26,7 @@ export default [
     id: 'assignclasses',
     title: 'Assign Classes',
     icon: <TbLayoutNavbar />,
-    navLink: '/assign-classes'
+    navLink: '/admin/assign-classes'
   },
   {
     id: 'make_time_table',
