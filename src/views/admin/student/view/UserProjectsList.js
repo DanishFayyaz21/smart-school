@@ -2,18 +2,18 @@
 import { Button, Card, CardHeader, NavLink, Progress } from 'reactstrap'
 
 // ** Third Party Components
-import { ChevronDown } from 'react-feather'
 import DataTable from 'react-data-table-component'
+import { ChevronDown } from 'react-feather'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
 
 // ** Label Images
-import xdLabel from '@src/assets/images/icons/brands/xd-label.png'
-import vueLabel from '@src/assets/images/icons/brands/vue-label.png'
 import htmlLabel from '@src/assets/images/icons/brands/html-label.png'
 import reactLabel from '@src/assets/images/icons/brands/react-label.png'
 import sketchLabel from '@src/assets/images/icons/brands/sketch-label.png'
+import vueLabel from '@src/assets/images/icons/brands/vue-label.png'
+import xdLabel from '@src/assets/images/icons/brands/xd-label.png'
 
 // ** Styles
 import '@styles/react/libs/tables/react-dataTable-component.scss'
@@ -138,7 +138,7 @@ const UserProjectsList = () => {
   const [detail, setDetail] = useState(false)
   return (
     <Card>
-      <CardHeader tag='h4'>Acadmic Performance
+      {/* <CardHeader tag='h4'>Acadmic Performance
         <Button type='submit' className='me-1' color='primary' onClick={() => setDetail(!detail)} >
           {detail ? "Hide details" : "View details"}
         </Button>
@@ -152,7 +152,7 @@ const UserProjectsList = () => {
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
         />
-      </div> : <SubjectTable />}
+      </div> : <SubjectTable />} */}
     </Card>
   )
 }
