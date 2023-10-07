@@ -1,7 +1,11 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Fragment, useEffect, useState } from 'react'
+import { Link, useLocation, useParams } from 'react-router-dom'
 
+import Select from 'react-select'
+import classnames from 'classnames'
+import { useForm, Controller } from 'react-hook-form'
+import { selectThemeColors } from '@utils'
 // ** Reactstrap Imports
 import {
   Row,
@@ -16,12 +20,13 @@ import {
   ModalBody,
   ModalHeader,
   FormFeedback,
+  Form,
   UncontrolledTooltip
 } from 'reactstrap'
 
 // ** Third Party Components
 import { Copy, Info } from 'react-feather'
-import { useForm, Controller } from 'react-hook-form'
+
 
 // ** Custom Components
 import AvatarGroup from '@components/avatar-group'
@@ -42,6 +47,9 @@ import avatar9 from '@src/assets/images/avatars/9.png'
 import avatar10 from '@src/assets/images/avatars/10.png'
 import avatar11 from '@src/assets/images/avatars/11.png'
 import avatar12 from '@src/assets/images/avatars/12.png'
+import { getCurrentClass } from '../../../redux/slices/classSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { post } from '../../../utility/Axios'
 
 // ** Vars
 const data = [
@@ -209,22 +217,47 @@ const rolesArr = [
   'Payroll'
 ]
 
+const defaultValues = {
+  name: ""
+  // role: "teacher" //Admin, Student, Teacher, Parent,SubAdmin
+}
+
 const ClassesCards = () => {
+  const [data, setData] = useState(null)
+  const {
+    control,
+    setValue,
+    setError,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm({ defaultValues })
+
   // ** States
   const [show, setShow] = useState(false)
   const [modalType, setModalType] = useState('Add New')
+  const { currentClass } = useSelector((state) => state.classSlice)
 
+  const { id } = useParams()
+  const location = useLocation()
+  const searchParams = location.search;
+  // const classId = searchParams.get('class-id');
+  console.log("pppppppppppppppppp", id)
   // ** Hooks
-  const {
-    reset,
-    control,
-    setError,
-    setValue,
-    handleSubmit,
-    formState: { errors }
-  } = useForm({ defaultValues: { roleName: '' } })
 
-  const onSubmit = data => {
+  const addClass = async (data) => {
+    console.log("data.....................", data)
+    try {
+      const response = await post("add-subject", { ...data, classId: id })
+      if (response.data.status == 201) {
+        setShow(false)
+        reset()
+        dispatch(getCurrentClass(id))
+
+      }
+    } catch (err) {
+      console.log("error:", err)
+    }
     if (data.roleName.length) {
       setShow(false)
     } else {
@@ -243,23 +276,28 @@ const ClassesCards = () => {
     setModalType('Add New')
     setValue('roleName')
   }
-
+  const dispatch = useDispatch()
+  console.log("rrrrrrrrrrrrrrrrrrrrrrrrr", currentClass)
+  useEffect(() => {
+    dispatch(getCurrentClass(id))
+  }, [])
   return (
     <Fragment>
       <Row>
-        {data.map((item, index) => {
+        {currentClass?.subject?.map((item, index) => {
           return (
             <Col key={index} xl={4} md={6}>
               <Link to="/classes/subject">
                 <Card>
                   <CardBody>
                     <div className='d-flex justify-content-between'>
-                      <span>{`Total ${item.totalUsers} users`}</span>
-                      <AvatarGroup data={item.users} />
+                      {/* <span>{`Total ${item.totalUsers} users`}</span> */}
+                      {/* <AvatarGroup data={item?.users} /> */}
                     </div>
                     <div className='d-flex justify-content-between align-items-end mt-1 pt-25'>
                       <div className='role-heading'>
-                        <h4 className='fw-bolder'>{item.title}</h4>
+                        <h4 className='fw-bolder'>{item.name}</h4>
+                        <p>{item.description}</p>
                         <Link
                           to='/'
                           className='role-edit-modal'
@@ -300,9 +338,9 @@ const ClassesCards = () => {
                       setShow(true)
                     }}
                   >
-                    Add New Role
+                    Add New Subject
                   </Button>
-                  <p className='mb-0'>Add a new role, if it does not exist</p>
+                  <p className='mb-0'>Add a new Subject, if it does not exist</p>
                 </CardBody>
               </Col>
             </Row>
@@ -317,86 +355,45 @@ const ClassesCards = () => {
       >
         <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
         <ModalBody className='px-5 pb-5'>
-          <div className='text-center mb-4'>
-            <h1>{modalType} Role</h1>
-            <p>Set role permissions</p>
-          </div>
-          <Row tag='form' onSubmit={handleSubmit(onSubmit)}>
-            <Col xs={12}>
-              <Label className='form-label' for='roleName'>
-                Role Name
+          <Form className='pb-3 px-3'
+            onSubmit={handleSubmit(addClass)}
+          >
+            <div><h1>Add Class details</h1></div>
+            <div className='mb-1'>
+              <Label className='form-label' for='name'>
+                Name <span className='text-danger'>*</span>
               </Label>
               <Controller
-                name='roleName'
+                name='name'
                 control={control}
                 render={({ field }) => (
-                  <Input {...field} id='roleName' placeholder='Enter role name' invalid={errors.roleName && true} />
+                  <Input id='name' placeholder='Semester 1' invalid={errors.name && true} {...field} />
                 )}
               />
-              {errors.roleName && <FormFeedback>Please enter a valid role name</FormFeedback>}
-            </Col>
-            <Col xs={12}>
-              <h4 className='mt-2 pt-50'>Role Permissions</h4>
-              <Table className='table-flush-spacing' responsive>
-                <tbody>
-                  <tr>
-                    <td className='text-nowrap fw-bolder'>
-                      <span className='me-50'> Administrator Access</span>
-                      <Info size={14} id='info-tooltip' />
-                      <UncontrolledTooltip placement='top' target='info-tooltip'>
-                        Allows a full access to the system
-                      </UncontrolledTooltip>
-                    </td>
-                    <td>
-                      <div className='form-check'>
-                        <Input type='checkbox' id='select-all' />
-                        <Label className='form-check-label' for='select-all'>
-                          Select All
-                        </Label>
-                      </div>
-                    </td>
-                  </tr>
-                  {rolesArr.map((role, index) => {
-                    return (
-                      <tr key={index}>
-                        <td className='text-nowrap fw-bolder'>{role}</td>
-                        <td>
-                          <div className='d-flex'>
-                            <div className='form-check me-3 me-lg-5'>
-                              <Input type='checkbox' id={`read-${role}`} />
-                              <Label className='form-check-label' for={`read-${role}`}>
-                                Read
-                              </Label>
-                            </div>
-                            <div className='form-check me-3 me-lg-5'>
-                              <Input type='checkbox' id={`write-${role}`} />
-                              <Label className='form-check-label' for={`write-${role}`}>
-                                Write
-                              </Label>
-                            </div>
-                            <div className='form-check'>
-                              <Input type='checkbox' id={`create-${role}`} />
-                              <Label className='form-check-label' for={`create-${role}`}>
-                                Create
-                              </Label>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                    )
-                  })}
-                </tbody>
-              </Table>
-            </Col>
-            <Col className='text-center mt-2' xs={12}>
-              <Button type='submit' color='primary' className='me-1'>
-                Submit
-              </Button>
-              <Button type='reset' outline onClick={onReset}>
-                Discard
-              </Button>
-            </Col>
-          </Row>
+            </div>
+
+            <div className='mb-1'>
+              <Label className='form-label' for='name'>
+                Description<span className='text-danger'>*</span>
+              </Label>
+              <Controller
+                name='description'
+                control={control}
+                render={({ field }) => (
+                  <Input id='description' type='text-area' placeholder='Semester 1' invalid={errors.name && true} {...field} />
+                )}
+              />
+            </div>
+
+
+
+            <Button type='submit' className='me-1' color='primary' >
+              Submit
+            </Button>
+            <Button type='reset' color='secondary' outline >
+              Cancel
+            </Button>
+          </Form>
         </ModalBody>
       </Modal>
     </Fragment>

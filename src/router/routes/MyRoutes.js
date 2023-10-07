@@ -29,10 +29,12 @@ const DashboardEcommerce = lazy(() => import('../../views/dashboard/ecommerce'))
 import StudentView from '../../views/admin/student/view';
 import TeacherView from '../../views/admin/teacher/view';
 
+
 const DashboardAnalytics = lazy(() => import('../../views/dashboard/analytics'))
 const Profile = lazy(() => import('../../views/profile'))
 const AccountSettings = lazy(() => import('../../views/account-settings'))
 const Chat = lazy(() => import('../../views/chat'))
+const ClassesCards = lazy(() => import('../../views/admin/assignClasses/ClassesCards'))
 
 
 
@@ -89,8 +91,12 @@ export default [
     path: '/teacher/view/:id'
   },
   {
+    element: <ClassesCards />,
+    path: '/admin/class/:id'
+  },
+  {
     element: <AssignClasses />,
-    path: '/assign-classes'
+    path: '/admin/assign-classes'
   },
 
   {

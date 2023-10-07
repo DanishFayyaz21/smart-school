@@ -40,6 +40,7 @@ import {
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
+import { getAllTeachers } from '../../../../redux/slices/auth/userSlice'
 
 // ** Table Header
 const CustomHeader = ({ store, toggleSidebar, handlePerPage, rowsPerPage, handleFilter, searchTerm }) => {
@@ -168,7 +169,8 @@ const UsersList = () => {
   // ** Store Vars
   const dispatch = useDispatch()
   const store = useSelector(state => state.users)
-
+  const { allTeacher } = useSelector(state => state.user)
+  console.log("teacherkjasjda........", allTeacher)
   // ** States
   const [sort, setSort] = useState('desc')
   const [searchTerm, setSearchTerm] = useState('')
@@ -200,6 +202,10 @@ const UsersList = () => {
     )
   }, [dispatch, store.data.length, sort, sortColumn, currentPage])
 
+  useEffect(() => {
+    dispatch(getAllTeachers())
+
+  }, [])
   // ** User filter options
   const classOptions = [
     { value: '', label: 'Select Class' },
@@ -433,6 +439,7 @@ const UsersList = () => {
 
       <Card className='overflow-hidden'>
         <div className='react-dataTable'>
+          {console.log(dataToRender(), "gggggggggggg")}
           <DataTable
             noHeader
             subHeader
@@ -445,7 +452,7 @@ const UsersList = () => {
             sortIcon={<ChevronDown />}
             className='react-dataTable'
             paginationComponent={CustomPagination}
-            data={dataToRender()}
+            data={allTeacher}
             subHeaderComponent={
               <CustomHeader
                 store={store}

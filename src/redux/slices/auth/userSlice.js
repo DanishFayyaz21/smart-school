@@ -10,10 +10,21 @@ export const getUserAsync = createAsyncThunk("/user/get", async () => {
   }
 });
 
+export const getAllTeachers = createAsyncThunk("/getAllTeachers", async () => {
+  try {
+    const res = await get("/get-all-teacher");
+    console.log("res..........", res.data)
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 export const userSlice = createSlice({
   name: "user",
   initialState: {
     users: [],
+    allTeacher: [],
     loading: false,
     error: null,
   },
@@ -31,8 +42,23 @@ export const userSlice = createSlice({
       state.loading = false;
       state.error = action.payload.message;
     });
+
+    // getAllTeachers cases
+    builder.addCase(getAllTeachers.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getAllTeachers.fulfilled, (state, action) => {
+      state.loading = false;
+      console.log("teachers...........", action.payload.data.teachers)
+      state.allTeacher = action.payload.data.teachers;
+
+    });
+    builder.addCase(getAllTeachers.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload.message;
+    });
   },
 });
 
 export default userSlice.reducer;
-export const {} = userSlice.actions;
+export const { } = userSlice.actions;

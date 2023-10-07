@@ -20,10 +20,11 @@ import financialSlice from './slices/home/financialSlice';
 import activitySlice from './slices/home/activitySlice';
 import roleSlice from './slices/role/roleSlice'
 import permissionSlice from './slices/permission/permissionSlice'
-import userSlice from './slices/auth/userSlice'
-
+import userSlice from './slices/auth/userSlice';
+import classSlice from "./slices/classSlice"
 
 const rootReducer = {
+  classSlice,
   auth,
   todo,
   chat,
