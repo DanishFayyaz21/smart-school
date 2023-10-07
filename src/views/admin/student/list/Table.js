@@ -42,6 +42,7 @@ import {
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
+import { Link, useNavigate } from 'react-router-dom'
 import { get } from '../../../../services'
 import MySpinner from '../../../components/Mycomponents/MySpinner'
 
@@ -172,6 +173,7 @@ const UsersList = () => {
   // ** Store Vars
   const dispatch = useDispatch()
   const store = useSelector(state => state.users)
+  const navigate = useNavigate()
 
   // ** States
   const [sort, setSort] = useState('desc')
@@ -461,6 +463,8 @@ const UsersList = () => {
         </CardBody>
       </Card>
 
+    
+
       <Card className='overflow-hidden'>
         <div className='react-dataTable'>
           <DataTable
@@ -488,6 +492,40 @@ const UsersList = () => {
             }
           />
         </div>
+      </Card>
+
+      <Card className="mb-0 rounded-none">
+        <CardBody className="p-2 pt-4">
+          <div className="d-flex justify-content-end gap-2">
+            <div className="d-flex align-items-center gap-1 w-30">
+              <label className="mb-0" htmlFor="search-invoice">
+                Search:
+              </label>
+              <Input
+                id="search-invoice"
+                className=""
+                type="text"
+                // value={searchText} // Bind the input value to the searchText state variable
+                // onChange={(e) => handleFilter(e.target.value)} // Call handleFilter when the input value changes
+              />
+              {/* 
+              <Input
+                id="search-invoice"
+                className=""
+                type="text"
+                // value={searchTerm}
+                onChange={(e) => handleFilter(e.target.value)}
+              /> */}
+            </div>
+            <div onClick={toggleSidebar}>
+                <div>
+                  <Button className="add-new-user" color="primary">
+                    Add New Student
+                  </Button>
+                </div>
+            </div>
+          </div>
+        </CardBody>
       </Card>
         
         {/* Students Listing */}
@@ -544,6 +582,10 @@ const UsersList = () => {
                           <MoreVertical size={15} />
                         </DropdownToggle>
                         <DropdownMenu>
+                          <DropdownItem onClick={() => navigate(`/student/view/${item._id}`)}>
+                            <Edit className="me-50" size={15} />
+                            <span className="align-middle">Details</span>
+                          </DropdownItem>
                           <DropdownItem onClick={() => handleEditUser(item)}>
                             <Edit className="me-50" size={15} />
                             <span className="align-middle">Edit</span>

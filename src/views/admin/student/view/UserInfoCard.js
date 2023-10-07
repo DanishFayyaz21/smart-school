@@ -1,14 +1,14 @@
 // ** React Imports
-import { useState, Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 
 // ** Reactstrap Imports
-import { Row, Col, Card, Form, CardBody, Button, Badge, Modal, Input, Label, ModalBody, ModalHeader } from 'reactstrap'
+import { Badge, Button, Card, CardBody, Col, Form, Input, Label, Modal, ModalBody, ModalHeader, Row } from 'reactstrap'
 
 // ** Third Party Components
-import Swal from 'sweetalert2'
+import { Briefcase, Check, X } from 'react-feather'
+import { Controller, useForm } from 'react-hook-form'
 import Select from 'react-select'
-import { Check, Briefcase, X } from 'react-feather'
-import { useForm, Controller } from 'react-hook-form'
+import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
 // ** Custom Components
@@ -62,6 +62,11 @@ const MySwal = withReactContent(Swal)
 const UserInfoCard = ({ selectedUser }) => {
   // ** State
   const [show, setShow] = useState(false)
+  const [userDetails, setUserDetails] = useState()
+
+
+
+  console.log('jgcvjhvjhv', selectedUser)
 
   // ** Hook
   const {
@@ -72,11 +77,19 @@ const UserInfoCard = ({ selectedUser }) => {
     formState: { errors }
   } = useForm({
     defaultValues: {
-      username: selectedUser.username,
-      lastName: selectedUser.fullName.split(' ')[1],
-      firstName: selectedUser.fullName.split(' ')[0]
+      user_name: selectedUser?.user_name,
+      lastName: selectedUser?.fullName?.split(' ')[1],
+      firstName: selectedUser?.fullName?.split(' ')[0]
     }
   })
+
+  useEffect(() => {
+    if(selectedUser){
+      setUserDetails(selectedUser)
+    }
+  }, [selectedUser])
+
+  console.log('khvjhvj', userDetails)
 
   // ** render user img
   const renderUserImg = () => {
@@ -128,9 +141,9 @@ const UserInfoCard = ({ selectedUser }) => {
 
   const handleReset = () => {
     reset({
-      username: selectedUser.username,
-      lastName: selectedUser.fullName.split(' ')[1],
-      firstName: selectedUser.fullName.split(' ')[0]
+      user_name: selectedUser.user_name,
+      lastName: selectedUser.fullName?.split(' ')[1],
+      firstName: selectedUser.fullName?.split(' ')[0]
     })
   }
 
@@ -175,15 +188,15 @@ const UserInfoCard = ({ selectedUser }) => {
         <CardBody>
           <div className='user-avatar-section'>
             <div className='d-flex align-items-center flex-column'>
-              {renderUserImg()}
+              {/* {renderUserImg()} */}
               <div className='d-flex flex-column align-items-center text-center'>
                 <div className='user-info'>
-                  <h4>{selectedUser !== null ? selectedUser.fullName : 'Eleanor Aguilar'}</h4>
-                  {selectedUser !== null ? (
+                  <h4>{selectedUser !== null ? selectedUser?.user_name : 'Eleanor Aguilar'}</h4>
+                  {/* {selectedUser !== null ? (
                     <Badge color={roleColors[selectedUser.role]} className='text-capitalize'>
                       {selectedUser.role}
                     </Badge>
-                  ) : null}
+                  ) : null} */}
                 </div>
               </div>
             </div>
@@ -209,12 +222,12 @@ const UserInfoCard = ({ selectedUser }) => {
             </div>
           </div>
           <h4 className='fw-bolder border-bottom pb-50 mb-1'>Details</h4>
-          <div className='info-container'>
+          {/* <div className='info-container'>
             {selectedUser !== null ? (
               <ul className='list-unstyled'>
                 <li className='mb-75'>
                   <span className='fw-bolder me-25'>CNIC/B-form:</span>
-                  <span>{selectedUser.username}</span>
+                  <span>{selectedUser.user_name}</span>
                 </li>
                 <li className='mb-75'>
                   <span className='fw-bolder me-25'>Email:</span>
@@ -244,18 +257,18 @@ const UserInfoCard = ({ selectedUser }) => {
                 </li>
               </ul>
             ) : null}
-          </div>
+          </div> */}
           <div className='d-flex justify-content-center pt-2'>
             <Button color='primary' onClick={() => setShow(true)}>
               Edit
             </Button>
-            <Button className='ms-1' color='danger' outline onClick={handleSuspendedClick}>
+            {/* <Button className='ms-1' color='danger' outline onClick={handleSuspendedClick}>
               Suspended
-            </Button>
+            </Button> */}
           </div>
         </CardBody>
       </Card>
-      <Modal isOpen={show} toggle={() => setShow(!show)} className='modal-dialog-centered modal-lg'>
+      {/* <Modal isOpen={show} toggle={() => setShow(!show)} className='modal-dialog-centered modal-lg'>
         <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
         <ModalBody className='px-sm-5 pt-50 pb-5'>
           <div className='text-center mb-2'>
@@ -293,16 +306,16 @@ const UserInfoCard = ({ selectedUser }) => {
                 />
               </Col>
               <Col xs={12}>
-                <Label className='form-label' for='username'>
-                  Username
+                <Label className='form-label' for='user_name'>
+                  user_name
                 </Label>
                 <Controller
                   defaultValue=''
                   control={control}
-                  id='username'
-                  name='username'
+                  id='user_name'
+                  name='user_name'
                   render={({ field }) => (
-                    <Input {...field} id='username' placeholder='john.doe.007' invalid={errors.username && true} />
+                    <Input {...field} id='user_name' placeholder='john.doe.007' invalid={errors.user_name && true} />
                   )}
                 />
               </Col>
@@ -412,7 +425,7 @@ const UserInfoCard = ({ selectedUser }) => {
             </Row>
           </Form>
         </ModalBody>
-      </Modal>
+      </Modal> */}
     </Fragment>
   )
 }
