@@ -34,7 +34,7 @@ const SidebarLeft = props => {
       <Card className='sidebar-wrapper shadow-none'>
         <CardBody className='card-body d-flex justify-content-center my-sm-0 mb-3'>
           <Button color='primary' block onClick={handleAddEventClick}>
-            <span className='align-middle'>Add Event</span>
+            <span className='align-middle'>Add Class lecture</span>
           </Button>
         </CardBody>
         <CardBody>
@@ -55,8 +55,9 @@ const SidebarLeft = props => {
             </Label>
           </div>
           <div className='calendar-events-filter'>
-            {filters.length &&
+            {/* {filters.length &&
               filters.map(filter => {
+                { console.log("filters...............", filter) }
                 return (
                   <div
                     key={`${filter.label}-key`}
@@ -80,7 +81,112 @@ const SidebarLeft = props => {
                     </Label>
                   </div>
                 )
-              })}
+              })} */}
+            <div
+              key={`Physics-key`}
+
+              className="form-check mb-1 form-check-info"
+            >
+              <Input
+                type='checkbox'
+                key={"Physics"}
+                label={"Physics"}
+                className='input-filter'
+                id={`Physics`}
+                checked={true}
+              // onChange={() => {
+              //   dispatch(updateFilter(filter.label))
+              // }}
+              />
+              <Label className='form-check-label' for={`Physics-event`}>
+                English class 9
+              </Label>
+            </div>
+
+            <div
+              key={`Physics-key`}
+
+              className="form-check mb-1 form-check-success"
+            >
+              <Input
+                type='checkbox'
+                key={"Physics"}
+                label={"Physics"}
+                className='input-filter'
+                id={`Physics`}
+                checked={true}
+              // onChange={() => {
+              //   dispatch(updateFilter(filter.label))
+              // }}
+              />
+              <Label className='form-check-label' for={`Physics-event`}>
+                Physics class 10
+              </Label>
+            </div>
+
+            <div
+              key={`Physics-key`}
+
+              className="form-check mb-1 form-check-warning"
+            >
+              <Input
+                type='checkbox'
+                key={"Physics"}
+                label={"Physics"}
+                className='input-filter'
+                id={`Physics`}
+                checked={true}
+              // onChange={() => {
+              //   dispatch(updateFilter(filter.label))
+              // }}
+              />
+              <Label className='form-check-label' for={`Physics-event`}>
+                Chemistry class 9
+              </Label>
+            </div>
+
+            <div
+              key={`Physics-key`}
+
+              className="form-check mb-1 form-check-primary"
+            >
+              <Input
+                type='checkbox'
+                key={"Physics"}
+                label={"Physics"}
+                className='input-filter'
+                id={`Physics`}
+                checked={true}
+              // onChange={() => {
+              //   dispatch(updateFilter(filter.label))
+              // }}
+              />
+              <Label className='form-check-label' for={`Physics-event`}>
+                Math class 7
+              </Label>
+            </div>
+
+            <div
+              key={`Physics-key`}
+
+              className="form-check mb-1 form-check-danger"
+            >
+              <Input
+                type='checkbox'
+                key={"Physics"}
+                label={"Physics"}
+                className='input-filter'
+                id={`Physics`}
+                checked={true}
+              // onChange={() => {
+              //   dispatch(updateFilter(filter.label))
+              // }}
+              />
+              <Label className='form-check-label' for={`Physics-event`}>
+                Economics class 8
+              </Label>
+            </div>
+
           </div>
         </CardBody>
       </Card>

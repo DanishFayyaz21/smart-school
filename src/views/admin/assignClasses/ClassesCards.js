@@ -307,12 +307,12 @@ const ClassesCards = () => {
                             setShow(true)
                           }}
                         >
-                          <small className='fw-bolder'>Edit Role</small>
+                          <small className='fw-bolder'>Edit Subject</small>
                         </Link>
                       </div>
-                      <Link to='' className='text-body' onClick={e => e.preventDefault()}>
+                      {/* <Link to='' className='text-body' onClick={e => e.preventDefault()}>
                         <Copy className='font-medium-5' />
-                      </Link>
+                      </Link> */}
                     </div>
                   </CardBody>
                 </Card>
@@ -358,7 +358,7 @@ const ClassesCards = () => {
           <Form className='pb-3 px-3'
             onSubmit={handleSubmit(addClass)}
           >
-            <div><h1>Add Class details</h1></div>
+            <div><h1>Add Subject details</h1></div>
             <div className='mb-1'>
               <Label className='form-label' for='name'>
                 Name <span className='text-danger'>*</span>
