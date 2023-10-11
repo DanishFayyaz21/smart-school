@@ -286,7 +286,7 @@ const SecurityTab = () => {
           </Form>
         </CardBody>
       </Card>
-      <Card>
+      {/* <Card>
         <CardBody>
           <CardTitle className='mb-50'>Two-steps verification</CardTitle>
           <span>Keep your account secure with authentication step.</span>
@@ -317,7 +317,7 @@ const SecurityTab = () => {
             </a>
           </p>
         </CardBody>
-      </Card>
+      </Card> */}
       {/* <Card>
         <CardHeader>
           <CardTitle tag='h4'>Recent devices</CardTitle>

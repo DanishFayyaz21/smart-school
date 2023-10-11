@@ -15,18 +15,18 @@ export default [
     id: 'profile',
     title: 'Profile',
     icon: <BsPersonExclamation size={20} />,
-    navLink: '/profile' 
+    navLink: '/profile'
   },
-  {
-    id: 'chat',
-    title: 'Chat',
-    icon: <MessageSquare size={20} />,
-    navLink: '/chat'
-  },
+  // {
+  //   id: 'chat',
+  //   title: 'Chat',
+  //   icon: <MessageSquare size={20} />,
+  //   navLink: '/chat'
+  // },
   {
     id: 'accountSettings',
     title: 'Account Settings',
     icon: <FiSettings size={20} />,
-    navLink: '/account-settings' 
+    navLink: '/account-settings'
   }
 ]

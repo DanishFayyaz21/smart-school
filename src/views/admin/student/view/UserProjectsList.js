@@ -97,11 +97,11 @@ export const columns = [
       return (
         <div className='d-flex justify-content-left align-items-center'>
           <div className='avatar-wrapper'>
-            <Avatar className='me-1' img={row.img} alt={row.title} imgWidth='32' />
+            {/* <Avatar className='me-1' img={row.img} alt={row.title} imgWidth='32' /> */}
           </div>
           <div className='d-flex flex-column'>
             <span className='text-truncate fw-bolder'>{row.title}</span>
-            <small className='text-muted'>{row.subtitle}</small>
+            {/* <small className='text-muted'>{row.subtitle}</small> */}
           </div>
         </div>
       )
@@ -109,7 +109,7 @@ export const columns = [
   },
   {
     name: 'Teacher',
-    selector: row => row.totalTasks
+    selector: row => "Usama Khan"
   },
   {
     name: 'Progress',
@@ -130,7 +130,7 @@ export const columns = [
   },
   {
     name: 'Hours',
-    selector: row => row.hours
+    selector: row => 1.5 + "Hr"
   }
 ]
 
@@ -138,7 +138,7 @@ const UserProjectsList = () => {
   const [detail, setDetail] = useState(false)
   return (
     <Card>
-      {/* <CardHeader tag='h4'>Acadmic Performance
+      <CardHeader tag='h4'>Acadmic Performance
         <Button type='submit' className='me-1' color='primary' onClick={() => setDetail(!detail)} >
           {detail ? "Hide details" : "View details"}
         </Button>
@@ -152,7 +152,7 @@ const UserProjectsList = () => {
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
         />
-      </div> : <SubjectTable />} */}
+      </div> : <SubjectTable />}
     </Card>
   )
 }

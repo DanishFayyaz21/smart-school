@@ -11,7 +11,7 @@ const RegisterCover = lazy(() => import('../../views/pages/authentication/Regist
 const RegisterMultiSteps = lazy(() => import('../../views/pages/authentication/register-multi-steps'))
 
 const ForgotPassword = lazy(() => import('../../views/pages/authentication/ForgotPassword'))
-const ForgotPasswordBasic = lazy(() => import('../../views/pages/authentication/ForgotPasswordBasic'))
+const ForgotPasswordBasic = lazy(() => import('../../views/auth/ForgotPasswordBasic'))
 const ForgotPasswordCover = lazy(() => import('../../views/pages/authentication/ForgotPasswordCover'))
 
 const ResetPasswordBasic = lazy(() => import('../../views/pages/authentication/ResetPasswordBasic'))

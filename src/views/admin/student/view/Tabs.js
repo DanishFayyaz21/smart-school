@@ -29,7 +29,7 @@ const UserTabs = ({ active, toggleTab }) => {
         <NavItem>
           <NavLink active={active === '2'} onClick={() => toggleTab('2')}>
             <Bookmark className='font-medium-3 me-50' />
-            <span className='fw-bold'>Guardians</span>
+            <span className='fw-bold'>Guardian</span>
           </NavLink>
         </NavItem>
         <NavItem>
@@ -53,7 +53,7 @@ const UserTabs = ({ active, toggleTab }) => {
           {/* <BillingPlanTab /> */}
           <div className='d-flex flex-wrap gap-2'>
           <UserInfoCard selectedUser={store.selectedUser} />
-          <UserInfoCard selectedUser={store.selectedUser} />
+          {/* <UserInfoCard selectedUser={store.selectedUser} /> */}
         
           </div>
           </TabPane>

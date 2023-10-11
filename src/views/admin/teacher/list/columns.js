@@ -80,7 +80,7 @@ export const columns = [
     selector: row => row.fullName,
     cell: row => (
       <div className='d-flex justify-content-left align-items-center'>
-        {renderClient(row)}
+        {/* {renderClient(row)} */}
 
         <div className='d-flex flex-column'>
           <Link
@@ -113,7 +113,7 @@ export const columns = [
     sortable: true,
     sortField: 'currentPlan',
     selector: row => row.currentPlan,
-    cell: row => <span className='text-capitalize'>{row.currentPlan}</span>
+    cell: row => <span className='text-capitalize'>{row?.classes.map(item => item + ", ")}</span>
   },
   {
     name: 'Gender',

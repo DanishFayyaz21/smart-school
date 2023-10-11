@@ -43,7 +43,7 @@ const Notifications = () => {
       <Table className='text-nowrap text-center border-bottom' responsive>
         <thead>
           <tr>
-            <th className='text-start'>Student</th>
+            <th className='text-start'>Date</th>
             <th>✉️ Present</th>
             <th>🖥 Absent</th>
             <th>👩🏻‍💻 Leave</th>
@@ -53,7 +53,7 @@ const Notifications = () => {
           {typesArr.map((type, index) => {
             return (
               <tr key={index}>
-                <td className='text-start'>{type.title}</td>
+                <td className='text-start'>{(index + 1) + "/10/2023"}</td>
                 <td>
                   <div className='d-flex form-check justify-content-center'>
                     <Input type='checkbox' defaultChecked={type.defaultChecked.includes('email')} />

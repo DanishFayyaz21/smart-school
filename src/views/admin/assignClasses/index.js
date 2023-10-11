@@ -9,13 +9,13 @@ const Roles = () => {
   return (
     <Fragment>
       <h3>Classes</h3>
-      <p className='mb-2'>
+      {/* <p className='mb-2'>
         A role provides access to predefined menus and features depending on the assigned role to an administrator that
         can have access to what he needs.
-      </p>
+      </p> */}
       {/* <ClassesCards /> */}
-      <h3 className='mt-50'>Total users with their roles</h3>
-      <p className='mb-2'>Find all of your company’s administrator accounts and their associate roles.</p>
+      {/* <h3 className='mt-50'>Total users with their roles</h3>
+      <p className='mb-2'>Find all of your company’s administrator accounts and their associate roles.</p> */}
       <div className='app-user-list'>
         <Table />
       </div>

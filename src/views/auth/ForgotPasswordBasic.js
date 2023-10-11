@@ -11,14 +11,14 @@ import { Card, CardBody, CardTitle, CardText, Form, Label, Input, Button } from 
 import '@styles/react/pages/page-authentication.scss'
 import { useTranslation } from 'react-i18next'
 const ForgotPasswordBasic = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   return (
     <div className='auth-wrapper auth-basic px-2'>
       <div className='auth-inner my-2'>
         <Card className='mb-0'>
           <CardBody>
             <Link className='brand-logo' to='/' onClick={e => e.preventDefault()}>
-              <svg viewBox='0 0 139 95' version='1.1' height='28'>
+              {/* <svg viewBox='0 0 139 95' version='1.1' height='28'>
                 <defs>
                   <linearGradient x1='100%' y1='10.5120544%' x2='50%' y2='89.4879456%' id='linearGradient-1'>
                     <stop stopColor='#000000' offset='0%'></stop>
@@ -65,8 +65,8 @@ const ForgotPasswordBasic = () => {
                     </g>
                   </g>
                 </g>
-              </svg>
-              <h2 className='brand-text text-primary ms-1'>Vuexy</h2>
+              </svg> */}
+              <h2 className='brand-text text-primary ms-1'>Smart school</h2>
             </Link>
             <CardTitle tag='h4' className='mb-1'>
               Forgot Password? 🔒
@@ -79,14 +79,14 @@ const ForgotPasswordBasic = () => {
                 <Label className='form-label' for='login-email'>
                   {t("Email")}
                 </Label>
-                <Input type='email' id='login-email' placeholder='john@example.com' autoFocus />
+                <Input type='email' id='login-email' placeholder='email' autoFocus />
               </div>
               <Button color='primary' block>
                 Send reset link
               </Button>
             </Form>
             <p className='text-center mt-2'>
-              <Link to='/pages/login-basic'>
+              <Link to='/login'>
                 <ChevronLeft className='rotate-rtl me-25' size={14} />
                 <span className='align-middle'>Back to login</span>
               </Link>

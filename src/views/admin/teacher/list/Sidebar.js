@@ -188,7 +188,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     <Sidebar
       size='lg'
       open={open}
-      title='New Student'
+      title='New Teacher'
       headerClassName='mb-1'
       contentClassName='pt-0'
       toggleSidebar={toggleSidebar}
@@ -205,7 +205,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
               name='firstName'
               control={control}
               render={({ field }) => (
-                <Input id='firstName' placeholder='M John' invalid={errors.firstName && true} {...field} />
+                <Input id='firstName' placeholder='Fisrt Name' invalid={errors.firstName && true} {...field} />
               )}
             />
           </div>
@@ -217,7 +217,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
               name='lastName'
               control={control}
               render={({ field }) => (
-                <Input id='lastName' placeholder='Doe' invalid={errors.lastName && true} {...field} />
+                <Input id='lastName' placeholder='Last Name' invalid={errors.lastName && true} {...field} />
               )}
             />
           </div>
@@ -229,7 +229,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
               name='user_name'
               control={control}
               render={({ field }) => (
-                <Input id='user_name' placeholder='Doe' invalid={errors.user_name && true} {...field} />
+                <Input id='user_name' placeholder='username' invalid={errors.user_name && true} {...field} />
               )}
             />
           </div>
@@ -244,7 +244,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
                 <Input
                   type='email'
                   id='userEmail'
-                  placeholder='john.doe@example.com'
+                  placeholder='email'
                   invalid={errors.email && true}
                   {...field}
                 />

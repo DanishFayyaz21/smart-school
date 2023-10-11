@@ -51,6 +51,7 @@ const TimeTable = lazy(() => import('../../views/teacher/timetable'))
 const Attendence = lazy(() => import('../../views/teacher/attendence'))
 const Classes = lazy(() => import('../../views/teacher/classes'))
 const Subject = lazy(() => import('../../views/teacher/classes/subject'))
+const ForgotPassword = lazy(() => import('../../views/auth/ForgotPasswordBasic'))
 
 
 export default [
@@ -61,6 +62,10 @@ export default [
   {
     path: '/profile',
     element: <Profile />
+  },
+  {
+    path: '/forgot-password',
+    element: <ForgotPassword />
   },
   {
     path: '/chat',
