@@ -367,7 +367,7 @@ const ClassesCards = () => {
                 name='name'
                 control={control}
                 render={({ field }) => (
-                  <Input id='name' placeholder='Semester 1' invalid={errors.name && true} {...field} />
+                  <Input id='name' placeholder='Subject Name' invalid={errors.name && true} {...field} />
                 )}
               />
             </div>
@@ -380,7 +380,7 @@ const ClassesCards = () => {
                 name='description'
                 control={control}
                 render={({ field }) => (
-                  <Input id='description' type='text-area' placeholder='Semester 1' invalid={errors.name && true} {...field} />
+                  <Input id='description' type='text-area' placeholder='Description' invalid={errors.name && true} {...field} />
                 )}
               />
             </div>
