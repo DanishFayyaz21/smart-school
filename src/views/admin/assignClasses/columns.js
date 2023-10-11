@@ -87,7 +87,7 @@ export const columns = [
             className='user_name text-truncate text-body'
             onClick={() => store.dispatch(getUser(row.id))}
           >
-            <span className='fw-bold'>{row.name}</span>
+            <span className='fw-bold text-capitalize'>{row.name}</span>
           </Link>
           {/* <small className='text-truncate text-muted mb-0'>{row.email}</small> */}
         </div>
