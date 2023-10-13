@@ -113,7 +113,10 @@ export const columns = [
     sortable: true,
     sortField: 'currentPlan',
     selector: row => row.currentPlan,
-    cell: row => <span className='text-capitalize'>{row?.classes.map(item => item + ", ")}</span>
+    cell: row => <>
+      <span className='text-capitalize'>{row?.classes?.slice(0, 3)?.map((item, i) => i < row?.classes?.length - 1 ? item.name + ", " : item.name)}
+        <span className='text-lowercase'>{row?.classes?.length > 3 && "and more..."}</span></span>
+    </>
   },
   {
     name: 'Gender',

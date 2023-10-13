@@ -24,11 +24,16 @@ export const userSlice = createSlice({
   name: "user",
   initialState: {
     users: [],
+    currentStudent: null,
     allTeacher: [],
     loading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    setCurrentStudent: (state, action) => {
+      state.currentStudent = action.payload;
+    },
+  },
 
   extraReducers: (builder) => {
     builder.addCase(getUserAsync.pending, (state) => {
@@ -61,4 +66,4 @@ export const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const { } = userSlice.actions;
+export const {setCurrentStudent } = userSlice.actions;

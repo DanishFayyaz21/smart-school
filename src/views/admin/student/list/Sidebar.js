@@ -16,9 +16,11 @@ import Select from "react-select";
 import { Button, Form, FormText, Input, Label } from "reactstrap";
 
 // ** Store & Actions
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { post } from "../../../../services";
 import { addUser } from "../store";
+import { getAllClasses } from "../../../../redux/slices/classSlice";
+import { useEffect } from "react";
 
 const defaultValues = {
   rollNumber: "",
@@ -42,13 +44,19 @@ const defaultValues = {
   role: "",
 };
 
-const SectionOptions = [
-  { label: "A", value: "A" },
-  { label: "B", value: "B" },
-  { label: "C", value: "C" },
-  { label: "D", value: "D" },
-  { label: "F", value: "F" },
-];
+// const SectionOptions = [
+//   { label: "A", value: "A" },
+//   { label: "B", value: "B" },
+//   { label: "C", value: "C" },
+//   { label: "D", value: "D" },
+//   { label: "F", value: "F" },
+// ];
+
+const genderOptions = [
+  { label: 'Male', value: 'Male' },
+  { label: 'Female', value: 'Female' },
+  { label: 'Prefer not to say', value: 'Prefer not to say' },
+]
 
 const checkIsValid = (data) => {
   return Object.values(data).every((field) =>
@@ -65,7 +73,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
   // ** Store Vars
   const dispatch = useDispatch();
-
+  const { allclasses } = useSelector((state) => state.classSlice)
+  useEffect(() => {
+    dispatch(getAllClasses())
+  }, [])
   // ** Vars
   const {
     control,
@@ -77,7 +88,8 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
   // ** Function to handle form submit
   const onSubmit = async (data) => {
-    const formData = { ...data, status, studentclass, role: "Student" };
+    const formData = { ...data, status, studentclass, role: "Student", gender: data.gender.value, };
+    console.log("formdaata..............", formData)
     const res = await post("/register-student", formData);
     console.log("res.....................", res);
     // setData(data)
@@ -249,6 +261,42 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             />
           </div>
           <div className="mb-1">
+            <Label className="form-label" for="mobile">
+              Password <span className="text-danger">*</span>
+            </Label>
+            <Controller
+              name="password"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  id="mobile"
+                  type="password"
+                  invalid={errors.password && true}
+                  {...field}
+                />
+              )}
+            />
+          </div>
+          <div className='mb-1'>
+            <Label className='form-label' for='gender'>
+              Gender <span className='text-danger'>*</span>
+            </Label>
+            <Controller
+              name='gender'
+              control={control}
+              render={({ field }) => (
+                <Select
+                  isClearable={false}
+                  classNamePrefix='select'
+                  options={genderOptions}
+                  theme={selectThemeColors}
+                  className={classnames('react-select', { 'is-invalid': data !== null && data.gender === null })}
+                  {...field}
+                />
+              )}
+            />
+          </div>
+          <div className="mb-1">
             <Label className="form-label" for="cnic">
               CNIC/B-form <span className="text-danger">*</span>
             </Label>
@@ -277,22 +325,14 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
               value={studentclass}
               onChange={(e) => setClass(e.target.value)}
             >
-              <option value="1st Class">1st Class</option>
-              <option value="2nd Class">2nd Class</option>
-              <option value="3rd Class">3rd Class</option>
-              <option value="4th Class">4th Class</option>
-              <option value="5th Class">5th Class</option>
-              <option value="6th Class">6th Class</option>
-              <option value="7th Class">7th Class</option>
-              <option value="8th Class">8th Class</option>
-              <option value="9th Class">9th Class</option>
-              <option value="10th Class">10th Class</option>
-              <option value="11th Class">11th Class</option>
-              <option value="12th Class">12th Class</option>
+              <option value="">Select - Class</option>
+              {allclasses.length > 0 && allclasses?.map(item => (
+                <option value={item._id}>{item.name}</option>
+              ))}
             </Input>
           </div>
 
-          <div className="mb-1">
+          {/* <div className="mb-1">
             <Label className="form-label" for="section">
               Section <span className="text-danger">*</span>
             </Label>
@@ -313,7 +353,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
                 />
               )}
             />
-          </div>
+          </div> */}
           <div className="mb-1">
             <Label className="form-label" for="select-plan">
               Status
@@ -324,8 +364,9 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
               name="select-plan"
               onChange={(e) => setStatus(e.target.value)}
             >
-              <option value="basic">Active</option>
-              <option value="enterprise">InActive</option>
+              <option value="">Select - Status</option>
+              <option value="active">Active</option>
+              <option value="inactive">InActive</option>
             </Input>
           </div>
           <Button type="submit" className="me-1" color="primary">

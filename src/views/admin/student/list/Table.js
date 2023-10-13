@@ -186,7 +186,7 @@ const UsersList = () => {
   const [currentPlan, setCurrentPlan] = useState({ value: '', label: 'Select Section' })
   const [currentStatus, setCurrentStatus] = useState({ value: '', label: 'Select Status', number: 0 })
 
-  
+
   const [data, setData] = useState([]);
   const [isLoader, setIsLoader] = useState(false);
 
@@ -346,7 +346,7 @@ const UsersList = () => {
     const isFiltered = Object.keys(filters).some(function (k) {
       return filters[k].length > 0
     })
-    
+
     if (store.data.length > 0) {
       return store.data
     } else if (store.data.length === 0 && isFiltered) {
@@ -463,9 +463,9 @@ const UsersList = () => {
         </CardBody>
       </Card>
 
-    
 
-      <Card className='overflow-hidden'>
+
+      {/* <Card className='overflow-hidden'>
         <div className='react-dataTable'>
           <DataTable
             noHeader
@@ -492,7 +492,7 @@ const UsersList = () => {
             }
           />
         </div>
-      </Card>
+      </Card> */}
 
       <Card className="mb-0 rounded-none">
         <CardBody className="p-2 pt-4">
@@ -505,8 +505,8 @@ const UsersList = () => {
                 id="search-invoice"
                 className=""
                 type="text"
-                // value={searchText} // Bind the input value to the searchText state variable
-                // onChange={(e) => handleFilter(e.target.value)} // Call handleFilter when the input value changes
+              // value={searchText} // Bind the input value to the searchText state variable
+              // onChange={(e) => handleFilter(e.target.value)} // Call handleFilter when the input value changes
               />
               {/* 
               <Input
@@ -518,17 +518,17 @@ const UsersList = () => {
               /> */}
             </div>
             <div onClick={toggleSidebar}>
-                <div>
-                  <Button className="add-new-user" color="primary">
-                    Add New Student
-                  </Button>
-                </div>
+              <div>
+                <Button className="add-new-user" color="primary">
+                  Add New Student
+                </Button>
+              </div>
             </div>
           </div>
         </CardBody>
       </Card>
-        
-        {/* Students Listing */}
+
+      {/* Students Listing */}
       <Card>
         <Table responsive>
           <thead>
@@ -544,17 +544,20 @@ const UsersList = () => {
           <tbody>
             {!isLoader &&
               data?.map((item, index) => {
+                console.log("log.............", data)
+
                 return (
                   <tr key={index}>
                     <td>
-                    <div class="avatar me-1" width="32" height="32"><img class="" src="/src/assets/images/avatars/9.png" alt="avatarImg" height="32" width="32" /></div>
-                      <span className="align-middle fw-bold">
+                      {/* <div class="avatar me-1" width="32" height="32"><img class="" src="/src/assets/images/avatars/9.png" alt="avatarImg" height="32" width="32" /></div> */}
+                      <Link to={`/student/view/${item._id}`} className="align-middle fw-bold">
                         {item.firstName + " " + item.lastName}
-                      </span>
+                      </Link>
                     </td>
                     <td>{item.gender}</td>
                     <td>
-                      {item.studentclass}
+                      {item?.studentclass?.name}
+                      {console.log("llllllllllll", item?.studentclass?.name)}
                     </td>
                     <td>
                       {item.role == "Admin" || item.role == "Consumer"
@@ -563,9 +566,8 @@ const UsersList = () => {
                     </td>
                     <td>
                       <Badge
-                        color={`${
-                          item.status ? "success" : "danger"
-                        } `}
+                        color={`${item.status ? "success" : "danger"
+                          } `}
                       >
                         {item.status}
                       </Badge>

@@ -66,7 +66,8 @@ const UserInfoCard = ({ selectedUser }) => {
 
 
 
-  console.log('jgcvjhvjhv', selectedUser)
+  console.log('userDetails', selectedUser)
+  console.log('jgcvjhvjhv', userDetails)
 
   // ** Hook
   const {
@@ -192,11 +193,11 @@ const UserInfoCard = ({ selectedUser }) => {
               <div className='d-flex flex-column align-items-center text-center'>
                 <div className='user-info'>
                   <h4>{selectedUser !== null ? selectedUser?.user_name : 'Eleanor Aguilar'}</h4>
-                  {/* {selectedUser !== null ? (
-                    <Badge color={roleColors[selectedUser.role]} className='text-capitalize'>
-                      {selectedUser.role}
+                  {selectedUser !== null ? (
+                    <Badge color={roleColors[selectedUser?.role]} className='text-capitalize'>
+                      {selectedUser?.role}
                     </Badge>
-                  ) : null} */}
+                  ) : null}
                 </div>
               </div>
             </div>
@@ -223,40 +224,41 @@ const UserInfoCard = ({ selectedUser }) => {
           </div> */}
           <h4 className='fw-bolder border-bottom pb-50 mb-1'>Details</h4>
           <div className='info-container'>
-            {/* {selectedUser !== null ? ( */}
-            <ul className='list-unstyled'>
-              <li className='mb-75'>
-                <span className='fw-bolder me-25'>CNIC/B-form:</span>
-                <span>{"35201-7517420-5"}</span>
-              </li>
-              <li className='mb-75'>
-                <span className='fw-bolder me-25'>Email:</span>
-                <span>{"danishfayyaz21@gmail.com"}</span>
-              </li>
-              <li className='mb-75'>
-                <span className='fw-bolder me-25'>Status:</span>
-                <Badge className='text-capitalize' color={statusColors["active"]}>
-                  Active
-                </Badge>
-              </li>
-              <li className='mb-75'>
-                <span className='fw-bolder me-25'>Class:</span>
-                <span className='text-capitalize'>{"Student"}</span>
-              </li>
-              <li className='mb-75'>
-                <span className='fw-bolder me-25'>Section:</span>
-                {/* <span>Tax-{selectedUser.contact.substr(selectedUser.contact.length - 4)}</span> */}
-              </li>
-              <li className='mb-75'>
-                <span className='fw-bolder me-25'>Contact:</span>
-                <span>{"03420699570"}</span>
-              </li>
-              <li className='mb-75'>
-                <span className='fw-bolder me-25'>Language:</span>
-                <span>English</span>
-              </li>
-            </ul>
-            {/* ) : null} */}
+            {selectedUser &&
+              (
+                <ul className='list-unstyled'>
+                  <li className='mb-75'>
+                    <span className='fw-bolder me-25'>CNIC/B-form:</span>
+                    <span>{selectedUser?.cnic}</span>
+                  </li>
+                  <li className='mb-75'>
+                    <span className='fw-bolder me-25'>Email:</span>
+                    <span>{selectedUser?.email}</span>
+                  </li>
+                  <li className='mb-75'>
+                    <span className='fw-bolder me-25'>Status:</span>
+                    <Badge className='text-capitalize' color={statusColors[selectedUser?.status]}>
+                      {selectedUser?.status}
+                    </Badge>
+                  </li>
+                  <li className='mb-75'>
+                    <span className='fw-bolder me-25'>Class:</span>
+                    <span className='text-capitalize'>{"Student"}</span>
+                  </li>
+                  {/* <li className='mb-75'>
+                    <span className='fw-bolder me-25'>Section:</span>
+                    <span>Tax-{selectedUser?.contact?.substr(selectedUser?.contact?.length - 4)}</span>
+                  </li> */}
+                  <li className='mb-75'>
+                    <span className='fw-bolder me-25'>Contact:</span>
+                    <span>{selectedUser?.phone}</span>
+                  </li>
+                  <li className='mb-75'>
+                    <span className='fw-bolder me-25'>Language:</span>
+                    <span>English</span>
+                  </li>
+                </ul>
+              )}
           </div>
           <div className='d-flex justify-content-center pt-2'>
             <Button color='primary' onClick={() => setShow(true)}>

@@ -19,6 +19,7 @@ import xdLabel from '@src/assets/images/icons/brands/xd-label.png'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { useState } from 'react'
 import SubjectTable from './subjectsTable'
+import { useSelector } from 'react-redux'
 
 const projectsArr = [
   {
@@ -100,7 +101,7 @@ export const columns = [
             {/* <Avatar className='me-1' img={row.img} alt={row.title} imgWidth='32' /> */}
           </div>
           <div className='d-flex flex-column'>
-            <span className='text-truncate fw-bolder'>{row.title}</span>
+            <span className='text-truncate fw-bolder'>{row?.name}</span>
             {/* <small className='text-muted'>{row.subtitle}</small> */}
           </div>
         </div>
@@ -118,11 +119,11 @@ export const columns = [
     cell: row => {
       return (
         <div className='d-flex flex-column w-100'>
-          <small className='mb-1'>{`${row.progress}%`}</small>
+          <small className='mb-1'>{`${10}%`}</small>
           <Progress
-            value={row.progress}
+            value={10}
             style={{ height: '6px' }}
-            className={`w-100 progress-bar-${row.progressColor}`}
+            className={`w-100 ${`progress-bar-danger`}`}
           />
         </div>
       )
@@ -136,6 +137,7 @@ export const columns = [
 
 const UserProjectsList = () => {
   const [detail, setDetail] = useState(false)
+  const { currentStudent } = useSelector((state) => state.user)
   return (
     <Card>
       <CardHeader tag='h4'>Acadmic Performance
@@ -143,12 +145,13 @@ const UserProjectsList = () => {
           {detail ? "Hide details" : "View details"}
         </Button>
       </CardHeader>
+      {console.log("sssssssssssss", currentStudent?.studentclass?.subject)}
       {!detail ? <div className='react-dataTable user-view-account-projects'>
         <DataTable
           noHeader
           responsive
           columns={columns}
-          data={projectsArr}
+          data={currentStudent?.studentclass?.subject}
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
         />

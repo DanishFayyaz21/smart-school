@@ -14,8 +14,9 @@ import UserProjectsList from './UserProjectsList'
 import UserInfoCard from './UserInfoCard'
 import { useSelector } from 'react-redux'
 
-const UserTabs = ({ active, toggleTab }) => {
+const UserTabs = ({ active, toggleTab, selectedUser }) => {
   const store = useSelector(state => state.users)
+  console.log("sssssssssssssssssssss,,,,,,,", selectedUser)
 
   return (
     <Fragment>
@@ -47,16 +48,16 @@ const UserTabs = ({ active, toggleTab }) => {
       </Nav>
       <TabContent activeTab={active}>
         <TabPane tabId='1'>
-          <UserProjectsList />
+          <UserProjectsList selectedUser={selectedUser} />
         </TabPane>
         <TabPane tabId='2'>
           {/* <BillingPlanTab /> */}
           <div className='d-flex flex-wrap gap-2'>
-          <UserInfoCard selectedUser={store.selectedUser} />
-          {/* <UserInfoCard selectedUser={store.selectedUser} /> */}
-        
+            <UserInfoCard selectedUser={store.selectedUser} />
+            {/* <UserInfoCard selectedUser={store.selectedUser} /> */}
+
           </div>
-          </TabPane>
+        </TabPane>
         <TabPane tabId='3'>
           <Notifications />
         </TabPane>

@@ -35,7 +35,7 @@ const defaultValues = {
   lastName: "",
   gender: "",
   password: "",
-  class: ""
+  classes: ""
   // role: "teacher" //Admin, Student, Teacher, Parent,SubAdmin
 }
 
@@ -110,13 +110,13 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   // console.log("waaaaaaaaaa", watch())
   const getSubjects = async () => {
     const data = watch()
-    const classes = data.class.map(item => item.value)
+    const classes = data?.classes.map(item => item.value)
     dispatch(getClassSubjects(JSON.stringify(classes)))
 
   }
   useEffect(() => {
     getSubjects()
-  }, [watch()])
+  }, [])
   const onSubmit = async (data) => {
     setData(data)
     if (checkIsValid(data)) {
@@ -143,7 +143,8 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
         designation: data.designation.value,
         country: data.country.value,
         gender: data.gender.value,
-        class: data.class.map(item => item.value),
+        classes: data.classes.map(item => item.value),
+        subjects: data.subjects.map(item => item.value),
         role: "Teacher"
       }
       try {
@@ -359,33 +360,28 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
               Class
             </Label>
             {/* {console.log("classssssssssssss", allclasses.map(item => item.name))} */}
-            <Controller
+            {/* <Controller
               name='class'
               control={control}
               render={({ field }) => (
-                // <Input id='gender' placeholder='Australia' invalid={errors.gender && true} {...field} />
-                <Select
-                  isMulti={true}
-                  isClearable={false}
-                  classNamePrefix='select'
-                  options={allclasses.length > 0 && allclasses.map((item) => {
-                    return { label: item.name, value: item._id }
-                  })}
-                  theme={selectThemeColors}
-                  className={classnames('react-select', { 'is-invalid': data !== null && data.class === null })}
-                  {...field}
-                // onChange={(selectedOption) => {
-                //   // console.log("dddddddddddddddddddddddddddddd", selectedOption)
-                //   // Here, you can run your function when a class is selected.
-                //   // `selectedOption` contains the selected class's value.
-                //   // For example, you can call a function like handleClassSelection(selectedOption);
-
-                //   // Example:
-                //   // handleClassSelection(selectedOption);
-                // }}
-                />
-              )}
+                // <Input id='gender' placeholder='Australia' invalid={errors.gender && true} {...field} /> */}
+            <Select
+              isMulti={true}
+              isClearable={false}
+              classNamePrefix='select'
+              options={allclasses.length > 0 && allclasses.map((item) => {
+                return { label: item.name, value: item._id }
+              })}
+              onChange={(e) => {
+                setValue("classes", e)
+                getSubjects()
+              }}
+              theme={selectThemeColors}
+              className={classnames('react-select', { 'is-invalid': data !== null && data.class === null })}
+            // {...field}
             />
+
+
 
           </div>
 
@@ -395,7 +391,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             </Label>
             {/* {console.log("classssssssssssss", allclasses.map(item => item.name))} */}
             <Controller
-              name='class'
+              name='subjects'
               control={control}
               render={({ field }) => (
                 // <Input id='gender' placeholder='Australia' invalid={errors.gender && true} {...field} />
@@ -403,12 +399,11 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
                   isMulti={true}
                   isClearable={false}
                   classNamePrefix='select'
-                  // options={classesSubject.length > 0 && allclasses.map((item) => {
-                  // return { label: {`${item.name}-${item.name}`}, value: item._id }
-                  // })}
+                  options={classesSubject.length > 0 && classesSubject.map((item) => {
 
-                  onChange={(e) => console.log("eeeeeeeeeeeeeeeeee", e)}
-                  onInputChange={(e) => console.log(".........eeeeeeeeeeeeeeeeee", e)}
+                    console.log("llllllllllllllllllldddddddddddd", { label: `${item.name} - ${item?.classId?.name}`, value: item._id })
+                    return { label: `${item.name} - ${item?.classId?.name}`, value: item._id }
+                  })}
                   theme={selectThemeColors}
                   className={classnames('react-select', { 'is-invalid': data !== null && data.class === null })}
                   {...field}

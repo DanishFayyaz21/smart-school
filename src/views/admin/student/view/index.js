@@ -17,6 +17,7 @@ import UserInfoCard from "./UserInfoCard";
 // ** Styles
 import "@styles/react/apps/app-users.scss";
 import { get } from "../../../../services";
+import { setCurrentStudent } from "../../../../redux/slices/auth/userSlice";
 
 const StudentView = () => {
   // ** Store Vars
@@ -40,9 +41,10 @@ const StudentView = () => {
         const res = await get(`/get-student-by-id/${id}`);
 
         setUser(res.data?.data?.user)
+        dispatch(setCurrentStudent(res.data?.data?.user))
 
         console.log('hvhjvjhv', res)
-      } catch (error) {}
+      } catch (error) { }
     };
 
     getUserById();
@@ -70,10 +72,10 @@ const StudentView = () => {
           {/* <PlanCard /> */}
         </Col>
         <Col xl="8" lg="7" xs={{ order: 0 }} md={{ order: 1, size: 7 }}>
-          <UserTabs active={active} toggleTab={toggleTab} />
+          <UserTabs selectedUser={user} active={active} toggleTab={toggleTab} />
         </Col>
       </Row>
     </div>
-  ) 
+  )
 };
 export default StudentView;
