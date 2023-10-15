@@ -43,6 +43,30 @@ const Calendar = props => {
   // ** calendarOptions(Props)
   const calendarOptions = {
     events: store.events.length ? store.events : [],
+    //   events:  [
+    //     {
+    //       "id": 1,
+    //       "url": "",
+    //       "title": "testing Review1",
+    //       "start": "2023-10-15T04:58:07.764Z",
+    //       "end": "2023-10-16T04:58:07.764Z",
+    //       "allDay": false,
+    //       "extendedProps": {
+    //           "calendar": "Business"
+    //       }
+    //   },
+    //   {
+    //     "id": 2,
+    //     "url": "",
+    //     "title": "testing Review2",
+    //     "start": "2023-11-15T04:58:07.764Z",
+    //     "end": "2023-11-16T04:58:07.764Z",
+    //     "allDay": false,
+    //     "extendedProps": {
+    //         "calendar": "Business"
+    //     }
+    // }
+    //   ],
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
     initialView: 'dayGridMonth',
     headerToolbar: {
@@ -146,6 +170,7 @@ const Calendar = props => {
   return (
     <Card className='shadow-none border-0 mb-0 rounded-0'>
       <CardBody className='pb-0'>
+        {console.log(",,,,,,,,,,,,,,,,", calendarOptions)}
         <FullCalendar {...calendarOptions} />{' '}
       </CardBody>
     </Card>

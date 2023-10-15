@@ -55,7 +55,7 @@ const SidebarLeft = props => {
             </Label>
           </div>
           <div className='calendar-events-filter'>
-            {/* {filters.length &&
+            {filters.length &&
               filters.map(filter => {
                 { console.log("filters...............", filter) }
                 return (
@@ -81,8 +81,8 @@ const SidebarLeft = props => {
                     </Label>
                   </div>
                 )
-              })} */}
-            <div
+              })}
+            {/* <div
               key={`Physics-key`}
 
               className="form-check mb-1 form-check-info"
@@ -185,7 +185,7 @@ const SidebarLeft = props => {
               <Label className='form-check-label' for={`Physics-event`}>
                 Economics class 8
               </Label>
-            </div>
+            </div> */}
 
           </div>
         </CardBody>

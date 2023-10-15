@@ -88,6 +88,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const [data, setData] = useState(null)
   const [plan, setPlan] = useState('basic')
   const [role, setRole] = useState('subscriber')
+  const [status, setStatus] = useState('active')
   const [formStatus, setFormStatus] = useState(1)
   const { allclasses } = useSelector((state) => state.classSlice)
   const { classesSubject } = useSelector((state) => state.subject)
@@ -145,7 +146,8 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
         gender: data.gender.value,
         classes: data.classes.map(item => item.value),
         subjects: data.subjects.map(item => item.value),
-        role: "Teacher"
+        role: "Teacher",
+        status,
       }
       try {
         const addTeacher = await post("register-teacher", formData)
@@ -412,11 +414,16 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             />
 
           </div>
-          <div className='mb-1' value={plan} onChange={e => setPlan(e.target.value)}>
+          <div className='mb-1'
+          //  value={plan} onChange={e => setPlan(e.target.value)}
+          >
             <Label className='form-label' for='select-plan'>
               Status
             </Label>
-            <Input type='select' id='select-plan' name='select-plan'>
+            <Input type='select' id='select-plan' name='select-plan'
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              <option value=''>Select - Status</option>
               <option value='active'>active</option>
               <option value='inactive'>inactive</option>
             </Input>
