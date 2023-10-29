@@ -34,4 +34,11 @@ export default [
     icon: <Layout />,
     navLink: '/admin/time-table'
   },
+  
+  {
+    id: 'make_time_table',
+    title: 'Make Class Time Table',
+    icon: <Layout />,
+    navLink: '/admin/automatic-time-table'
+  },
 ]

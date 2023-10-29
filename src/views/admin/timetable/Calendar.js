@@ -30,7 +30,8 @@ const Calendar = props => {
     blankEvent,
     toggleSidebar,
     selectEvent,
-    updateEvent
+    updateEvent,
+    myLectures
   } = props
 
   // ** UseEffect checks for CalendarAPI Update
@@ -41,8 +42,10 @@ const Calendar = props => {
   }, [calendarApi])
 
   // ** calendarOptions(Props)
+
   const calendarOptions = {
-    events: store.events.length ? store.events : [],
+    // events: store.events.length ? store.events : [],
+    events: myLectures.length ? myLectures : [],
     //   events:  [
     //     {
     //       "id": 1,
@@ -166,6 +169,8 @@ const Calendar = props => {
     // Get direction from app state (store)
     direction: isRtl ? 'rtl' : 'ltr'
   }
+  // console.log("events............", calendarOptions.events)
+
 
   return (
     <Card className='shadow-none border-0 mb-0 rounded-0'>

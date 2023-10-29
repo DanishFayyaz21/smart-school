@@ -28,6 +28,7 @@ import { lazy } from 'react';
 const DashboardEcommerce = lazy(() => import('../../views/dashboard/ecommerce'))
 import StudentView from '../../views/admin/student/view';
 import TeacherView from '../../views/admin/teacher/view';
+import AutomatictimeTable from '../../views/admin/timetable/automaticTimetable';
 
 
 const DashboardAnalytics = lazy(() => import('../../views/dashboard/analytics'))
@@ -106,7 +107,11 @@ export default [
 
   {
     element: <AdminTimeTable />,
-    path: '/admin/time-table'
+    path: '/admin/time-table/:id'
+  },
+  {
+    element: <AutomatictimeTable />,
+    path: '/admin/automatic-time-table'
   },
 
   {

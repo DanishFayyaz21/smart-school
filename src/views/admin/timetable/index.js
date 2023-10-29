@@ -19,6 +19,8 @@ import { fetchEvents, selectEvent, updateEvent, updateFilter, updateAllFilters, 
 
 // ** Styles
 import '@styles/react/apps/app-calendar.scss'
+import { get } from '../../../utility/Axios'
+import { useLocation, useParams } from 'react-router-dom'
 
 // ** CalendarColors
 const calendarsColor = {
@@ -38,7 +40,9 @@ const CalendarComponent = () => {
   const [calendarApi, setCalendarApi] = useState(null)
   const [addSidebarOpen, setAddSidebarOpen] = useState(false)
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(false)
-
+  const [myLectures, setMyLectures] = useState(false)
+  const {id} = useParams()
+  console.log("locations", id)
   // ** Hooks
   const [isRtl] = useRTL()
 
@@ -70,11 +74,42 @@ const CalendarComponent = () => {
     }
   }
 
+  const getAllLectures = async (id) => {
+    try {
+      const response = await get(`/time-table?classId=${id}`)
+      console.log("response........", response.data.timeTable)
+      if (response.data?.status == 200) {
+        if (response.data.timeTable.length > 0) {
+          setMyLectures(response.data.timeTable.map((item, i) => {
+            return {
+              id: item?._id,
+              url: "",
+              title: item?.subject?.name,
+              start: item?.startDateTime,
+              end: item?.endDateTime,
+              allDay: false,
+              extendedProps: {
+                calendar: "Business"
+              }
+            }
+          }))
+        }
+
+      }
+
+    } catch (err) {
+      console.log("error: ", err)
+    }
+  }
+
   // ** Fetch Events On Mount
   useEffect(() => {
     dispatch(fetchEvents(store.selectedCalendars))
+  
   }, [])
-
+useEffect(()=>{
+  getAllLectures(id)
+},[id])
   return (
     <Fragment>
       <div className='app-calendar overflow-hidden border'>
@@ -87,18 +122,22 @@ const CalendarComponent = () => {
           >
             <SidebarLeft
               store={store}
+              id={id}
               dispatch={dispatch}
               updateFilter={updateFilter}
               toggleSidebar={toggleSidebar}
               updateAllFilters={updateAllFilters}
               handleAddEventSidebar={handleAddEventSidebar}
+              getAllLectures={getAllLectures}
             />
           </Col>
+          {console.log("store,,,,,,,,,,,,,...........", store.events)}
           <Col className='position-relative'>
             <Calendar
               isRtl={isRtl}
               store={store}
               dispatch={dispatch}
+              myLectures={myLectures}
               blankEvent={blankEvent}
               calendarApi={calendarApi}
               selectEvent={selectEvent}

@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 
 // ** Custom Components
 import classnames from 'classnames'
@@ -9,6 +9,7 @@ import { Card, CardBody, Button, Input, Label } from 'reactstrap'
 
 // ** illustration import
 import illustration from '@src/assets/images/pages/calendar-illustration.png'
+import { post } from '../../../utility/Axios'
 
 // ** Filters Checkbox Array
 const filters = [
@@ -21,20 +22,38 @@ const filters = [
 
 const SidebarLeft = props => {
   // ** Props
-  const { handleAddEventSidebar, toggleSidebar, updateFilter, updateAllFilters, store, dispatch } = props
+  const { handleAddEventSidebar, getAllLectures, toggleSidebar, updateFilter, updateAllFilters, store, dispatch, id } = props
 
   // ** Function to handle Add Event Click
   const handleAddEventClick = () => {
     toggleSidebar(false)
     handleAddEventSidebar()
   }
+  const [loading, setLoading] = useState(false)
+  const generateTimetable = async () => {
+    try {
+      setLoading(true)
+      const response = await post(`/time-table/automatic?classId=${id}`)
+      if (response.data.status == 200) {
+        getAllLectures(id)
+        setLoading(false)
+      }
+    } catch (err) {
+      setLoading(false)
+
+      console.log("erroe", err)
+    }
+  }
 
   return (
     <Fragment>
       <Card className='sidebar-wrapper shadow-none'>
-        <CardBody className='card-body d-flex justify-content-center my-sm-0 mb-3'>
+        <CardBody className='card-body my-sm-0 mb-3'>
           <Button color='primary' block onClick={handleAddEventClick}>
             <span className='align-middle'>Add Class lecture</span>
+          </Button>
+          <Button className='mt-2' color='primary' disabled={loading} block onClick={generateTimetable}>
+            <span className='align-middle'>Generate Automatic Time Table </span>
           </Button>
         </CardBody>
         <CardBody>
