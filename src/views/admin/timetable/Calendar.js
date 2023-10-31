@@ -45,7 +45,7 @@ const Calendar = props => {
 
   const calendarOptions = {
     // events: store.events.length ? store.events : [],
-    events: myLectures.length ? myLectures : [],
+    events: myLectures?.length ? myLectures : [],
     //   events:  [
     //     {
     //       "id": 1,

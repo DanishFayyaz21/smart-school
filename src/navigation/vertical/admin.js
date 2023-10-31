@@ -28,16 +28,10 @@ export default [
     icon: <TbLayoutNavbar />,
     navLink: '/admin/assign-classes'
   },
-  {
-    id: 'make_time_table',
-    title: 'Make Time Table',
-    icon: <Layout />,
-    navLink: '/admin/time-table'
-  },
   
   {
     id: 'make_time_table',
-    title: 'Make Class Time Table',
+    title: 'Make Time Table',
     icon: <Layout />,
     navLink: '/admin/automatic-time-table'
   },

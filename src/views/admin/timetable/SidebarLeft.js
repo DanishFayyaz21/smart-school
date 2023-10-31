@@ -22,7 +22,7 @@ const filters = [
 
 const SidebarLeft = props => {
   // ** Props
-  const { handleAddEventSidebar, getAllLectures, toggleSidebar, updateFilter, updateAllFilters, store, dispatch, id } = props
+  const { handleAddEventSidebar, myLectures, getAllLectures, toggleSidebar, updateFilter, updateAllFilters, store, dispatch, id } = props
 
   // ** Function to handle Add Event Click
   const handleAddEventClick = () => {
@@ -73,10 +73,15 @@ const SidebarLeft = props => {
               View All
             </Label>
           </div>
+
           <div className='calendar-events-filter'>
-            {filters.length &&
-              filters.map(filter => {
-                { console.log("filters...............", filter) }
+            {/* {console.log(myLectures?.length && myLectures?.map(fil => fil.title, fil.id))} */}
+            {myLectures?.length &&
+              console.log(Array.from(new Map(myLectures.map(item => [item.title, { id: item.id, title: item.title }])).values()), "lllllllllll")}
+            {myLectures?.length &&
+              Array.from(new Map(myLectures.map(item => [item.title, { id: item.id, title: item.title }])).values())?.map(filter => {
+                { console.log(filter.id, filter.title) }
+
                 return (
                   <div
                     key={`${filter.label}-key`}
@@ -90,13 +95,13 @@ const SidebarLeft = props => {
                       label={filter.label}
                       className='input-filter'
                       id={`${filter.label}-event`}
-                      checked={store.selectedCalendars.includes(filter.label)}
+                      checked={Array.from(new Map(myLectures.map(item => [item.title, { id: item.id, title: item.title }])).values())?.map(item => item.title)?.includes(filter.title)}
                       onChange={() => {
                         dispatch(updateFilter(filter.label))
                       }}
                     />
-                    <Label className='form-check-label' for={`${filter.label}-event`}>
-                      {filter.label}
+                    <Label className='form-check-label' for={`${filter.title}-event`}>
+                      {filter.title}
                     </Label>
                   </div>
                 )

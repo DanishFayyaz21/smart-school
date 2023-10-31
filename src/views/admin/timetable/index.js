@@ -40,8 +40,8 @@ const CalendarComponent = () => {
   const [calendarApi, setCalendarApi] = useState(null)
   const [addSidebarOpen, setAddSidebarOpen] = useState(false)
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(false)
-  const [myLectures, setMyLectures] = useState(false)
-  const {id} = useParams()
+  const [myLectures, setMyLectures] = useState()
+  const { id } = useParams()
   console.log("locations", id)
   // ** Hooks
   const [isRtl] = useRTL()
@@ -74,7 +74,7 @@ const CalendarComponent = () => {
     }
   }
 
-  const getAllLectures = async (id) => {
+  const getAllLectures = async (id, subject) => {
     try {
       const response = await get(`/time-table?classId=${id}`)
       console.log("response........", response.data.timeTable)
@@ -105,11 +105,11 @@ const CalendarComponent = () => {
   // ** Fetch Events On Mount
   useEffect(() => {
     dispatch(fetchEvents(store.selectedCalendars))
-  
+
   }, [])
-useEffect(()=>{
-  getAllLectures(id)
-},[id])
+  useEffect(() => {
+    getAllLectures(id)
+  }, [id])
   return (
     <Fragment>
       <div className='app-calendar overflow-hidden border'>
@@ -123,6 +123,7 @@ useEffect(()=>{
             <SidebarLeft
               store={store}
               id={id}
+              myLectures={myLectures}
               dispatch={dispatch}
               updateFilter={updateFilter}
               toggleSidebar={toggleSidebar}
