@@ -19,6 +19,7 @@ import { fetchEvents, selectEvent, updateEvent, updateFilter, updateAllFilters, 
 
 // ** Styles
 import '@styles/react/apps/app-calendar.scss'
+import { get } from '../../../utility/Axios'
 
 // ** CalendarColors
 const calendarsColor = {
@@ -33,7 +34,8 @@ const CalendarComponent = () => {
   // ** Variables
   const dispatch = useDispatch()
   const store = useSelector(state => state.calendar)
-
+  const { userData } = useSelector(state => state.auth)
+  console.log(" useSelector(state => state.calendar)", userData)
   // ** states
   const [calendarApi, setCalendarApi] = useState(null)
   const [addSidebarOpen, setAddSidebarOpen] = useState(false)
@@ -75,6 +77,41 @@ const CalendarComponent = () => {
     dispatch(fetchEvents(store.selectedCalendars))
   }, [])
 
+  const [myLectures, setMyLectures] = useState()
+
+  const getAllLectures = async (id, subject) => {
+    try {
+      // const response = await get(`/time-table?classId=652145146f05649f3ed1a106`)
+      const response = await get(`/time-table?classId=${id}`)
+      console.log("response........", response.data.timeTable)
+      if (response.data?.status == 200) {
+        if (response.data.timeTable.length > 0) {
+          setMyLectures(response.data.timeTable.map((item, i) => {
+            console.log("000000", calendarsColor[Object.keys(calendarsColor)[Math.floor(Math.random() * Object.keys(calendarsColor).length)]])
+            return {
+              id: item?._id,
+              url: "",
+              title: item?.subject?.name,
+              start: item?.startDateTime,
+              end: item?.endDateTime,
+              allDay: false,
+              extendedProps: {
+                calendar: calendarsColor[Object.keys(calendarsColor)[Math.floor(Math.random() * Object.keys(calendarsColor).length)]]
+              }
+            }
+          }))
+        }
+
+      }
+
+    } catch (err) {
+      console.log("error: ", err)
+    }
+  }
+
+  useEffect(() => {
+    getAllLectures(userData?.studentclass)
+  }, [userData?.studentclass])
   return (
     <Fragment>
       <div className='app-calendar overflow-hidden border'>
@@ -92,11 +129,16 @@ const CalendarComponent = () => {
               toggleSidebar={toggleSidebar}
               updateAllFilters={updateAllFilters}
               handleAddEventSidebar={handleAddEventSidebar}
+              setMyLectures={setMyLectures}
+              myLectures={myLectures}
             />
           </Col>
           <Col className='position-relative'>
             <Calendar
               isRtl={isRtl}
+              setMyLectures={setMyLectures}
+              myLectures={myLectures}
+
               store={store}
               dispatch={dispatch}
               blankEvent={blankEvent}

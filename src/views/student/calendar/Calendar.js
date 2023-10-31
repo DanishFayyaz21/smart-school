@@ -22,6 +22,7 @@ const Calendar = props => {
   const {
     store,
     isRtl,
+    myLectures,
     dispatch,
     calendarsColor,
     calendarApi,
@@ -42,7 +43,8 @@ const Calendar = props => {
 
   // ** calendarOptions(Props)
   const calendarOptions = {
-    events: store.events.length ? store.events : [],
+    // events: store.events.length ? store.events : [],
+    events: myLectures?.length ? myLectures : [],
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
     initialView: 'dayGridMonth',
     headerToolbar: {

@@ -63,7 +63,8 @@ const SidebarLeft = props => {
                     className={classnames('form-check', {
                       [filter.className]: filter.className
                     })}
-                  >
+                  >{
+                      console.log("iiiiiiiiii", filter.className)}
                     <Input
                       type='checkbox'
                       key={filter.label}
