@@ -373,7 +373,6 @@ const AddEventSidebar = props => {
                     isClearable={false}
                     classNamePrefix='select'
                     options={classesSubject.length > 0 && classesSubject.map((item) => {
-                      console.log("llllllllllllllllllldddddddddddd", { label: `${item.name} - ${item?.classId?.name}`, value: item._id })
                       return { label: `${item.name} - ${item?.classId?.name}`, value: item._id }
                     })}
                     theme={selectThemeColors}

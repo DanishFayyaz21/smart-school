@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import { Fragment } from "react"
 import { useTranslation } from "react-i18next";
 import { CiExport } from 'react-icons/ci'
 import { HiOutlinePlus } from 'react-icons/hi'
 import { RiDeleteBinLine } from "react-icons/ri";
 import { TbEdit } from "react-icons/tb";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   Row,
@@ -26,124 +28,91 @@ import {
   UncontrolledButtonDropdown,
   Table,
 } from "reactstrap";
+import { getClassSubjects } from "../../../redux/slices/subjectSlice";
+import { get } from "../../../utility/Axios";
+import { useState } from "react";
+import moment from "moment";
 
 
 const Attendence = () => {
   const { t } = useTranslation();
 
-  const DecisionData = [
-    {
-      name: "Date of birth",
-      match: "Administrator",
-      watchlist: "International Security Database",
-      status: "Potential Positive",
-    },
-    {
-      name: "Nationality",
-      match: "Administrator",
-      watchlist: "security database",
-      status: "False Positive",
-    },
-    {
-      name: "Gender",
-      match: "Administrator",
-      watchlist: "security database",
-      status: "Potential Positive",
-    },
-    {
-      name: "Country",
-      match: "Administrator",
-      watchlist: "security database",
-      status: "Potential Positive",
-    },
-  ];
+
+  const [attendance, setAttendance] = useState([])
+  const [presents, setPresents] = useState([])
+
+  const dispatch = useDispatch()
+  const { classesSubject } = useSelector(state => state.subject)
+  const { userData } = useSelector(state => state.auth)
+  const [selectedSubject, setSelectedSubject] = useState()
+
+  useEffect(() => {
+    if (userData?.studentclass) {
+      dispatch(getClassSubjects(JSON.stringify([userData?.studentclass])))
+    }
+  }, [userData?.studentclass])
+
+  const getSubjectAttendance = async (subjectId) => {
+    try {
+      const response = await get(`/get-subject-attendance?userId=${userData?._id}&subjectId=${subjectId}`)
+      console.log("respoinse.", response.data.attendance)
+      setPresents(response.data?.attendance?.map(item => moment(item.date).format("YYYY-MM-DD")))
+    } catch (err) {
+      console.log("err", err)
+    }
+  }
+  const getLast30Days = () => {
+    const currentDate = new Date();
+    const dateArray = Array.from({ length: 30 }, (_, index) => {
+      const date = moment(new Date(currentDate).setDate(currentDate.getDate() - index)).format("YYYY-MM-DD")
+
+      return date;
+    });
+    setAttendance(dateArray)
+
+  } 
 
 
+  useEffect(() => {
+    getLast30Days()
 
+  }, [])
+  useEffect(() => {
+    if (classesSubject.length > 0) {
+      setSelectedSubject(classesSubject[0]?._id)
+      getSubjectAttendance(classesSubject[0]?._id)
+    }
+  }, [classesSubject])
   return (
     <Fragment>
 
       <div className="">
+        <h2 className="py-2 text-capitalize">{userData?.studentclass?.name}</h2>
+
         <h3 className="py-2">{t("Attendence")}</h3>
         <span>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam.
+          Select the subject to see your Attendence.
         </span>
       </div>
 
-      {/* button card section */}
-
-
-
-
       <div
-        className="d-md-flex  d-block p-2 rounded"
+        className="d-md-flex flex-wrap  d-block p-2 rounded"
         style={{ marginTop: "3rem", backgroundColor: "#FFFFFF" }}
       >
-        <div>
-          <button
-            type="button"
-            className=" btn border bg-white hover-bg-danger border rounded-4"
+        {classesSubject.length > 0 ? classesSubject?.map((item, i) => (
+          <div className="me-1">
 
-          >
-            <span
-              style={{ fontSize: "20px", marginRight: "" }} >
-            </span>
-            <span>Subject 01</span>
-          </button>
-        </div>
-        <div className=" gap-5"></div>
-
-        <div>
-          <button
-            type="button"
-            className=" btn border bg-white hover-bg-danger border rounded-4 "
-            style={{ marginLeft: "8px" }}
-          >
-            <span
-              style={{ fontSize: "20px", marginRight: "" }} >
-            </span>
-            <span>Crieria 02</span>
-          </button>
-        </div>
-
-        <div>
-          <button
-            type="button"
-            className=" btn border bg-white hover-bg-danger border rounded-4 "
-            style={{ marginLeft: "8px" }}
-          >
-            <span
-              style={{ fontSize: "20px", marginRight: "" }} >
-            </span>
-            <span>Subject 03</span>
-          </button>
-        </div>
-        <div>
-          <button
-            type="button"
-            className=" btn border bg-white hover-bg-danger border rounded-4 "
-            style={{ marginLeft: "8px" }}
-          >
-            <span
-              style={{ fontSize: "20px", marginRight: "" }} >
-            </span>
-            <span>Subject 04</span>
-          </button>
-        </div>
-        <div>
-          <button
-            type="button"
-            className=" btn border bg-white hover-bg-danger border rounded-4 w-2"
-            style={{ marginLeft: "8px", width: "100px" }}
-          >
-            <span
-              style={{ fontSize: "20px", marginRight: "" }} >
-            </span>
-            <span className=" "><HiOutlinePlus /> </span>
-          </button>
-        </div>
+            <Button className='mt-2 border rounded-2'
+              color={selectedSubject == item?._id && "primary"}
+              block onClick={() => {
+                setSelectedSubject(item?._id)
+                // setCurrentClass(item?.classId?._id)
+                getSubjectAttendance(item?._id)
+              }}>
+              <span className='align-middle'>{item?.name + "-" + item?.classId?.name}</span>
+            </Button>
+          </div>
+        )) : <span>No Class Assigned Yet</span>}
       </div>
 
       {/* button card section */}
@@ -181,46 +150,32 @@ const Attendence = () => {
                   />
                 </div>
               </th>
-              <th>{t("SORT BY")}</th>
+
               <th>{t("Date")}</th>
               <th>{t("STATUS")}</th>
-              <th style={{ minWidth: '120px' }}> {t("ACTION")}</th>
+
             </tr>
           </thead>
           <tbody>
-            {DecisionData.map(({ name, match, watchlist, status }) => (
+            {attendance.map((item, i) => (
               <tr>
                 <td scope="col">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                    />
-                  </div>
+                  <p>{i + 1}</p>
                 </td>
-                <td className="px-2 py-2">{name}</td>
-                <td>{match}</td>
-                <td>
-                  {status === "Potential Positive" && (
-                    <span className="rounded px-1  d-inline-block
-                    d-inline-block" style={{ backgroundColor: " rgba(40, 199, 111, 0.16)", color: " rgba(40, 199, 111, 1)" }}>{status}</span>
-                  )}
+                <td className="px-2 py-2">{moment(item).format("YYYY-MM-DD, dddd")}</td>
 
-                  {status === "False Positive" && (
+                <td>
+                  {presents.includes(item) === true && (
                     <span className="rounded px-1  d-inline-block
-                    d-inline-block" style={{ backgroundColor: " rgba(255, 159, 67, 0.16)", color: " rgba(255, 159, 67, 1)" }}>{status}</span>
+                    d-inline-block" style={{ backgroundColor: " rgba(40, 199, 111, 0.16)", color: " rgba(40, 199, 111, 1)" }}>Prsent</span>
+                  )}
+                  {console.log("presents.includes(item)", presents.includes(item), presents, item)}
+                  {presents.includes(item) === false && (
+                    <span className="rounded px-1  d-inline-block
+                    d-inline-block" style={{ backgroundColor: " rgba(255, 159, 67, 0.16)", color: " rgba(255, 159, 67, 1)" }}>Absent</span>
                   )}
                 </td>
-                <td className="  gap-1" style={{ fontSize: "17px" }}>
-                  <span className="px-1">
-                    <TbEdit />
-                  </span>
-                  <span>
-                    <RiDeleteBinLine className="" />
-                  </span>
-                </td>
+
               </tr>
             ))}
           </tbody>

@@ -195,7 +195,7 @@ const UsersList = () => {
     try {
       const response = await get(`/get-all-students`);
 
-      console.log('khvhjvhv ', response)
+
 
       // if (response.data?.success) {
       setData(response.data.data.students);
@@ -550,14 +550,17 @@ const UsersList = () => {
                   <tr key={index}>
                     <td>
                       {/* <div class="avatar me-1" width="32" height="32"><img class="" src="/src/assets/images/avatars/9.png" alt="avatarImg" height="32" width="32" /></div> */}
-                      <Link to={`/student/view/${item._id}`} className="align-middle fw-bold">
-                        {item.firstName + " " + item.lastName}
-                      </Link>
+                      <div className='d-flex flex-column'>
+                        <Link to={`/student/view/${item._id}`} className="align-middle fw-bold">
+                          {item.firstName + " " + item.lastName}
+                        </Link>
+                        <small className='text-truncate text-muted mb-0'>{item.email}</small>
+
+                      </div>
                     </td>
                     <td>{item.gender}</td>
                     <td>
                       {item?.studentclass?.name}
-                      {console.log("llllllllllll", item?.studentclass?.name)}
                     </td>
                     <td>
                       {item.role == "Admin" || item.role == "Consumer"
