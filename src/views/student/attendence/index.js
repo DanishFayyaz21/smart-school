@@ -73,6 +73,7 @@ const Attendence = () => {
   } 
 
 
+
   useEffect(() => {
     getLast30Days()
 
@@ -142,12 +143,7 @@ const Attendence = () => {
             <tr>
               <th scope="col">
                 <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                  />
+                <span>Id</span>
                 </div>
               </th>
 

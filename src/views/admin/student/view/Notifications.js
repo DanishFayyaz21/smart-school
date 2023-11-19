@@ -1,6 +1,14 @@
 // ** Reactstrap Imports
+import react, { useEffect, useState } from 'react'
+import { } from 'react'
+
 import { Card, CardTitle, CardBody, Table, Col, Input, Button, Label } from 'reactstrap'
 import { selectThemeColors } from '@utils'
+import { get, post } from '../../../../utility/Axios'
+import moment from 'moment'
+import { useLocation, useNavigation, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getClassSubjects } from '../../../../redux/slices/subjectSlice'
 
 const typesArr = [
   {
@@ -23,6 +31,75 @@ const typesArr = [
 
 const Notifications = () => {
 
+  const { id } = useParams()
+  const [selectedSubject, setSelectedSubject] = useState()
+
+  const [attendance, setAttendance] = useState([])
+  const [presents, setPresents] = useState([])
+  const dispatch = useDispatch()
+  const { classesSubject } = useSelector(state => state.subject)
+  const { currentStudent } = useSelector(state => state.user)
+
+  const handleCheckboxChange = (date) => {
+    console.log("datedate", date)
+    if (presents.includes(date)) {
+      setPresents(presents.filter((id) => id !== date));
+    } else {
+      setPresents((prevAttendance) => ([
+        ...prevAttendance,
+        date,
+      ]))
+    }
+  };
+
+  const getSubjectAttendance = async (subjectId) => {
+    try {
+      const response = await get(`/get-subject-attendance?userId=${id}&subjectId=${subjectId}`)
+      console.log("respoinse.", response.data.attendance)
+      setPresents(response.data?.attendance?.map(item => moment(item.date).format("YYYY-MM-DD")))
+    } catch (err) {
+      console.log("err", err)
+    }
+  }
+  const getLast30Days = () => {
+    const currentDate = new Date();
+    const dateArray = Array.from({ length: 30 }, (_, index) => {
+      const date = moment(new Date(currentDate).setDate(currentDate.getDate() - index)).format("YYYY-MM-DD")
+
+      return date;
+    });
+    setAttendance(dateArray)
+
+  }
+
+  useEffect(() => {
+    getLast30Days()
+  }, [])
+
+  useEffect(() => {
+    if (classesSubject.length > 0) {
+      setSelectedSubject(classesSubject[0]?._id)
+      getSubjectAttendance(classesSubject[0]?._id)
+    }
+  }, [classesSubject])
+
+  useEffect(() => {
+    if (currentStudent?.studentclass?._id) {
+      dispatch(getClassSubjects(JSON.stringify([currentStudent?.studentclass?._id])))
+    }
+  }, [currentStudent?.studentclass])
+
+  const saveAttendence = async () => {
+    const formData = {
+      userId: id,
+      subjectId: selectedSubject,
+      attendance: attendance.map(item => {
+        return { date: item, status: presents.includes(item) ? "Present" : "Absent" }
+      })
+    }
+    const response = await post("/mark-user-attendence", formData)
+    console.log("response", response.data)
+  }
 
   return (
     <Card>
@@ -30,6 +107,25 @@ const Notifications = () => {
         <CardTitle className='mb-50' tag='h4'>
           Attendence
         </CardTitle>
+        <div
+          className="d-md-flex flex-wrap my-1  d-block p-2 rounded"
+          style={{ backgroundColor: "#FFFFFF" }}
+        >
+          {classesSubject.length > 0 ? classesSubject?.map((item, i) => (
+            <div className="me-1">
+
+              <Button className='mt-1 border rounded-2'
+                color={selectedSubject == item?._id && "primary"}
+                block onClick={() => {
+                  setSelectedSubject(item?._id)
+                  getSubjectAttendance(item?._id)
+                }}>
+                <span className='align-middle' >{item?.name}</span>
+              </Button>
+            </div>
+          )) : <span>No Class Assigned Yet</span>}
+        </div>
+
         <Col md='4'>
           <Label for='role-select'>Select Date</Label>
           <Input
@@ -40,47 +136,49 @@ const Notifications = () => {
           />
         </Col>
       </CardBody>
-      <Table className='text-nowrap text-center border-bottom' responsive>
+      <Table className='text-nowrap text-center border-bottom'
+        responsive>
         <thead>
           <tr>
             <th className='text-start'>Date</th>
             <th>✉️ Present</th>
             <th>🖥 Absent</th>
-            <th>👩🏻‍💻 Leave</th>
+            {/* <th>👩🏻‍💻 Leave</th> */}
           </tr>
         </thead>
         <tbody>
-          {typesArr.map((type, index) => {
+          {attendance?.map((item, index) => {
             return (
               <tr key={index}>
                 <td className='text-start'>{(index + 1) + "/10/2023"}</td>
                 <td>
                   <div className='d-flex form-check justify-content-center'>
-                    <Input type='checkbox' defaultChecked={type.defaultChecked.includes('email')} />
+                    <Input type='checkbox' checked={presents.includes(item)}
+                      onChange={() => handleCheckboxChange(item)} />
                   </div>
                 </td>
                 <td>
                   <div className='d-flex form-check justify-content-center'>
-                    <Input type='checkbox' defaultChecked={type.defaultChecked.includes('browser')} />
+                    <Input type='checkbox' checked={!presents.includes(item)} onChange={() => handleCheckboxChange(item)} />
                   </div>
                 </td>
-                <td>
+                {/* <td>
                   <div className='d-flex form-check justify-content-center'>
                     <Input type='checkbox' defaultChecked={type.defaultChecked.includes('app')} />
                   </div>
-                </td>
+                </td> */}
               </tr>
             )
           })}
         </tbody>
       </Table>
       <CardBody>
-        <Button className='me-1' color='primary'>
+        <Button className='me-1' color='primary' onClick={saveAttendence}>
           Save Changes
         </Button>
         <Button outline>Discard</Button>
       </CardBody>
-    </Card>
+    </Card >
   )
 }
 
