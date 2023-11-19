@@ -68,15 +68,14 @@ const Attendence = () => {
   }
 
   useEffect(() => {
-
     getTeacherClasses(userData?._id)
   }, [])
 
   useEffect(() => {
     getSpecificDateAttendence(date)
   }, [selectedSubject])
+  
   const handleCheckboxChange = (studentId) => {
-
     if (attendance.includes(studentId)) {
       setAttendance(attendance.filter((id) => id !== studentId));
     } else {

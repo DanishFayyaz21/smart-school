@@ -18,7 +18,6 @@ axiosInstance.interceptors.request.use(async config => {
   if (token) {
     config.headers['Authorization'] = 'Bearer ' + JSON.parse(token);
   }
-  console.log("tokem............", config.headers['Authorization'])
   return config;
 }, error => {
   Promise.reject(error);

@@ -139,7 +139,7 @@ export default [
     element: <Classes />
   },
   {
-    path: '/classes/subject',
+    path: '/classes/subject/:classId/:subjectId',
     element: <Subject />,
     meta: {
       appLayout: true,

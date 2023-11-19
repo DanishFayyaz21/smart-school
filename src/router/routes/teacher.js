@@ -20,7 +20,7 @@ const Teacher = [
         element: <Classes />
     },
     {
-        path: '/classes/subject',
+        path: '/classes/subject/:id',
         element: <Subject />,
         meta: {
             appLayout: true,

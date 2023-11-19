@@ -77,17 +77,17 @@ export const columns = [
     sortable: true,
     minWidth: '297px',
     sortField: 'fullName',
-    selector: row => row.fullName,
+    selector: row => row,
     cell: row => (
       <div className='d-flex justify-content-left align-items-center'>
         {renderClient(row)}
         <div className='d-flex flex-column'>
           <Link
-            to={`/apps/user/view/${row.id}`}
+            to={`/student/view/${row._id}`}
             className='user_name text-truncate text-body'
             onClick={() => store.dispatch(getUser(row.id))}
           >
-            <span className='fw-bold'>{row.fullName}</span>
+            <span className='fw-bold'>{row?.firstName}</span>
           </Link>
           <small className='text-truncate text-muted mb-0'>{row.email}</small>
         </div>
@@ -102,22 +102,7 @@ export const columns = [
     selector: row => row.role,
     cell: row => renderRole(row)
   },
-  {
-    name: 'Plan',
-    sortable: true,
-    minWidth: '138px',
-    sortField: 'currentPlan',
-    selector: row => row.currentPlan,
-    cell: row => <span className='text-capitalize'>{row.currentPlan}</span>
-  },
-  {
-    name: 'Billing',
-    sortable: true,
-    minWidth: '230px',
-    sortField: 'billing',
-    selector: row => row.billing,
-    cell: row => <span className='text-capitalize'>{row.billing}</span>
-  },
+ 
   {
     name: 'Status',
     sortable: true,

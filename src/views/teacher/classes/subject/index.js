@@ -20,6 +20,9 @@ import KanbanBoards from './KanbanBoards'
 
 // ** Styles
 import '@styles/react/apps/app-kanban.scss'
+import Table from '../Table'
+import { useParams } from 'react-router-dom'
+import { get } from '../../../../utility/Axios'
 
 const defaultValues = {
   boardTitle: ''
@@ -38,6 +41,29 @@ const KanbanBoard = () => {
   // ** States
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [showAddBoard, setShowAddBoard] = useState(false)
+  const [students, setStudents] = useState([])
+
+  const { classId,subjectId } = useParams()
+  console.log("id...........", classId)
+  const getClassStudents = async (id) => {
+    console.log("sadsadsadasdsad",id)
+
+    try {
+      const response = await get(`get-class-students/${id}`)
+      console.log("rrposne.", response.data.data)
+      setStudents(response.data.data)
+    } catch (err) {
+      console.log("err", err)
+      setStudents([])
+
+    }
+  }
+
+  useEffect(() => {
+    console.log("sadsadsadasdsad",classId)
+    if (classId)
+      getClassStudents(classId)
+  }, [classId])
 
   // ** Hooks
   const dispatch = useDispatch()
@@ -127,29 +153,46 @@ const KanbanBoard = () => {
     dispatch(fetchTasks())
   }, [dispatch])
 
-  return store.boards ? (
-    <div className='app-kanban-wrapper'>
-      {renderBoards()}
+  return (
+    store.boards ? (
+      <div style={{ overflow: "auto", width: "100%" }}>
+        <div className='app-kanban-wrapper'>
+          {renderBoards()}
 
-      <div className='ms-1' style={{ minWidth: 150 }}>
-        {!showAddBoard ? (
-          <Button size='sm' color='light-secondary' onClick={handleOpenAddBoard}>
-            <Plus size={14} className='me-25' />
-            <span className='align-middle'> Add Board</span>
-          </Button>
-        ) : (
-          renderAddBoardForm()
-        )}
+          <div className='ms-1' style={{ minWidth: 150 }}>
+            {!showAddBoard ? (
+              <Button size='sm' color='light-secondary' onClick={handleOpenAddBoard}>
+                <Plus size={14} className='me-25' />
+                <span className='align-middle'> Add Board</span>
+              </Button>
+            ) : (
+              renderAddBoardForm()
+            )}
+          </div>
+
+          <TaskSidebar
+            labelColors={labelColors}
+            sidebarOpen={sidebarOpen}
+            selectedTask={store.selectedTask}
+            handleTaskSidebarToggle={handleTaskSidebarToggle}
+          />
+
+        </div>
+        <div style={{
+          display: "block",
+          width: "100%",
+          overflow: "auto",
+          minHeight: "100vh"
+        }}>
+
+          <h3 className='mt-50'>Students</h3>
+          <div className='app-user-list'>
+            <Table students={students}/>
+          </div>
+
+        </div>
       </div>
-
-      <TaskSidebar
-        labelColors={labelColors}
-        sidebarOpen={sidebarOpen}
-        selectedTask={store.selectedTask}
-        handleTaskSidebarToggle={handleTaskSidebarToggle}
-      />
-    </div>
-  ) : null
+    ) : null)
 }
 
 export default KanbanBoard

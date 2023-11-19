@@ -42,6 +42,9 @@ import avatar9 from '@src/assets/images/avatars/9.png'
 import avatar10 from '@src/assets/images/avatars/10.png'
 import avatar11 from '@src/assets/images/avatars/11.png'
 import avatar12 from '@src/assets/images/avatars/12.png'
+import { useEffect } from 'react'
+import { get } from '../../../utility/Axios'
+import { useSelector } from 'react-redux'
 
 // ** Vars
 const data = [
@@ -213,6 +216,8 @@ const ClassesCards = () => {
   // ** States
   const [show, setShow] = useState(false)
   const [modalType, setModalType] = useState('Add New')
+  const [classes, setClasses] = useState([])
+
 
   // ** Hooks
   const {
@@ -244,22 +249,36 @@ const ClassesCards = () => {
     setValue('roleName')
   }
 
+  const { userData } = useSelector(state => state.auth)
+
+  const getTeacherClasses = async (id) => {
+    try {
+      const response = await get(`get-teacher-classes?id=${id}`)
+      setClasses(response.data.data)
+    } catch (err) {
+      console.log("err", err)
+    }
+  }
+
+  useEffect(() => {
+    getTeacherClasses(userData?._id)
+  }, [])
   return (
     <Fragment>
       <Row>
-        {data.map((item, index) => {
+        {classes?.length > 0 && classes.map((item, index) => {
           return (
             <Col key={index} xl={4} md={6}>
-              <Link to="/classes/subject">
+              <Link to={`/classes/subject/${item?.classId?._id}/${item?._id}`}>
                 <Card>
                   <CardBody>
-                    <div className='d-flex justify-content-between'>
-                      <span>{`Total ${item.totalUsers} users`}</span>
-                      <AvatarGroup data={item.users} />
-                    </div>
+                    {/* <div className='d-flex justify-content-between'> */}
+                    {/* <span>{`Total ${item.totalUsers} users`}</span>
+                      <AvatarGroup data={item.users} /> */}
+                    {/* </div> */}
                     <div className='d-flex justify-content-between align-items-end mt-1 pt-25'>
                       <div className='role-heading'>
-                        <h4 className='fw-bolder'>{item.title}</h4>
+                        <h4 className='fw-bolder'>{item?.name+" - "+item?.classId?.name}</h4>
                         <Link
                           to='/'
                           className='role-edit-modal'

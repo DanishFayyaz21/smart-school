@@ -78,7 +78,7 @@ const CustomHeader = ({ plan, handlePlanChange, handlePerPage, rowsPerPage, hand
   )
 }
 
-const Table = () => {
+const Table = ({students}) => {
   // ** Store Vars
   const dispatch = useDispatch()
   const store = useSelector(state => state.users)
@@ -247,7 +247,7 @@ const Table = () => {
           paginationServer
           columns={columns}
           onSort={handleSort}
-          data={dataToRender()}
+          data={students}
           sortIcon={<ChevronDown />}
           paginationComponent={CustomPagination}
           selectableRowsComponent={BootstrapCheckbox}
