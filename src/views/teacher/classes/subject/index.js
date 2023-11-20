@@ -22,10 +22,10 @@ import KanbanBoards from './KanbanBoards'
 import '@styles/react/apps/app-kanban.scss'
 import Table from '../Table'
 import { useParams } from 'react-router-dom'
-import { get } from '../../../../utility/Axios'
+import { get, post } from '../../../../utility/Axios'
 
 const defaultValues = {
-  boardTitle: ''
+  name: ''
 }
 
 const labelColors = {
@@ -42,11 +42,22 @@ const KanbanBoard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [showAddBoard, setShowAddBoard] = useState(false)
   const [students, setStudents] = useState([])
+  const [taskCategories, setTaskCategories] = useState([])
 
-  const { classId,subjectId } = useParams()
-  console.log("id...........", classId)
+  const { classId, subjectId } = useParams()
+
+  const getSubjectTasks = async () => {
+    try {
+      const response = await get(`get-tasks?subjectId=${subjectId}`)
+      if (response.data.status == 200) {
+        setTaskCategories(response.data?.taskCategories)
+      }
+    } catch (err) {
+      console.log("error", err)
+    }
+  }
+
   const getClassStudents = async (id) => {
-    console.log("sadsadsadasdsad",id)
 
     try {
       const response = await get(`get-class-students/${id}`)
@@ -60,10 +71,12 @@ const KanbanBoard = () => {
   }
 
   useEffect(() => {
-    console.log("sadsadsadasdsad",classId)
-    if (classId)
+    console.log("sadsadsadasdsad", classId)
+    if (classId) {
       getClassStudents(classId)
-  }, [classId])
+    }
+    if (subjectId) { getSubjectTasks(subjectId) }
+  }, [classId, subjectId])
 
   // ** Hooks
   const dispatch = useDispatch()
@@ -86,19 +99,86 @@ const KanbanBoard = () => {
   }
 
   const handleAddBoardFormSubmit = data => {
-    dispatch(addBoard({ title: data.boardTitle, id: data.boardTitle.toLowerCase().replace(/ /g, '-') }))
+    dispatch(addBoard({ title: data.name, id: data.name.toLowerCase().replace(/ /g, '-') }))
     handleAddBoardReset()
   }
 
   const handleTaskSidebarToggle = () => setSidebarOpen(!sidebarOpen)
 
   const renderBoards = () => {
-    return store.boards.map((board, index) => {
-      const isLastBoard = store.boards[store.boards.length - 1].id === board.id
+    const boards = taskCategories.length > 0 ? taskCategories.map((item) => {
+      return { id: item._id, title: item?.name }
+    }) : []
+
+    let tasks = []
+    taskCategories.length > 0 && taskCategories.map((item) => {
+      if (item?.tasks.length > 0) {
+        const temp = item?.tasks?.length > 0 && item?.tasks.map((item) => {
+          console.log("item?._iditem?._id", item)
+          return {
+            id: item?._id,
+            "labels": [
+              "UX"
+            ],
+            boardId: item?.taskCategory,
+            description: item?.description,
+            dueDate: 1700594583088,
+            title: item?.title,
+            "attachments": [
+              {
+                "name": "documentation.doc",
+                "img": "/src/assets/images/icons/file-icons/doc.png"
+              },
+              {
+                "name": "app.js",
+                "img": "/src/assets/images/icons/file-icons/js.png"
+              }
+            ],
+            "comments": [
+              {
+                "name": "Joey Tribbiani",
+                "img": "/src/assets/images/portrait/small/avatar-s-3.jpg",
+                "comment": "Complete this on priority"
+              },
+              {
+                "name": "Chandler Bing",
+                "img": "/src/assets/images/portrait/small/avatar-s-5.jpg",
+                "comment": "Complete this on priority"
+              },
+              {
+                "name": "Monica Geller",
+                "img": "/src/assets/images/portrait/small/avatar-s-6.jpg",
+                "comment": "Complete this on priority"
+              }
+            ],
+            "assignedTo": [
+              {
+                "title": "Ross Geller",
+                "img": "/src/assets/images/portrait/small/avatar-s-1.jpg"
+              },
+              {
+                "title": "Pheobe Buffay",
+                "img": "/src/assets/images/portrait/small/avatar-s-2.jpg"
+              }
+            ]
+          }
+        })
+        tasks = [...tasks, ...temp]
+      }
+    })
+    console.log("askjdsajdsalktass...........", tasks)
+    return boards.length > 0 && boards.map((board, index) => {
+      // console.log("board.....", board, store)
+
+
+
+
+
+      const isLastBoard = boards[boards.length - 1].id === board.id
 
       return (
         <KanbanBoards
-          store={store}
+          store={{ boards, tasks }}
           board={board}
           labelColors={labelColors}
           isLastBoard={isLastBoard}
@@ -111,28 +191,46 @@ const KanbanBoard = () => {
   }
 
   const renderAddBoardForm = () => {
+    const addTaskCategory = async (e) => {
+      console.log("sssssssssssssssssss", e)
+      try {
+        const formData = {
+          name: e?.name,
+          subject: subjectId
+        }
+        const response = await post("/add-task-category", formData)
+        if (response.data.status == 201) {
+          handleAddBoardReset()
+        }
+      } catch (err) {
+        console.log("err", err)
+      }
+    }
     return showAddBoard ? (
-      <form onSubmit={handleSubmit(handleAddBoardFormSubmit)}>
+      <form onSubmit={handleSubmit((e) => {
+        // handleAddBoardFormSubmit(e)
+        addTaskCategory(e)
+      })}>
         <div className='mb-50'>
           <Controller
-            name='boardTitle'
+            name='name'
             control={control}
             rules={{ required: true }}
             render={({ field: { value, onChange } }) => (
               <Input
                 autoFocus
                 value={value}
-                id='board-title'
+                id='name'
                 onChange={onChange}
-                placeholder='Board Title'
-                invalid={Boolean(errors.boardTitle)}
+                placeholder='Task Category'
+                invalid={Boolean(errors.name)}
                 aria-describedby='validation-add-board'
               />
             )}
           />
-          {errors.boardTitle && (
+          {errors.name && (
             <FormText color='danger' id='validation-add-board'>
-              Please enter a valid Board Title
+              Please enter a valid Task Category Title
             </FormText>
           )}
         </div>
@@ -187,7 +285,7 @@ const KanbanBoard = () => {
 
           <h3 className='mt-50'>Students</h3>
           <div className='app-user-list'>
-            <Table students={students}/>
+            <Table students={students} />
           </div>
 
         </div>

@@ -25,7 +25,7 @@ const defaultValues = {
 const KanbanBoard = props => {
   // ** Props
   const { board, index, store, labelColors, handleTaskSidebarToggle } = props
-
+  console.log("stoeeeeeeeee", store)
   // ** States
   const [title, setTitle] = useState('')
   const [showAddTask, setShowAddTask] = useState(null)
