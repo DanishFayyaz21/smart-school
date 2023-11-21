@@ -88,10 +88,18 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
   // ** Function to handle form submit
   const onSubmit = async (data) => {
-    const formData = { ...data, status, studentclass, role: "Student", gender: data.gender.value, };
-    console.log("formdaata..............", formData)
-    const res = await post("/register-student", formData);
-    console.log("res.....................", res);
+    try {
+      const formData = { ...data, status, studentclass, role: "Student", gender: data.gender.value, };
+      console.log("formdaata..............", formData)
+      const res = await post("/register-student", formData);
+      console.log("res.....................", res);
+      if (res.data.success) {
+        setFormStatus(1)
+        toggleSidebar()
+      }
+    } catch (err) {
+      console.log("err", err)
+    }
     // setData(data)
     // if (checkIsValid(data)) {
     //   if (formStatus == 2)toggleSidebar()

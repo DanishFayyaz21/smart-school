@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 
 // ** Custom Components
 import classnames from 'classnames'
@@ -9,6 +9,7 @@ import { Card, CardBody, Button, Input, Label } from 'reactstrap'
 
 // ** illustration import
 import illustration from '@src/assets/images/pages/calendar-illustration.png'
+import { post } from '../../../utility/Axios'
 
 // ** Filters Checkbox Array
 const filters = [
@@ -21,22 +22,32 @@ const filters = [
 
 const SidebarLeft = props => {
   // ** Props
-  const { handleAddEventSidebar, toggleSidebar, updateFilter, updateAllFilters, store, dispatch } = props
+  const { handleAddEventSidebar, myLectures, getAllLectures, toggleSidebar, updateFilter, updateAllFilters, store, dispatch, id } = props
 
   // ** Function to handle Add Event Click
   const handleAddEventClick = () => {
     toggleSidebar(false)
     handleAddEventSidebar()
   }
+  const [loading, setLoading] = useState(false)
+  const generateTimetable = async () => {
+    try {
+      setLoading(true)
+      const response = await post(`/time-table/automatic?classId=${id}`)
+      if (response.data.status == 200) {
+        getAllLectures(id)
+        setLoading(false)
+      }
+    } catch (err) {
+      setLoading(false)
+
+      console.log("erroe", err)
+    }
+  }
 
   return (
     <Fragment>
       <Card className='sidebar-wrapper shadow-none'>
-        <CardBody className='card-body d-flex justify-content-center my-sm-0 mb-3'>
-          <Button color='primary' block onClick={handleAddEventClick}>
-            <span className='align-middle'>Add Event</span>
-          </Button>
-        </CardBody>
         <CardBody>
           <h5 className='section-label mb-1'>
             <span className='align-middle'>Filter</span>
@@ -54,33 +65,145 @@ const SidebarLeft = props => {
               View All
             </Label>
           </div>
+
           <div className='calendar-events-filter'>
-            {filters.length &&
-              filters.map(filter => {
+            {/* {console.log(myLectures?.length && myLectures?.map(fil => fil.title, fil.id))} */}
+            {myLectures?.length &&
+              console.log(Array.from(new Map(myLectures.map(item => [item.title, { id: item.id, title: item.title }])).values()), "lllllllllll")}
+            {myLectures?.length &&
+              Array.from(new Map(myLectures.map(item => [item.title, { ...item }])).values())?.map(filter => {
+                { console.log("fgggggggg", filter, filter.title) }
+
                 return (
                   <div
                     key={`${filter.label}-key`}
-                    className={classnames('form-check', {
+                    className={classnames(`form-check mt-1 ${filter?.extendedProps.calender}`, {
                       [filter.className]: filter.className
                     })}
                   >
+
                     <Input
                       type='checkbox'
                       key={filter.label}
                       label={filter.label}
-                      className='input-filter'
+                      className={`input-filter`}
                       id={`${filter.label}-event`}
-                      checked={store.selectedCalendars.includes(filter.label)}
+                      checked={Array.from(new Map(myLectures.map(item => [item.title, { id: item.id, title: item.title }])).values())?.map(item => item.title)?.includes(filter.title)}
                       onChange={() => {
                         dispatch(updateFilter(filter.label))
                       }}
                     />
-                    <Label className='form-check-label' for={`${filter.label}-event`}>
-                      {filter.label}
+                    <Label className='form-check-label' for={`${filter.title}-event`}>
+                      {filter.title}
                     </Label>
                   </div>
                 )
               })}
+            {/* <div
+              key={`Physics-key`}
+
+              className="form-check mb-1 form-check-info"
+            >
+              <Input
+                type='checkbox'
+                key={"Physics"}
+                label={"Physics"}
+                className='input-filter'
+                id={`Physics`}
+                checked={true}
+              // onChange={() => {
+              //   dispatch(updateFilter(filter.label))
+              // }}
+              />
+              <Label className='form-check-label' for={`Physics-event`}>
+                English class 9
+              </Label>
+            </div>
+
+            <div
+              key={`Physics-key`}
+
+              className="form-check mb-1 form-check-success"
+            >
+              <Input
+                type='checkbox'
+                key={"Physics"}
+                label={"Physics"}
+                className='input-filter'
+                id={`Physics`}
+                checked={true}
+              // onChange={() => {
+              //   dispatch(updateFilter(filter.label))
+              // }}
+              />
+              <Label className='form-check-label' for={`Physics-event`}>
+                Physics class 10
+              </Label>
+            </div>
+
+            <div
+              key={`Physics-key`}
+
+              className="form-check mb-1 form-check-warning"
+            >
+              <Input
+                type='checkbox'
+                key={"Physics"}
+                label={"Physics"}
+                className='input-filter'
+                id={`Physics`}
+                checked={true}
+              // onChange={() => {
+              //   dispatch(updateFilter(filter.label))
+              // }}
+              />
+              <Label className='form-check-label' for={`Physics-event`}>
+                Chemistry class 9
+              </Label>
+            </div>
+
+            <div
+              key={`Physics-key`}
+
+              className="form-check mb-1 form-check-primary"
+            >
+              <Input
+                type='checkbox'
+                key={"Physics"}
+                label={"Physics"}
+                className='input-filter'
+                id={`Physics`}
+                checked={true}
+              // onChange={() => {
+              //   dispatch(updateFilter(filter.label))
+              // }}
+              />
+              <Label className='form-check-label' for={`Physics-event`}>
+                Math class 7
+              </Label>
+            </div>
+
+            <div
+              key={`Physics-key`}
+
+              className="form-check mb-1 form-check-danger"
+            >
+              <Input
+                type='checkbox'
+                key={"Physics"}
+                label={"Physics"}
+                className='input-filter'
+                id={`Physics`}
+                checked={true}
+              // onChange={() => {
+              //   dispatch(updateFilter(filter.label))
+              // }}
+              />
+              <Label className='form-check-label' for={`Physics-event`}>
+                Economics class 8
+              </Label>
+            </div> */}
+
           </div>
         </CardBody>
       </Card>

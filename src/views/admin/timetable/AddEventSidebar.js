@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
@@ -29,6 +29,10 @@ import img6 from '@src/assets/images/avatars/11-small.png'
 // ** Styles Imports
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/flatpickr/flatpickr.scss'
+import { getAllClasses } from '../../../redux/slices/classSlice'
+import { useSelector } from 'react-redux'
+import { getClassSubjects } from '../../../redux/slices/subjectSlice'
+
 
 const AddEventSidebar = props => {
   // ** Props
@@ -56,7 +60,7 @@ const AddEventSidebar = props => {
       handleSubmit,
       formState: { errors }
     } = useForm({
-      defaultValues: { title: '' }
+      defaultValues: { class: "", subject: '' }
     })
 
   // ** States
@@ -69,6 +73,14 @@ const AddEventSidebar = props => {
   const [startPicker, setStartPicker] = useState(new Date())
   const [calendarLabel, setCalendarLabel] = useState([{ value: 'Business', label: 'Business', color: 'primary' }])
 
+  const { allclasses } = useSelector((state) => state.classSlice)
+  const { classesSubject } = useSelector((state) => state.subject)
+  const getSubjects = async (classId) => {
+    dispatch(getClassSubjects(JSON.stringify([classId])))
+  }
+  useEffect(() => {
+    dispatch(getAllClasses())
+  }, [])
   // ** Select Options
   const options = [
     { value: 'Business', label: 'Business', color: 'primary' },
@@ -308,23 +320,38 @@ const AddEventSidebar = props => {
           >
             <div className='mb-1'>
               <Label className='form-label' for='title'>
-                Title <span className='text-danger'>*</span>
+                Class <span className='text-danger'>*</span>
               </Label>
-              <Controller
+              {/* <Controller
                 name='title'
                 control={control}
                 render={({ field }) => (
                   <Input id='title' placeholder='Title' invalid={errors.title && true} {...field} />
                 )}
+              /> */}
+              <Select
+                isClearable={false}
+                classNamePrefix='select'
+                options={allclasses.length > 0 && allclasses.map((item) => {
+                  return { label: item.name, value: item._id }
+                })}
+                onChange={(e) => {
+                  // setValue("classes", e)
+                  getSubjects(e.value)
+                }}
+                theme={selectThemeColors}
+              // className={classNames('react-select', { 'is-invalid': data !== null && data.class === null })}
+              // {...field}
               />
             </div>
 
             <div className='mb-1'>
               <Label className='form-label' for='label'>
-                Label
+                Subject
               </Label>
-              <Select
+              {/* <Select
                 id='label'
+
                 value={calendarLabel}
                 options={options}
                 theme={selectThemeColors}
@@ -335,6 +362,24 @@ const AddEventSidebar = props => {
                 components={{
                   Option: OptionComponent
                 }}
+              /> */}
+              <Controller
+                name='subjects'
+                control={control}
+                render={({ field }) => (
+                  // <Input id='gender' placeholder='Australia' invalid={errors.gender && true} {...field} />
+                  <Select
+                    // isMulti={true}
+                    isClearable={false}
+                    classNamePrefix='select'
+                    options={classesSubject.length > 0 && classesSubject.map((item) => {
+                      return { label: `${item.name} - ${item?.classId?.name}`, value: item._id }
+                    })}
+                    theme={selectThemeColors}
+                    // className={classnames('react-select', { 'is-invalid': data !== null && data.class === null })}
+                    {...field}
+                  />
+                )}
               />
             </div>
 
@@ -375,7 +420,7 @@ const AddEventSidebar = props => {
               />
             </div>
 
-            <div className='form-switch mb-1'>
+            {/* <div className='form-switch mb-1'>
               <Input
                 id='allDay'
                 type='switch'
@@ -387,9 +432,9 @@ const AddEventSidebar = props => {
               <Label className='form-label' for='allDay'>
                 All Day
               </Label>
-            </div>
+            </div> */}
 
-            <div className='mb-1'>
+            {/* <div className='mb-1'>
               <Label className='form-label' for='eventURL'>
                 Event URL
               </Label>
@@ -400,9 +445,9 @@ const AddEventSidebar = props => {
                 onChange={e => setUrl(e.target.value)}
                 placeholder='https://www.google.com'
               />
-            </div>
+            </div> */}
 
-            <div className='mb-1'>
+            {/* <div className='mb-1'>
               <Label className='form-label' for='guests'>
                 Guests
               </Label>
@@ -420,16 +465,16 @@ const AddEventSidebar = props => {
                   Option: GuestsComponent
                 }}
               />
-            </div>
+            </div> */}
 
-            <div className='mb-1'>
+            {/* <div className='mb-1'>
               <Label className='form-label' for='location'>
                 Location
               </Label>
               <Input id='location' value={location} onChange={e => setLocation(e.target.value)} placeholder='Office' />
-            </div>
+            </div> */}
 
-            <div className='mb-1'>
+            {/* <div className='mb-1'>
               <Label className='form-label' for='description'>
                 Description
               </Label>
@@ -442,7 +487,7 @@ const AddEventSidebar = props => {
                 onChange={e => setDesc(e.target.value)}
                 placeholder='Description'
               />
-            </div>
+            </div> */}
             <div className='d-flex mb-1'>
               <EventActions />
             </div>

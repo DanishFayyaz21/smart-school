@@ -243,7 +243,7 @@ const UserInfoCard = ({ selectedUser }) => {
                   </li>
                   <li className='mb-75'>
                     <span className='fw-bolder me-25'>Class:</span>
-                    <span className='text-capitalize'>{"Student"}</span>
+                    <span className='text-capitalize'>{selectedUser?.studentclass?.name?.split(" ")[1]}</span>
                   </li>
                   {/* <li className='mb-75'>
                     <span className='fw-bolder me-25'>Section:</span>
