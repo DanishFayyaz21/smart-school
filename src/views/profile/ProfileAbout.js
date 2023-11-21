@@ -18,12 +18,12 @@ const ProfileAbout = ({ data }) => {
           <CardText>PK</CardText>
         </div>
         <div className='mt-2'>
-          <h5 className='mb-75'>{t("Email:")} </h5>
+          <h5 className='mb-75'>Email: </h5>
           <CardText>danishfayyaz91@gmail.com</CardText>
         </div>
         <div className='mt-2'>
-          <h5 className='mb-75'>Website:</h5>
-          <CardText>https://danish21portfolio.netlify.app/</CardText>
+          <h5 className='mb-75'>class:</h5>
+          <CardText>Class 1</CardText>
         </div>
       </CardBody>
     </Card>
