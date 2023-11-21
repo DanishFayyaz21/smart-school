@@ -29,6 +29,7 @@ const DashboardEcommerce = lazy(() => import('../../views/dashboard/ecommerce'))
 import StudentView from '../../views/admin/student/view';
 import TeacherView from '../../views/admin/teacher/view';
 import AutomatictimeTable from '../../views/admin/timetable/automaticTimetable';
+import StudentSubjectView from '../../views/student/classes/subject';
 
 
 const DashboardAnalytics = lazy(() => import('../../views/dashboard/analytics'))
@@ -126,6 +127,10 @@ export default [
   {
     path: '/subjects',
     element: <StudentsSubjects />
+  },
+  {
+    path: '/subject/:classId/:subjectId',
+    element: <StudentSubjectView />
   },
   {
     path: '/teacher/time-table',

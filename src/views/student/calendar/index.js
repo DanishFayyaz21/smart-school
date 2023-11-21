@@ -110,7 +110,8 @@ const CalendarComponent = () => {
   }
 
   useEffect(() => {
-    getAllLectures(userData?.studentclass)
+    console.log("userData?.studentclass", userData?.studentclass)
+    getAllLectures(userData?.studentclass?._id)
   }, [userData?.studentclass])
   return (
     <Fragment>

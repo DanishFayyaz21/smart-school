@@ -99,15 +99,16 @@ const KanbanTasks = props => {
   return (
     <Card onClick={handleTaskClick} className='task' data-board-id={task.boardId} data-task-id={task.id}>
       <CardBody data-task-id={task.id}>
-        {renderLabels()}
+        {/* {renderLabels()} */}
 
         {task.coverImage ? (
           <img className='img-fluid rounded task-img mb-1' alt={task.title} src={task.coverImage} />
         ) : null}
 
-        <span className='task-title'>{task.title}</span>
+        <h3 className='task-title text-capitalize'>{task.title}</h3>
+        <span className='task-title'>{task?.description}</span>
 
-        {renderTaskFooter()}
+        {/* {renderTaskFooter()} */}
       </CardBody>
     </Card>
   )
