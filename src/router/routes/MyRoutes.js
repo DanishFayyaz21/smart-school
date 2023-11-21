@@ -46,6 +46,7 @@ const AdminTimeTable = lazy(() => import('../../views/admin/timetable'))
 
 const StudentAttendence = lazy(() => import('../../views/student/attendence'))
 const Simulation = lazy(() => import('../../views/student/simulation'))
+const StudentsSubjects = lazy(() => import('../../views/student/classes'))
 const Calendar = lazy(() => import('../../views/student/calendar'))
 
 const TimeTable = lazy(() => import('../../views/teacher/timetable'))
@@ -123,8 +124,8 @@ export default [
     element: <StudentAttendence />
   },
   {
-    path: '/grades',
-    element: <Simulation />
+    path: '/subjects',
+    element: <StudentsSubjects />
   },
   {
     path: '/teacher/time-table',

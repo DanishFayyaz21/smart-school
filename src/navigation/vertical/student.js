@@ -19,9 +19,9 @@ export default [
     navLink: '/attendence'
   },
   {
-    id: 'grades',
-    title: 'Grades',
+    id: 'subjects',
+    title: 'Subjects',
     icon: <TbToggleLeft />,
-    navLink: '/grades'
+    navLink: '/subjects'
   }
 ]
