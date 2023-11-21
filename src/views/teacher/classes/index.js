@@ -5,7 +5,7 @@ import { Fragment } from 'react'
 import Table from './Table'
 import ClassesCards from './ClassesCards'
 
-const Roles = () => {
+const Classes = () => {
   return (
     <Fragment>
       <h3>Classes</h3>
@@ -17,4 +17,4 @@ const Roles = () => {
   )
 }
 
-export default Roles
+export default Classes

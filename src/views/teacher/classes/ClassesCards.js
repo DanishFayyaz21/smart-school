@@ -279,7 +279,7 @@ const ClassesCards = () => {
                     <div className='d-flex justify-content-between align-items-end mt-1 pt-25'>
                       <div className='role-heading'>
                         <h4 className='fw-bolder'>{item?.name+" - "+item?.classId?.name}</h4>
-                        <Link
+                        {/* <Link
                           to='/'
                           className='role-edit-modal'
                           onClick={e => {
@@ -289,7 +289,7 @@ const ClassesCards = () => {
                           }}
                         >
                           <small className='fw-bolder'>Edit Role</small>
-                        </Link>
+                        </Link> */}
                       </div>
                       <Link to='' className='text-body' onClick={e => e.preventDefault()}>
                         <Copy className='font-medium-5' />
@@ -301,7 +301,7 @@ const ClassesCards = () => {
             </Col>
           )
         })}
-        <Col xl={4} md={6}>
+        {/* <Col xl={4} md={6}>
           <Card>
             <Row>
               <Col sm={5}>
@@ -326,7 +326,7 @@ const ClassesCards = () => {
               </Col>
             </Row>
           </Card>
-        </Col>
+        </Col> */}
       </Row>
       <Modal
         isOpen={show}
