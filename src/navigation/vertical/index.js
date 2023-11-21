@@ -25,8 +25,6 @@ const VerticalNavigation = () => {
         routes = [
             ...routes,
             ...admin,
-            // ...system_connectivity, ...manage_license, ...apps, ...pages, ...uiElements, ...forms,
-            // ...tables, ...charts, ...others
         ]
     }
 
@@ -35,16 +33,12 @@ const VerticalNavigation = () => {
         routes = [
             ...routes,
             ...student,
-            // ...system_connectivity, ...manage_license, ...apps, ...pages, ...uiElements, ...forms,
-            // ...tables, ...charts, ...others
         ]
     }
     if (userData.role == "Teacher") {
         routes = [
             ...routes,
             ...teacher,
-            // ...system_connectivity, ...manage_license, ...apps, ...pages, ...uiElements, ...forms,
-            // ...tables, ...charts, ...others
         ]
     }
     return routes
