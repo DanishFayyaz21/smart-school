@@ -32,7 +32,7 @@ const ProfileHeader = ({ data }) => {
           <Button color='' className='btn-icon navbar-toggler' onClick={toggle}>
             <AlignJustify size={21} />
           </Button>
-          <Collapse isOpen={isOpen} navbar>
+          {/* <Collapse isOpen={isOpen} navbar>
             <div className='profile-tabs d-flex justify-content-between flex-wrap mt-1 mt-md-0'>
               <Nav className='mb-0' pills>
                 <NavItem>
@@ -65,7 +65,7 @@ const ProfileHeader = ({ data }) => {
                 <span className='fw-bold d-none d-md-block'>Edit</span>
               </Button>
             </div>
-          </Collapse>
+          </Collapse> */}
         </Navbar>
       </div>
     </Card>
