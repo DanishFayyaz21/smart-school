@@ -21,26 +21,26 @@ import { useSelector } from "react-redux";
 const VerticalNavigation = () => {
     const { userData } = useSelector(state => state.auth)
     let routes = [...dashboards, ...admin, ...student, ...teacher]
-    // if (userData.role == "Admin") {
-    //     routes = [
-    //         ...routes,
-    //         ...admin,
-    //     ]
-    // }
+    if (userData.role == "Admin") {
+        routes = [
+            ...routes,
+            ...admin,
+        ]
+    }
 
 
-    // if (userData.role == "Student") {
-    //     routes = [
-    //         ...routes,
-    //         ...student,
-    //     ]
-    // }
-    // if (userData.role == "Teacher") {
-    //     routes = [
-    //         ...routes,
-    //         ...teacher,
-    //     ]
-    // }
+    if (userData.role == "Student") {
+        routes = [
+            ...routes,
+            ...student,
+        ]
+    }
+    if (userData.role == "Teacher") {
+        routes = [
+            ...routes,
+            ...teacher,
+        ]
+    }
     return routes
 
 
