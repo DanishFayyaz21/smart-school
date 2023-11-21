@@ -35,7 +35,7 @@ const AccountSettings = () => {
 
   return (
     <Fragment>
-      <Breadcrumbs title='Account Settings' data={[{ title: 'Pages' }, { title: 'Account Settings' }]} />
+      {/* <Breadcrumbs title='Account Settings' data={[{ title: 'Pages' }, { title: 'Account Settings' }]} /> */}
       {data !== null ? (
         <Row>
           <Col xs={12}>

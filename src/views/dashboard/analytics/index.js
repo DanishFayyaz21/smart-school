@@ -14,12 +14,13 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import CustomerScreenedCard from "../../../@core/components/dashboard/CustomerScreenedCard";
 import SystemConnectivityCard from "../../../@core/components/dashboard/SystemConnectivityCard";
 import DashboardMainCard from "../../../@core/components/dashboard/DashboardMainCard";
+import AssignClasses from '../../admin/assignClasses'
 
 import { useTranslation } from "react-i18next";
 
 const AnalyticsDashboard = () => {
-  
-  const {t} = useTranslation();
+
+  const { t } = useTranslation();
   // ** Context
   const { colors } = useContext(ThemeColors);
 
@@ -78,16 +79,18 @@ const AnalyticsDashboard = () => {
   return (
     <div id="dashboard-analytics">
       <Row>
-        <Col lg="6" sm="12">
+        <Col lg="12" sm="12">
           <DashboardMainCard />
         </Col>
-        <Col lg="3" sm="6">
+        {/* <Col lg="3" sm="6">
           <SystemConnectivityCard />
         </Col>
         <Col lg="3" sm="6">
           <CustomerScreenedCard />
-        </Col>
+        </Col> */}
       </Row>
+      <AssignClasses />
+
       {/* <Row className="match-height bg-danger p-2">
         <Col lg="6" xs="12">
           <AvgSessions primary={colors.primary.main} />
@@ -120,121 +123,7 @@ const AnalyticsDashboard = () => {
           <CardAppDesign />
         </Col>
       </Row> */}
-      <Row className="match-height">
-        <Col xs="12">
-          {/* <InvoiceList /> */}
-          {/* Table section */}
-          <div
-            className=" w-100 d-flex flex-md-row flex-column gap-1 justify-content-between align-items-center p-2 rounded"
-            style={{ marginTop: "3rem", backgroundColor: "#FFFFFF" }}
-          >
-            <div>
-              <span className="k_font  fw-bold">{t("LMS Process")}</span>
-            </div>
 
-            <div>
-              {/* <Button style={{ background: "rgba(10, 17, 114, 1)" }}>
-                SCREEN A CUSTOMER
-              </Button> */}
-            </div>
-          </div>
-        </Col>
-        <Col xs="12">
-          {/* <InvoiceList /> */}
-          {/* Table section */}
-          <div className="mt-7">
-            <Table responsive>
-              <thead>
-                <tr>
-                  <th scope="col">{t("Student Name")}</th>
-                  <th scope="col">{t("Class Level")}</th>
-                  <th scope="col">{t("STATUS")}</th>
-                  <th scope="col" style={{ minWidth: "120px" }}>
-                    {t("ACTION")}
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white">
-                {BusinessData.map(
-                  ({ name, description, level, level_id, status }) => (
-                    <tr key={level_id}>
-                      <td className="">
-                        <span className="d-block  table_customer_hading">
-                          {" "}
-                          {name}
-                        </span>
-                        <span className="d-block table_risk_description">
-                          {" "}
-                          {description}
-                        </span>
-                      </td>
-                      <td>
-                        <span className="d-block table_risk_hading">
-                          {level}
-                        </span>
-                        <span className="d-block table_risk_description">
-                          {level_id}
-                        </span>
-                      </td>
-                      <td className="">
-                        {status === "Verified" && (
-                          <div
-                            className="table_status_verified"
-                            // style={{
-                            //   backgroundColor: "rgba(40, 199, 111, 0.16)",
-                            //   color: "rgba(40, 199, 111, 1)",
-                            // }}
-                          >
-                            <span className="table_status_verified_child">
-                              {status}
-                            </span>
-                          </div>
-                        )}
-
-                        {status === "EDD" && (
-                          <div
-                            className="table_status_edd"
-                            // style={{
-                            //   backgroundColor: "rgba(255, 159, 67, 0.16)",
-                            //   color: "rgba(255, 159, 67, 1)",
-                            // }}
-                          >
-                            <span className="table_status_edd_child">
-                              {" "}
-                              {status}{" "}
-                            </span>
-                          </div>
-                        )}
-                        {status === "Screening" && (
-                          <div
-                            className="table_status_secreenning"
-                            // style={{
-                            //   backgroundColor: "rgba(255, 159, 67, 0.16)",
-                            //   color: "rgba(255, 159, 67, 1)",
-                            // }}
-                          >
-                            <span className="table_status_secreenning_child">
-                              {status}
-                            </span>
-                          </div>
-                        )}
-                      </td>
-                      <td>
-                        <span>
-                          <TbEdit size={17} />
-                        </span>
-                        <span className="px-1">
-                          <RiDeleteBinLine size={17} />
-                        </span>
-                      </td>
-                    </tr>
-                  )
-                )}
-              </tbody>
-            </Table>
-          </div>
-        </Col>
-      </Row>
     </div>
   );
 };

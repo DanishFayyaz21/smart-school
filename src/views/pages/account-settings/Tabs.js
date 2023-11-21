@@ -19,7 +19,7 @@ const Tabs = ({ activeTab, toggleTab }) => {
           <span className='fw-bold'>Security</span>
         </NavLink>
       </NavItem>
-      <NavItem>
+      {/* <NavItem>
         <NavLink active={activeTab === '3'} onClick={() => toggleTab('3')}>
           <Bookmark size={18} className='me-50' />
           <span className='fw-bold'>Billing & Plans</span>
@@ -36,7 +36,7 @@ const Tabs = ({ activeTab, toggleTab }) => {
           <Link size={18} className='me-50' />
           <span className='fw-bold'>Connections</span>
         </NavLink>
-      </NavItem>
+      </NavItem> */}
     </Nav>
   )
 }
