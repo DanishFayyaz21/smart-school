@@ -124,6 +124,7 @@ const KanbanBoard = () => {
             description: item?.description,
             dueDate: 1700594583088,
             title: item?.title,
+            coverImage: item?.taskImage,
             "attachments": [
               {
                 "name": "documentation.doc",
@@ -166,13 +167,8 @@ const KanbanBoard = () => {
         tasks = [...tasks, ...temp]
       }
     })
-    console.log("askjdsajdsalktass...........", tasks)
+
     return boards.length > 0 && boards.map((board, index) => {
-      // console.log("board.....", board, store)
-
-
-
-
 
       const isLastBoard = boards[boards.length - 1].id === board.id
 
@@ -180,6 +176,9 @@ const KanbanBoard = () => {
         <KanbanBoards
           store={{ boards, tasks }}
           board={board}
+          subjectId={subjectId}
+          classId={classId}
+          getSubjectTasks={getSubjectTasks}
           labelColors={labelColors}
           isLastBoard={isLastBoard}
           key={`${board.id}-${index}`}
@@ -192,7 +191,6 @@ const KanbanBoard = () => {
 
   const renderAddBoardForm = () => {
     const addTaskCategory = async (e) => {
-      console.log("sssssssssssssssssss", e)
       try {
         const formData = {
           name: e?.name,
@@ -271,6 +269,7 @@ const KanbanBoard = () => {
           <TaskSidebar
             labelColors={labelColors}
             sidebarOpen={sidebarOpen}
+            getSubjectTasks={getSubjectTasks}
             selectedTask={store.selectedTask}
             handleTaskSidebarToggle={handleTaskSidebarToggle}
           />

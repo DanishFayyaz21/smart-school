@@ -10,12 +10,13 @@ import { useForm, Controller } from 'react-hook-form'
 import { Plus, MoreVertical } from 'react-feather'
 
 // ** Redux Imports
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 // ** Actions
 import { addTask, clearTasks, deleteBoard, reorderTasks, updateTaskBoard } from './store'
 
 import KanbanTasks from './KanbanTasks'
+import { post } from '../../../../utility/Axios'
 // ** Kanban Component
 
 const defaultValues = {
@@ -24,10 +25,10 @@ const defaultValues = {
 
 const KanbanBoard = props => {
   // ** Props
-  const { board, index, store, labelColors, handleTaskSidebarToggle } = props
-  console.log("stoeeeeeeeee", store)
+  const { board, subjectId, getSubjectTasks, classId, index, store, labelColors, handleTaskSidebarToggle } = props
   // ** States
   const [title, setTitle] = useState('')
+  // const { userData } = useSelector((state) => state.auth)
   const [showAddTask, setShowAddTask] = useState(null)
 
   // ** Hooks
@@ -61,9 +62,21 @@ const KanbanBoard = props => {
     dispatch(deleteBoard(board.id))
   }
 
-  const handleAddTaskFormSubmit = data => {
-    dispatch(addTask({ title: data.taskTitle, boardId: board.id }))
-    handleAddTaskReset()
+  const handleAddTaskFormSubmit = async (data) => {
+
+    const response = await post("/add-task", {
+      title: data.taskTitle,
+      classId,
+      subject: subjectId,
+      taskCategory: board.id,
+    })
+
+    if (response.data.status == 201) {
+
+      getSubjectTasks()
+      handleAddTaskReset()
+    }
+    // dispatch(addTask({ title: data.taskTitle, boardId: board.id }))
   }
 
   const renderAddTaskForm = () => {

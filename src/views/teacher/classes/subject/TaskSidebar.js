@@ -33,6 +33,7 @@ import img6 from '@src/assets/images/portrait/small/avatar-s-11.jpg'
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/file-uploader/file-uploader.scss'
+import { post } from '../../../../utility/Axios'
 
 // ** Assignee Select Options
 const assigneeOptions = [
@@ -62,7 +63,7 @@ const labelOptions = [
 
 const TaskSidebar = props => {
   // ** Props
-  const { sidebarOpen, labelColors, selectedTask, handleTaskSidebarToggle } = props
+  const { sidebarOpen, getSubjectTasks, labelColors, selectedTask, handleTaskSidebarToggle } = props
 
   // ** State
   const [desc, setDesc] = useState('')
@@ -136,7 +137,6 @@ const TaskSidebar = props => {
       }
     }
   }
-
   // ** Function to run when sidebar closes
   const handleSidebarClosed = () => {
     setDesc('')
@@ -148,45 +148,105 @@ const TaskSidebar = props => {
     dispatch(handleSelectTask({}))
     setAssignedTo(null)
   }
+  const [taskImage, setTaskImage] = useState("")
+  const imagetob64 = (image) => {
+    let finalimage = ""
+    if (image) {
 
-  const onSubmit = data => {
-    if (data.title.length) {
-      const labelsArr = []
-      const assignedArr = []
+      var reader = new FileReader();
 
-      if (data.assignedTo && assignedTo.length) {
-        assignedTo.map(item => {
-          assignedArr.push({ title: item.label, img: item.img })
-        })
-      }
+      reader.readAsDataURL(image);
+      reader.onload = () => {
 
-      if (labels.length) {
-        labels.map(label => {
-          labelsArr.push(label.label)
-        })
-      }
+        setTaskImage(reader.result)
 
-      dispatch(
-        updateTask({
-          ...selectedTask,
-          ...data,
-          dueDate,
-          labels: labelsArr,
-          description: desc,
-          assignedTo: assignedArr,
-          // eslint-disable-next-line multiline-ternary
-          ...(files.length && typeof files[0] !== 'string'
-            ? // eslint-disable-next-line multiline-ternary
-              {
-                coverImage: URL.createObjectURL(files[0])
-              }
-            : {})
-        })
-      )
-      handleTaskSidebarToggle()
-    } else {
-      setError('title')
+      };
+      reader.onerror = (error) => {
+        // console.log("error: ", error);
+      };
     }
+
+  };
+  console.log("taskImage", taskImage)
+  const onSubmit = async (data) => {
+    // console.log("dataks", {
+    //   // ...selectedTask,
+    //   ...data,
+    //   taskId: selectedTask.id,
+    //   deadline: dueDate,
+    //   // labels: labelsArr,
+    //   description: desc,
+    //   // assignedTo: assignedArr,
+    //   // eslint-disable-next-line multiline-ternary
+    //   ...(files.length && typeof files[0] !== 'string'
+    //     ? // eslint-disable-next-line multiline-ternary
+    //     {
+    //       taskImage: imagetob64(files[0])
+    //     }
+    //     : {})
+    // })
+
+    // if (data.title.length) {
+    // const labelsArr = []
+    // const assignedArr = []
+
+    // if (data.assignedTo && assignedTo.length) {
+    //   assignedTo.map(item => {
+    //     assignedArr.push({ title: item.label, img: item.img })
+    //   })
+    // }
+
+    // if (labels.length) {
+    //   labels.map(label => {
+    //     labelsArr.push(label.label)
+    //   })
+    // }
+
+    // dispatch(
+    //   updateTask(
+    //     {
+    //       ...selectedTask,
+    //       ...data,
+    //       dueDate,
+    //       labels: labelsArr,
+    //       description: desc,
+    //       assignedTo: assignedArr,
+    //       // eslint-disable-next-line multiline-ternary
+    //       ...(files.length && typeof files[0] !== 'string'
+    //         ? // eslint-disable-next-line multiline-ternary
+    //         {
+    //           coverImage: URL.createObjectURL(files[0])
+    //         }
+    //         : {})
+    //     })
+    // )
+
+    if (typeof files[0] !== "string") {
+      imagetob64(files[0])
+
+    }
+    const formData = {
+      ...data,
+      taskId: selectedTask.id,
+      deadline: dueDate,
+      description: desc,
+      ...(files.length && typeof files[0] !== 'string'
+        ?
+        {
+          // taskImage: URL.createObjectURL(files[0])
+          taskImage: taskImage
+        }
+        : {})
+    }
+    const response = await post("update-task", formData)
+    console.log("response", response.data)
+    if (response.data.status == 201) {
+      getSubjectTasks()
+      handleTaskSidebarToggle()
+    }
+    // } else {
+    //   setError('title')
+    // }
   }
 
   const renderUploadedImage = () => {
@@ -279,7 +339,7 @@ const TaskSidebar = props => {
                 onChange={date => setDueDate(date[0])}
               />
             </div>
-            <div className='mb-1'>
+            {/* <div className='mb-1'>
               <Label className='form-label' for='task-labels'>
                 Labels
               </Label>
@@ -314,7 +374,7 @@ const TaskSidebar = props => {
                 onChange={data => setAssignedTo(data)}
                 components={{ Option: AssigneeComponent }}
               />
-            </div>
+            </div> */}
             <div className='mb-1'>
               <div {...getRootProps({ className: 'dropzone' })}>
                 <input {...getInputProps()} />
