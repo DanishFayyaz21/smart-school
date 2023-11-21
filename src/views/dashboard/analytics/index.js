@@ -17,6 +17,9 @@ import DashboardMainCard from "../../../@core/components/dashboard/DashboardMain
 import AssignClasses from '../../admin/assignClasses'
 
 import { useTranslation } from "react-i18next";
+import Classes from "../../teacher/classes";
+import { useSelector } from 'react-redux'
+import Subjects from "../../student/classes";
 
 const AnalyticsDashboard = () => {
 
@@ -25,6 +28,8 @@ const AnalyticsDashboard = () => {
   const { colors } = useContext(ThemeColors);
 
   // ** Vars
+  const { userData } = useSelector(state => state.auth)
+  
   const BusinessData = [
     {
       name: "First Last Name",
@@ -89,7 +94,17 @@ const AnalyticsDashboard = () => {
           <CustomerScreenedCard />
         </Col> */}
       </Row>
-      <AssignClasses />
+      {userData.role=="Admin"&&
+      <AssignClasses />}
+
+{userData.role=="Teacher"&&
+      <Classes/>}
+
+      
+{userData.role=="Student"&&
+      <Subjects/>}
+
+      
 
       {/* <Row className="match-height bg-danger p-2">
         <Col lg="6" xs="12">
