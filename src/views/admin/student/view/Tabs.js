@@ -53,7 +53,7 @@ const UserTabs = ({ active, toggleTab, selectedUser }) => {
         <TabPane tabId='2'>
           {/* <BillingPlanTab /> */}
           <div className='d-flex flex-wrap gap-2'>
-            <UserInfoCard selectedUser={store.selectedUser} />
+            <UserInfoCard selectedUser={selectedUser?.parent_id} />
             {/* <UserInfoCard selectedUser={store.selectedUser} /> */}
 
           </div>
