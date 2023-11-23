@@ -94,16 +94,16 @@ export const columns = [
       </div>
     )
   },
-  {
-    name: 'Department',
-    sortable: true,
-    minWidth: '172px',
-    sortField: 'role',
-    selector: row => row.role,
-    cell: row => <div>
-      coming soon..
-    </div>
-  },
+  // {
+  //   name: 'Department',
+  //   sortable: true,
+  //   minWidth: '172px',
+  //   sortField: 'role',
+  //   selector: row => row.role,
+  //   cell: row => <div>
+  //     coming soon..
+  //   </div>
+  // },
   {
     name: 'Subjects',
     sortable: true,
@@ -112,14 +112,14 @@ export const columns = [
     selector: row => row.currentPlan,
     cell: row => <span className='text-capitalize'>{row?.subject?.length}</span>
   },
-  {
-    name: 'Students',
-    sortable: true,
-    minWidth: '230px',
-    sortField: 'billing',
-    selector: row => row.billing,
-    cell: row => <span className='text-capitalize'>{row?.students?.length}</span>
-  },
+  // {
+  //   name: 'Students',
+  //   sortable: true,
+  //   minWidth: '230px',
+  //   sortField: 'billing',
+  //   selector: row => row.billing,
+  //   cell: row => <span className='text-capitalize'>{row?.students?.length}</span>
+  // },
   // {
   //   name: '',
   //   sortable: true,
@@ -136,7 +136,7 @@ export const columns = [
     name: 'Actions',
     minWidth: '100px',
     cell: row => (
-      <Link to={`/apps/user/view/${row.id}`}>
+      <Link to={`/admin/class/${row._id}`}>
         <Eye className='font-medium-3 text-body' />
       </Link>
     )

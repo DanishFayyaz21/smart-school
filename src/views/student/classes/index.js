@@ -13,7 +13,7 @@ const Roles = () => {
     <Fragment>
       <h3 className="text-capitalize">{userData?.studentclass?.name}</h3>
       <p className='mb-2'>
-        You are enrolled in the following courses. Click on the course to see your grades in it.
+        {userData?.child ? "Your child is" : "You are"} enrolled in the following courses. Click on the course to see your grades in it.
       </p>
       <ClassesCards />
     </Fragment>

@@ -30,6 +30,7 @@ import StudentView from '../../views/admin/student/view';
 import TeacherView from '../../views/admin/teacher/view';
 import AutomatictimeTable from '../../views/admin/timetable/automaticTimetable';
 import StudentSubjectView from '../../views/student/classes/subject';
+import TaskDetails from '../../views/student/classes/subject/taskdetails';
 
 
 const DashboardAnalytics = lazy(() => import('../../views/dashboard/analytics'))
@@ -143,6 +144,10 @@ export default [
   {
     path: '/classes',
     element: <Classes />
+  },
+  {
+    path: '/task/:taskId',
+    element: <TaskDetails />
   },
   {
     path: '/classes/subject/:classId/:subjectId',

@@ -110,9 +110,17 @@ const CalendarComponent = () => {
   }
 
   useEffect(() => {
-    console.log("userData?.studentclass", userData?.studentclass)
-    getAllLectures(userData?.studentclass?._id)
-  }, [userData?.studentclass])
+    console.log("userData?.studentclass", userData)
+    if (userData.role == "Parent") {
+
+      console.log("asdsad", userData.role)
+      getAllLectures(userData?.child.studentclass)
+
+    } else {
+      getAllLectures(userData?.studentclass?._id)
+
+    }
+  }, [userData])
   return (
     <Fragment>
       <div className='app-calendar overflow-hidden border'>

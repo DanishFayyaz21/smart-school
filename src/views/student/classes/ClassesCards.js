@@ -270,6 +270,11 @@ const ClassesCards = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    if (userData?.role == "Parent") {
+
+      dispatch(getClassSubjects(JSON.stringify([userData?.child?.studentclass])))
+
+    }
     if (userData?.studentclass) {
       dispatch(getClassSubjects(JSON.stringify([userData?.studentclass])))
     }

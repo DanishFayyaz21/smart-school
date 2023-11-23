@@ -287,7 +287,7 @@ const ClassesCards = () => {
         {currentClass?.subject?.map((item, index) => {
           return (
             <Col key={index} xl={4} md={6}>
-              <Link to="/classes/subject">
+              <Link to={`/classes/subject/${id}/${item?._id}`}>
                 <Card>
                   <CardBody>
                     <div className='d-flex justify-content-between'>

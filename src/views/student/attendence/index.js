@@ -47,10 +47,13 @@ const Attendence = () => {
   const [selectedSubject, setSelectedSubject] = useState()
 
   useEffect(() => {
+    if (userData?.role == "Parent") {
+      dispatch(getClassSubjects(JSON.stringify([userData?.child?.studentclass])))
+    }
     if (userData?.studentclass) {
       dispatch(getClassSubjects(JSON.stringify([userData?.studentclass])))
     }
-  }, [userData?.studentclass])
+  }, [userData])
 
   const getSubjectAttendance = async (subjectId) => {
     try {
@@ -70,7 +73,7 @@ const Attendence = () => {
     });
     setAttendance(dateArray)
 
-  } 
+  }
 
 
 
@@ -143,7 +146,7 @@ const Attendence = () => {
             <tr>
               <th scope="col">
                 <div class="form-check">
-                <span>Id</span>
+                  <span>Id</span>
                 </div>
               </th>
 
