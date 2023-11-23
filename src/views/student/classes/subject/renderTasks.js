@@ -35,38 +35,39 @@ const RenderTasks = ({ data }) => {
   // ** States
   const [tasksOpen, setTasksOpen] = useState(false)
 
-  console.log("data,,,,,,,,,,,,,", data)
+
   return (
 
     <div className=' border-bottom mb-3'>
       <h3 className='text-capitalize'>{data.name}</h3>
       <Row className='p-3'>
-        {data.tasks.length > 0 && data.tasks?.map((task, index) => (
-          <Col key={index} xl={4} md={6}>
-            <Card
+        {data.tasks.length > 0 ?
+          data.tasks?.map((task, index) => (
+            <Col key={index} xl={4} md={6}>
+              <Card
 
-              //  onClick={handleTaskClick} 
-              className='task '
-            // data-board-id={task.boardId} 
-            // data-task-id={task.id}
-            >
-              <CardBody >
-<div className='text-center'>
-                {task.taskImage ? (
-                  <img className='img-fluid rounded task-img mb-1'
-                    alt={task.title}
-                    src={task.taskImage}
-                  />
-                ) : null}
-</div>
-                <h3 className='task-title text-capitalize'>{task.title}</h3>
-                <span className='task-title'>{task?.description}</span>
+                //  onClick={handleTaskClick} 
+                className='task '
+              // data-board-id={task.boardId} 
+              // data-task-id={task.id}
+              >
+                <CardBody >
+                  <div className='text-center'>
+                    {task.taskImage ? (
+                      <img className='img-fluid rounded task-img mb-1'
+                        alt={task.title}
+                        src={task.taskImage}
+                      />
+                    ) : null}
+                  </div>
+                  <h3 className='task-title text-capitalize'>{task.title}</h3>
+                  <span className='task-title'>{task?.description}</span>
 
-                {/* {renderTaskFooter()} */}
-              </CardBody>
-            </Card>
-          </Col>
-        ))}
+                  {/* {renderTaskFooter()} */}
+                </CardBody>
+              </Card>
+            </Col>
+          )) : <p>No item has been defined in this board yet.</p>}
       </Row>
 
     </div>

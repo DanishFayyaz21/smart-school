@@ -67,11 +67,11 @@ const StudentSubjectView = () => {
 
         </div> */}
 
-        {taskCategories.length > 0 && taskCategories.map((item, i) => (
+        {taskCategories.length > 0 ? taskCategories.map((item, i) => (
           <>
             <RenderTasks data={item} />
           </>
-        ))}
+        )) : <p>No Board has been defined yet.</p>}
 
 
       </div>

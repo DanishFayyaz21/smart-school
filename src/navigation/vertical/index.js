@@ -8,7 +8,7 @@ import charts from "./charts";
 import dashboards from "./dashboards";
 import uiElements from "./ui-elements";
 import admin from "./admin";
-import student from "./student";
+import Student from "./student";
 import teacher from "./teacher";
 import system_connectivity from "./system_connectivity";
 import manage_license from "./manage_license";
@@ -20,7 +20,7 @@ import { useSelector } from "react-redux";
 
 const VerticalNavigation = () => {
     const { userData } = useSelector(state => state.auth)
-    let routes = [...dashboards, ...admin, ...student, ...teacher]
+    let routes = [...dashboards, ...admin, ...Student(), ...teacher]
     // if (userData.role == "Admin") {
     //     routes = [
     //         ...routes,
