@@ -64,12 +64,13 @@ const checkIsValid = (data) => {
   );
 };
 
-const SidebarNewUsers = ({ open, toggleSidebar }) => {
+const SidebarNewUsers = ({ open, fetchData, toggleSidebar, }) => {
   // ** States
   const [data, setData] = useState(null);
   const [status, setStatus] = useState();
   const [studentclass, setClass] = useState();
   const [formStatus, setFormStatus] = useState(1);
+  const [childId, setChildId] = useState();
 
   // ** Store Vars
   const dispatch = useDispatch();
@@ -83,57 +84,41 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     setValue,
     setError,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({ defaultValues });
 
   // ** Function to handle form submit
   const onSubmit = async (data) => {
-    try {
-      const formData = { ...data, status, studentclass, role: "Student", gender: data.gender.value, };
-      console.log("formdaata..............", formData)
-      const res = await post("/register-student", formData);
-      console.log("res.....................", res);
-      if (res.data.success) {
-        setFormStatus(1)
-        toggleSidebar()
-      }
-    } catch (err) {
-      console.log("err", err)
-    }
-    // setData(data)
-    // if (checkIsValid(data)) {
-    //   if (formStatus == 2)toggleSidebar()
-    //   dispatch(
-    //     addUser({
-    //       role,
-    //       avatar: '',
-    //       status: 'active',
-    //       email: data.email,
-    //       currentPlan: plan,
-    //       billing: 'auto debit',
-    //       company: data.company,
-    //       contact: data.contact,
-    //       fullName: data.fullName,
-    //       username: data.username,
-    //       country: data.country.value
-    //     })
-    //   )
-    //   setFormStatus(2)
+    if (formStatus == 1) {
+      try {
+        const formData = { ...data, status, studentclass, role: "Student", gender: data.gender.value, };
 
-    // } else {
-    //   for (const key in data) {
-    //     if (data[key] === null) {
-    //       setError('country', {
-    //         type: 'manual'
-    //       })
-    //     }
-    //     if (data[key] !== null && data[key].length === 0) {
-    //       setError(key, {
-    //         type: 'manual'
-    //       })
-    //     }
-    //   }
-    // }
+        const res = await post("/register-student", formData);
+        if (res.data.success) {
+          setChildId(res?.data?.data?.student?._id)
+          setFormStatus(2)
+          reset()
+          fetchData()
+        }
+      } catch (err) {
+        console.log("err", err)
+      }
+    }
+    if (formStatus == 2) {
+      try {
+        const formData = { ...data, child: childId, status, role: "Parent", gender: data.gender.value, };
+        const res = await post("/register-parent", formData);
+
+        if (res.data.success) {
+          setFormStatus(1)
+          toggleSidebar()
+          fetchData()
+        }
+      } catch (err) {
+        console.log("err", err)
+      }
+    }
   };
 
   const handleSidebarClosed = () => {
@@ -144,6 +129,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     // setPlan('basic')
   };
 
+  console.log("formstatus", formStatus)
   return (
     <Sidebar
       size="lg"
@@ -169,14 +155,236 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
                 control={control}
                 render={({ field }) => (
                   <Input
-                    id="fullName"
-                    placeholder="M John"
+                    id="rollnumber"
+                    type="number"
+                    placeholder="#001"
                     invalid={errors.fullName && true}
                     {...field}
                   />
                 )}
               />
             </div>
+            <div>
+              <Label className="form-label" for="fullName">
+                Fisrt Name <span className="text-danger">*</span>
+              </Label>
+              <Controller
+                name="firstName"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    id="fullName"
+                    placeholder="Imran"
+                    invalid={errors.fullName && true}
+                    {...field}
+                  />
+                )}
+              />
+            </div>
+            <div>
+              <Label className="form-label" for="fullName">
+                Last Name <span className="text-danger">*</span>
+              </Label>
+              <Controller
+                name="lastName"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    id="fullName"
+                    placeholder="Khan"
+                    invalid={errors.fullName && true}
+                    {...field}
+                  />
+                )}
+              />
+            </div>
+          </div>
+          <div className="mb-1">
+            <Label className="form-label" for="user_name">
+              Username <span className="text-danger">*</span>
+            </Label>
+            <Controller
+              name="user_name"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  id="user_name"
+                  placeholder="imrakhan99"
+                  invalid={errors.user_name && true}
+                  {...field}
+                />
+              )}
+            />
+          </div>
+          <div className="mb-1">
+            <Label className="form-label" for="userEmail">
+              Email <span className="text-danger">*</span>
+            </Label>
+            <Controller
+              name="email"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  type="email"
+                  id="userEmail"
+                  placeholder="imrankhan@example.com"
+                  invalid={errors.email && true}
+                  {...field}
+                />
+              )}
+            />
+            <FormText color="muted">
+              You can use letters, numbers & periods
+            </FormText>
+          </div>
+
+          <div className="mb-1">
+            <Label className="form-label" for="mobile">
+              Contact <span className="text-danger">*</span>
+            </Label>
+            <Controller
+              name="mobile"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  id="mobile"
+                  placeholder="(397) 294-5153"
+                  invalid={errors.mobile && true}
+                  {...field}
+                />
+              )}
+            />
+          </div>
+          <div className="mb-1">
+            <Label className="form-label" for="mobile">
+              Password <span className="text-danger">*</span>
+            </Label>
+            <Controller
+              name="password"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  id="mobile"
+                  type="password"
+                  invalid={errors.password && true}
+                  {...field}
+                />
+              )}
+            />
+          </div>
+          <div className='mb-1'>
+            <Label className='form-label' for='gender'>
+              Gender <span className='text-danger'>*</span>
+            </Label>
+            <Controller
+              name='gender'
+              control={control}
+              render={({ field }) => (
+                <Select
+                  isClearable={false}
+                  classNamePrefix='select'
+                  options={genderOptions}
+                  theme={selectThemeColors}
+                  className={classnames('react-select', { 'is-invalid': data !== null && data.gender === null })}
+                  {...field}
+                />
+              )}
+            />
+          </div>
+          <div className="mb-1">
+            <Label className="form-label" for="cnic">
+              CNIC/B-form <span className="text-danger">*</span>
+            </Label>
+            <Controller
+              name="cnic"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  id="cnic"
+                  type="number"
+                  placeholder="00000-0000000-0"
+                  invalid={errors.company && true}
+                  {...field}
+                />
+              )}
+            />
+          </div>
+
+          <div className="mb-1">
+            <Label className="form-label" for="user-role">
+              Class
+            </Label>
+            <Input
+              type="select"
+              id="user-role"
+              name="user-role"
+              value={studentclass}
+              onChange={(e) => setClass(e.target.value)}
+            >
+              <option value="">Select - Class</option>
+              {allclasses.length > 0 && allclasses?.map(item => (
+                <option value={item._id}>{item.name}</option>
+              ))}
+            </Input>
+          </div>
+
+          {/* <div className="mb-1">
+            <Label className="form-label" for="section">
+              Section <span className="text-danger">*</span>
+            </Label>
+            <Controller
+              name="section"
+              control={control}
+              render={({ field }) => (
+                // <Input id='country' placeholder='Australia' invalid={errors.country && true} {...field} />
+                <Select
+                  isClearable={false}
+                  classNamePrefix="select"
+                  options={SectionOptions}
+                  theme={selectThemeColors}
+                  className={classnames("react-select", {
+                    "is-invalid": data !== null && data.country === null,
+                  })}
+                  {...field}
+                />
+              )}
+            />
+          </div> */}
+          <div className="mb-1">
+            <Label className="form-label" for="select-plan">
+              Status
+            </Label>
+            <Input
+              type="select"
+              id="select-plan"
+              name="select-plan"
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              <option value="">Select - Status</option>
+              <option value="active">Active</option>
+              <option value="inactive">InActive</option>
+            </Input>
+          </div>
+          <Button type="submit" className="me-1" color="primary">
+            Submit
+          </Button>
+          <Button
+            type="reset"
+            color="secondary"
+            outline
+            onClick={toggleSidebar}
+          >
+            Cancel
+          </Button>
+        </Form>
+      )}
+      {formStatus == 2 && (
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <h1>Gurdian details</h1>
+          </div>
+          <div className="mb-1">
+
             <div>
               <Label className="form-label" for="fullName">
                 Fisrt Name <span className="text-danger">*</span>
@@ -322,7 +530,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             />
           </div>
 
-          <div className="mb-1">
+          {/* <div className="mb-1">
             <Label className="form-label" for="user-role">
               Class
             </Label>
@@ -338,7 +546,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
                 <option value={item._id}>{item.name}</option>
               ))}
             </Input>
-          </div>
+          </div> */}
 
           {/* <div className="mb-1">
             <Label className="form-label" for="section">

@@ -195,8 +195,6 @@ const UsersList = () => {
     try {
       const response = await get(`/get-all-students`);
 
-
-
       // if (response.data?.success) {
       setData(response.data.data.students);
       setIsLoader(false);
@@ -657,7 +655,7 @@ const UsersList = () => {
         </div> */}
       </Card>
 
-      <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
+      <Sidebar open={sidebarOpen} fetchData={fetchDataSearch} toggleSidebar={toggleSidebar} />
     </Fragment>
   )
 }
