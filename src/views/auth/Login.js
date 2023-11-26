@@ -367,7 +367,7 @@ const Login = () => {
                               {t("Remember Me?")}
                            </Label>
 
-                           <Link to="/forgot-password">
+                           {/* <Link to="/forgot-password">
                               <span
                                  style={{
                                     color: "rgba(77, 75, 85, 0.4)",
@@ -377,7 +377,7 @@ const Login = () => {
                               >
                                  {t("Forgot Password?")
                                  }                              </span>
-                           </Link>
+                           </Link> */}
                         </div>
                      </div>
                      <Button
