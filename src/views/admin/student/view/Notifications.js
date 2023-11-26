@@ -39,7 +39,7 @@ const Notifications = () => {
   const dispatch = useDispatch()
   const { classesSubject } = useSelector(state => state.subject)
   const { currentStudent } = useSelector(state => state.user)
-
+console.log("presents",presents)
   const handleCheckboxChange = (date) => {
     console.log("datedate", date)
     if (presents.includes(date)) {
@@ -63,12 +63,32 @@ const Notifications = () => {
   }
   const getLast30Days = () => {
     const currentDate = new Date();
-    const dateArray = Array.from({ length: 30 }, (_, index) => {
-      const date = moment(new Date(currentDate).setDate(currentDate.getDate() - index)).format("YYYY-MM-DD")
+    // const dateArray = Array.from({ length: 30 }, (_, index) => {
+    //   const date = moment(new Date(currentDate).setDate(currentDate.getDate() - index)).format("YYYY-MM-DD")
 
-      return date;
-    });
-    setAttendance(dateArray)
+    //   return date;
+    // });
+
+
+
+
+    // Create an array to store the dates
+    const last30Days = [];
+
+    // Generate the last 30 days
+    for (let i = 0; i < 30; i++) {
+      const date = new Date();
+      date.setDate(currentDate.getDate() - i);
+
+      // Format the date as "YYYY-MM-DD"
+      // const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+
+      last30Days.push(moment(date).format("YYYY-MM-DD"));
+    }
+
+    setAttendance(last30Days)
+    console.log("30.....",last30Days)
+
 
   }
 
@@ -150,7 +170,7 @@ const Notifications = () => {
           {attendance?.map((item, index) => {
             return (
               <tr key={index}>
-                <td className='text-start'>{(index + 1) + "/10/2023"}</td>
+                <td className='text-start'>{item}</td>
                 <td>
                   <div className='d-flex form-check justify-content-center'>
                     <Input type='checkbox' checked={presents.includes(item)}
