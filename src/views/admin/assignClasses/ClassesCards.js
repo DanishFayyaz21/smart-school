@@ -2,10 +2,7 @@
 import { Fragment, useEffect, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 
-import Select from 'react-select'
-import classnames from 'classnames'
 import { useForm, Controller } from 'react-hook-form'
-import { selectThemeColors } from '@utils'
 // ** Reactstrap Imports
 import {
   Row,
@@ -13,7 +10,7 @@ import {
   Card,
   Label,
   Input,
-  Table,
+
   Modal,
   Button,
   CardBody,
@@ -49,7 +46,8 @@ import avatar11 from '@src/assets/images/avatars/11.png'
 import avatar12 from '@src/assets/images/avatars/12.png'
 import { getCurrentClass } from '../../../redux/slices/classSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { post } from '../../../utility/Axios'
+import { get, post } from '../../../utility/Axios'
+import Table from '../../teacher/classes/Table'
 
 // ** Vars
 const data = [
@@ -237,12 +235,10 @@ const ClassesCards = () => {
   const [show, setShow] = useState(false)
   const [modalType, setModalType] = useState('Add New')
   const { currentClass } = useSelector((state) => state.classSlice)
+  const [students, setStudents] = useState([])
 
   const { id } = useParams()
-  const location = useLocation()
-  const searchParams = location.search;
-  // const classId = searchParams.get('class-id');
-  console.log("pppppppppppppppppp", id)
+
   // ** Hooks
 
   const addClass = async (data) => {
@@ -281,6 +277,28 @@ const ClassesCards = () => {
   useEffect(() => {
     dispatch(getCurrentClass(id))
   }, [])
+
+  const getClassStudents = async (id) => {
+
+    try {
+      console.log("sdsdddddddddddd", id)
+      const response = await get(`get-class-students/${id}`)
+      console.log("rrposne.", response.data.data)
+      setStudents(response.data.data)
+    } catch (err) {
+      console.log("err", err)
+      setStudents([])
+
+    }
+  }
+
+  useEffect(() => {
+    if (id) {
+      console.log("id..........", id)
+      getClassStudents(id)
+    }
+  }, [id])
+
   return (
     <Fragment>
       <Row>
@@ -347,6 +365,20 @@ const ClassesCards = () => {
           </Card>
         </Col>
       </Row>
+
+      <div style={{
+        display: "block",
+        width: "100%",
+        overflow: "auto",
+        minHeight: "100vh"
+      }}>
+
+        <h3 className='mt-50'>Students</h3>
+        <div className='app-user-list'>
+          <Table students={students} />
+        </div>
+
+      </div>
       <Modal
         isOpen={show}
         onClosed={handleModalClosed}

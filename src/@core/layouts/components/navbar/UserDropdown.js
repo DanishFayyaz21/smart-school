@@ -45,27 +45,27 @@ const UserDropdown = () => {
           <span className='user-name fw-bold'>{(userData && userData['username']) || 'John Doe'}</span>
           <span className='user-status'>{(userData && userData.role) || 'Admin'}</span>
         </div> */}
-        <Avatar img="https://media.licdn.com/dms/image/D4D03AQFo0YE26wITKA/profile-displayphoto-shrink_800_800/0/1690618481074?e=1696464000&v=beta&t=ER8XskbX_xeAtDErBvGYJl5TZXXbjaZztPLsHkNNIAg" imgHeight='40' imgWidth='40' status='online' />
+        <Avatar img="	https://storage.needpix.com/rsynced_images/avatar-159236_1280.png" imgHeight='40' imgWidth='40' status='online' />
       </DropdownToggle>
       <DropdownMenu end>
         <DropdownItem tag={Link} to='/profile'>
           <User size={14} className='me-75' />
           <span className='align-middle'>Profile </span>
         </DropdownItem>
-        <DropdownItem tag={Link} to='/apps/email'>
+        {/* <DropdownItem tag={Link} to='/apps/email'>
           <Mail size={14} className='me-75' />
           <span className='align-middle'>Inbox</span>
-        </DropdownItem>
-        <DropdownItem tag={Link} to='/apps/todo'>
+        </DropdownItem> */}
+        {/* <DropdownItem tag={Link} to='/apps/todo'>
           <CheckSquare size={14} className='me-75' />
           <span className='align-middle'>Tasks</span>
-        </DropdownItem>
-        <DropdownItem tag={Link} to='/chat'>
+        </DropdownItem> */}
+        {/* <DropdownItem tag={Link} to='/chat'>
           <MessageSquare size={14} className='me-75' />
           <span className='align-middle'>Chats</span>
-        </DropdownItem>
+        </DropdownItem> */}
         <DropdownItem divider />
-        <DropdownItem tag={Link} to='/account-settings'>
+        {/* <DropdownItem tag={Link} to='/account-settings'>
           <Settings size={14} className='me-75' />
           <span className='align-middle'>Settings</span>
         </DropdownItem>
@@ -76,7 +76,7 @@ const UserDropdown = () => {
         <DropdownItem tag={Link} to='/pages/faq'>
           <HelpCircle size={14} className='me-75' />
           <span className='align-middle'>FAQ</span>
-        </DropdownItem>
+        </DropdownItem> */}
         <DropdownItem tag={Link} to='/login' onClick={() => dispatch(handleLogout())}>
           <Power size={14} className='me-75' />
           <span className='align-middle'>Logout</span>

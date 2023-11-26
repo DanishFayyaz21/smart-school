@@ -60,6 +60,7 @@ const Attendence = () => {
       const response = await get(`get-class-students/${id}`)
       console.log("rrposne.", response.data.data)
       setStudents(response.data.data)
+      setAttendance(response?.data?.data?.map(item => item?._id))
     } catch (err) {
       console.log("err", err)
       setStudents([])
@@ -69,12 +70,19 @@ const Attendence = () => {
 
   useEffect(() => {
     getTeacherClasses(userData?._id)
+
   }, [])
 
   useEffect(() => {
     getSpecificDateAttendence(date)
-  }, [selectedSubject])
-  
+    // setAttendance(students?.map(item => item?._id))
+
+  }, [selectedSubject, students])
+  // useEffect(() => {
+  //   console.log("use........")
+  //   setAttendance(students.map(item => item?._id))
+  // }, [students,])
+
   const handleCheckboxChange = (studentId) => {
     if (attendance.includes(studentId)) {
       setAttendance(attendance.filter((id) => id !== studentId));
@@ -91,12 +99,19 @@ const Attendence = () => {
       const response = await get(`get-specific-attendance?subjectId=${selectedSubject}&date=${date}`)
       if (response.status == 200) {
         setAttendance(response.data?.attendance.users?.map(item => item?.user))
-      } else {
-        setAttendance([])
+        console.log("sssssss.....", date == moment(new Date()).format("YYYY-MM-DD"))
+        // if (date == moment(new Date()).format("YYYY-MM-DD")) {
+        //   setAttendance(students.map(item => item?._id))
+        // }
       }
+      // else {
+      //   // setAttendance([])
+      // }
     } catch (err) {
       console.log("err", err)
-      setAttendance([])
+      // setAttendance([])
+      setAttendance(students.map(item => item?._id))
+
     }
   }
   const martAttendence = async () => {

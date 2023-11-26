@@ -41,7 +41,7 @@ const Profile = () => {
   }, [])
   return (
     <Fragment>
-      <Breadcrumbs title='Profile' data={[{ title: 'Pages' }, { title: 'Profile' }]} />
+      {/* <Breadcrumbs title='Profile' data={[{ title: 'Pages' }, { title: 'Profile' }]} /> */}
       {data !== null ? (
         <div id='user-profile'>
           <Row>

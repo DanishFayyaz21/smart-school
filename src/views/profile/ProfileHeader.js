@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 // ** Icons Imports
 import { AlignJustify, Rss, Info, Image, Users, Edit } from 'react-feather'
+import { useSelector } from 'react-redux'
 
 // ** Reactstrap Imports
 import { Card, CardImg, Collapse, Navbar, Nav, NavItem, NavLink, Button } from 'reactstrap'
@@ -10,6 +11,7 @@ import { Card, CardImg, Collapse, Navbar, Nav, NavItem, NavLink, Button } from '
 const ProfileHeader = ({ data }) => {
   // ** States
   const [isOpen, setIsOpen] = useState(false)
+  const { userData } = useSelector((state) => state.auth)
 
   const toggle = () => setIsOpen(!isOpen)
 
@@ -19,11 +21,11 @@ const ProfileHeader = ({ data }) => {
       <div className='position-relative'>
         <div className='profile-img-container d-flex align-items-center'>
           <div className='profile-img'>
-            <img className='rounded img-fluid' src="https://media.licdn.com/dms/image/D4D03AQFo0YE26wITKA/profile-displayphoto-shrink_800_800/0/1690618481074?e=1696464000&v=beta&t=ER8XskbX_xeAtDErBvGYJl5TZXXbjaZztPLsHkNNIAg" alt='Card image' />
+            <img className='rounded img-fluid' src="	https://storage.needpix.com/rsynced_images/avatar-159236_1280.png" alt='Card image' />
           </div>
           <div className='profile-title ms-3'>
-            <h2 className='text-white'>Muhammad Danish</h2>
-            <p className='text-white'>Software Engineer</p>
+            <h2 className='text-white text-capitalize'>{userData?.firstName + " " + userData?.lastName}</h2>
+            <p className='text-white text-capitalize'>{userData?.role}</p>
           </div>
         </div>
       </div>

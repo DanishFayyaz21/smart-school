@@ -23,8 +23,8 @@ export default [
     navLink: '/teachers'
   },
   {
-    id: 'assignclasses',
-    title: 'Assign Classes',
+    id: 'classes',
+    title: 'Classes',
     icon: <TbLayoutNavbar />,
     navLink: '/admin/assign-classes'
   },
