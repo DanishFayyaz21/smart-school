@@ -6,13 +6,15 @@ import AvatarGroup from '@components/avatar-group'
 
 // ** Third Party Imports
 import classnames from 'classnames'
-import { Paperclip, MessageSquare } from 'react-feather'
+import { Paperclip, MessageSquare, Edit } from 'react-feather'
 
 // ** Redux Imports
 import { useDispatch } from 'react-redux'
 
 // ** Actions
 import { handleSelectTask } from './store'
+import moment from 'moment'
+import { Link } from 'react-router-dom'
 
 const KanbanTasks = props => {
   // ** Props
@@ -97,21 +99,36 @@ const KanbanTasks = props => {
   }
 
   return (
-    <Card onClick={handleTaskClick} className='task' data-board-id={task.boardId} data-task-id={task.id}>
-      <CardBody data-task-id={task.id}>
-        {/* {renderLabels()} */}
+    <>
 
-        {task.coverImage ? (
-          <img className='img-fluid rounded task-img mb-1' alt={task.title} src={task.coverImage} />
-        ) : null}
+      <Card className='task' data-board-id={task.boardId} data-task-id={task.id}>
 
-        <h3 className='task-title text-capitalize'>{task.title}</h3>
-        <span className='task-title'>{task?.description}</span>
+        <Link to={`/task/check/${task?.classId}/${task.id}`}>
+          <CardBody data-task-id={task.id}>
+            {/* {renderLabels()} */}
 
-        {/* {renderTaskFooter()} */}
-      </CardBody>
-    </Card>
-  )
+            {task.coverImage ? (
+              <img className='img-fluid rounded task-img mb-1' alt={task.title} src={task.coverImage} />
+            ) : null}
+
+
+            <div className='d-flex justify-content-between'>
+              <h3 className='task-title text-capitalize'>{task.title}</h3>
+              <p><span className='text-info '>Marks:</span>{task.marks || 0}</p>
+            </div>
+            <span className='task-title'>{task?.description}</span>
+            <p className='mt-3 mb-0' style={{ fontSize: "12px" }}><span className='text-info '>Last update:</span> {moment(task?.updatedAt).format("H:mm a, DD-MM-YYYY")}</p>
+            <p style={{ fontSize: "12px" }}><span className='text-info '>Deadline:</span> {moment(task?.deadline).format("H:mm a, DD-MM-YYYY")}</p>
+
+
+            {/* {renderTaskFooter()} */}
+          </CardBody>
+        </Link>
+
+        <p className='align-self-end mx-2 ' style={{ cursor: "pointer" }} onClick={handleTaskClick}><Edit size={10} /> </p>
+
+      </Card>
+    </>)
 }
 
 export default KanbanTasks

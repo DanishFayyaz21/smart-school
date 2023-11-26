@@ -27,6 +27,7 @@ const TaskDetails = ({ data }) => {
   // ** States
   const [tasksOpen, setTasksOpen] = useState(false)
   const [taskDetails, setTaskDetails] = useState(null)
+  const [taskStatus, setTaskStatus] = useState(null)
   const { userData } = useSelector((state) => state.auth)
   const [showModal, setShowModal] = useState(false);
   const [document, setDocument] = useState("");
@@ -77,7 +78,7 @@ const TaskDetails = ({ data }) => {
       // setapplyLoading(false)
     } catch (err) {
       // setapplyLoading(false)
-      Toster("fail", err.message);
+      console.log("fail", err.message);
     }
   };
   const { taskId } = useParams()
@@ -87,9 +88,26 @@ const TaskDetails = ({ data }) => {
       setTaskDetails(response.data.task)
     }
   }
+  console.log("details...", taskStatus)
+  const getTaskStatus = async () => {
+    try {
+      const response = await get(`get-task-status?subjectId=${taskDetails?.subject}&taskId=${taskId}`)
+      if (response.data.status == 200) {
+        setTaskStatus(response.data.data)
+      }
+    } catch (err) {
+      console.log("err: ", err)
+    }
+  }
   useEffect(() => {
     getTaskDetails()
   }, [taskId])
+
+  useEffect(() => {
+    if (taskDetails) {
+      getTaskStatus()
+    }
+  }, [taskDetails])
   return (
 
     <div className=' border-bottom mb-3'>
@@ -109,10 +127,20 @@ const TaskDetails = ({ data }) => {
                 <div >
                   <div>
                     <h3 className='task-title text-capitalize'>{taskDetails.title}</h3>
-                    <span className='task-title'><span className='text-primary'>Deadline:</span> {moment(taskDetails?.deadline).format("H:mm a, DD-MM-YYY")}</span>
+                    <div className='d-flex justify-content-between'>
+                      <div>
+                        <span className='task-title'><span className='text-primary'>Deadline:</span> {moment(taskDetails?.deadline).format("H:mm a, DD-MM-YYY")}</span>
+                        <p className='task-title'>{taskDetails?.description}</p>
+                      </div>
+                      <div>
+                        <p style={{ fontSize: "20px" }}><span className='text-primary' style={{ fontWeight: "600" }}>Total Marks:</span> {taskDetails.marks || 0}</p>
+                        <p style={{ fontSize: "20px" }}><span className='text-primary' style={{ fontWeight: "600" }}>Obtained Marks:</span> {taskStatus?.obtainedMarks || 0}</p>
+                        <p style={{ fontSize: "20px" }}><span className='text-primary' style={{ fontWeight: "600" }}>Status:</span> {taskStatus ? taskStatus?.status : "Not Graded"}</p>
 
+                      </div>
+                    </div>
                   </div>
-                  <span className='task-title'>{taskDetails?.description}</span>
+
                 </div>
               </div>
               <div className='mb-2 mt-4'>

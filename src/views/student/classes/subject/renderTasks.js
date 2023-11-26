@@ -57,7 +57,10 @@ const RenderTasks = ({ data }) => {
               >
                 <CardBody >
                   <Link to={`/task/${task?._id}`}>
-                    <h3 className='task-title text-capitalize'>{task.title}</h3>
+                    <div className='d-flex justify-content-between'>
+                      <h3 className='task-title text-capitalize'>{task.title}</h3>
+                      <p><span className='text-info '>Marks:</span> {task.marks || 0}</p>
+                    </div>
                     <span className='task-title'>{task?.description}</span>
                   </Link>
                   <div className='text-center mb-2 mt-4'>
@@ -66,7 +69,8 @@ const RenderTasks = ({ data }) => {
                     ) : null}
                   </div>
 
-                  <p>Last update: {moment(task?.updatedAt).format("H:mm a, DD-MM-YYY")}</p>
+                  <p className='mt-3 mb-0' style={{ fontSize: "12px" }}><span className='text-info '>Last update:</span> {moment(task?.updatedAt).format("H:mm a, DD-MM-YYYY")}</p>
+                  <p style={{ fontSize: "12px" }}><span className='text-info '>Deadline:</span> {moment(task?.deadline).format("H:mm a, DD-MM-YYYY")}</p>
                   {/* {renderTaskFooter()} */}
                 </CardBody>
               </Card>
@@ -76,7 +80,7 @@ const RenderTasks = ({ data }) => {
           )) : <p>No item has been defined in this board yet.</p>}
       </Row>
 
-      
+
 
     </div >
   )

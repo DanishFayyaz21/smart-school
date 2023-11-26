@@ -44,7 +44,7 @@ const KanbanBoard = () => {
   const [students, setStudents] = useState([])
   const [taskCategories, setTaskCategories] = useState([])
 
-  const { classId, subjectId } = useParams()
+  const { classId, subjectId, subjectName } = useParams()
 
   const getSubjectTasks = async () => {
     try {
@@ -114,17 +114,19 @@ const KanbanBoard = () => {
     taskCategories.length > 0 && taskCategories.map((item) => {
       if (item?.tasks.length > 0) {
         const temp = item?.tasks?.length > 0 && item?.tasks.map((item) => {
-          console.log("item?._iditem?._id", item)
           return {
             id: item?._id,
             "labels": [
               "UX"
             ],
+            classId: item?.classId,
             boardId: item?.taskCategory,
             description: item?.description,
-            dueDate: 1700594583088,
+            dueDate: item?.deadline,
             title: item?.title,
             coverImage: item?.taskImage,
+            marks: item?.marks,
+            updatedAt: item?.updatedAt,
             "attachments": [
               {
                 "name": "documentation.doc",
@@ -199,6 +201,7 @@ const KanbanBoard = () => {
         const response = await post("/add-task-category", formData)
         if (response.data.status == 201) {
           handleAddBoardReset()
+          getSubjectTasks()
         }
       } catch (err) {
         console.log("err", err)
@@ -252,6 +255,7 @@ const KanbanBoard = () => {
   return (
     store.boards ? (
       <div style={{ overflow: "auto", width: "100%" }}>
+        <h3 className='mt-1 mb-2'>Subject: {subjectName}</h3>
         <div className='app-kanban-wrapper'>
           {renderBoards()}
 

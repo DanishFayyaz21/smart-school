@@ -269,7 +269,7 @@ const ClassesCards = () => {
         {classes?.length > 0 && classes.map((item, index) => {
           return (
             <Col key={index} xl={4} md={6}>
-              <Link to={`/classes/subject/${item?.classId?._id}/${item?._id}`}>
+              <Link to={`/classes/subject/${item?.name}/${item?.classId?._id}/${item?._id}`}>
                 <Card>
                   <CardBody>
                     {/* <div className='d-flex justify-content-between'> */}
@@ -278,7 +278,7 @@ const ClassesCards = () => {
                     {/* </div> */}
                     <div className='d-flex justify-content-between align-items-end mt-1 pt-25'>
                       <div className='role-heading'>
-                        <h4 className='fw-bolder'>{item?.name+" - "+item?.classId?.name}</h4>
+                        <h4 className='fw-bolder'>{item?.name + " - " + item?.classId?.name}</h4>
                         {/* <Link
                           to='/'
                           className='role-edit-modal'

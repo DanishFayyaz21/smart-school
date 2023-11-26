@@ -89,7 +89,7 @@ const TaskSidebar = props => {
     handleSubmit,
     formState: { errors }
   } = useForm({
-    defaultValues: { title: '' }
+    defaultValues: { title: '', marks: 0 }
   })
 
   // ** Custom Select Components
@@ -115,7 +115,10 @@ const TaskSidebar = props => {
   // ** Function to run when sidebar opens
   const handleSidebarOpened = () => {
     if (!isObjEmpty(selectedTask)) {
+      console.log("selectedTask", selectedTask)
+
       setValue('title', selectedTask.title)
+      setValue('marks', selectedTask.marks)
       setDueDate(selectedTask.dueDate)
       setDesc(selectedTask.description)
       if (selectedTask.coverImage) {
@@ -143,6 +146,7 @@ const TaskSidebar = props => {
     setFiles([])
     setLabels([])
     setValue('title', '')
+    setValue('marks', 0)
     setDueDate(new Date())
     clearErrors()
     dispatch(handleSelectTask({}))
@@ -220,6 +224,7 @@ const TaskSidebar = props => {
     //         : {})
     //     })
     // )
+    console.log("data.............a", data)
 
     if (typeof files[0] !== "string") {
       imagetob64(files[0])
@@ -325,6 +330,26 @@ const TaskSidebar = props => {
                 )}
               />
               {errors.title && <FormFeedback>Please enter a valid task title</FormFeedback>}
+            </div>
+            <div className='mb-1'>
+              <Label className='form-label' for='task-title'>
+                Marks <span className='text-danger'>*</span>
+              </Label>
+              <Controller
+                name='marks'
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    id='task-title'
+                    placeholder='marks'
+                    type='number'
+                    className='new-todo-item-title'
+                    invalid={errors.marks && true}
+                    {...field}
+                  />
+                )}
+              />
+              {errors.title && <FormFeedback>Please enter valid marks </FormFeedback>}
             </div>
             <div className='mb-1'>
               <Label className='form-label' for='due-date'>

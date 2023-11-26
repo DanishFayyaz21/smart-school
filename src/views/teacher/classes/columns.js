@@ -94,6 +94,19 @@ export const columns = [
       </div>
     )
   },
+
+  {
+    name: 'rollNumber',
+    sortable: true,
+    minWidth: '172px',
+    sortField: 'rollNumber',
+    selector: row => row.rollNumber,
+    cell: row => (
+      <div>
+        <span className='fw-bold'>{row?.rollNumber}</span>
+      </div>
+    )
+  },
   {
     name: 'Role',
     sortable: true,
@@ -102,7 +115,6 @@ export const columns = [
     selector: row => row.role,
     cell: row => renderRole(row)
   },
- 
   {
     name: 'Status',
     sortable: true,
@@ -119,7 +131,8 @@ export const columns = [
     name: 'Actions',
     minWidth: '100px',
     cell: row => (
-      <Link to={`/apps/user/view/${row.id}`}>
+      <Link
+        to={`/student/view/${row._id}`}>
         <Eye className='font-medium-3 text-body' />
       </Link>
     )
