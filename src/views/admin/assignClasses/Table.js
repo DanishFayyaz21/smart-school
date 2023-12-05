@@ -35,7 +35,7 @@ const CustomHeader = ({ setAddClassModal, addClassModal, plan, handlePlanChange,
     <div className='invoice-list-table-header w-100 me-1 ms-50 mt-2 mb-75'>
       <Row>
         <Col xl='6' className='d-flex align-items-center p-0'>
-          <div className='d-flex align-items-center w-100'>
+          {/* <div className='d-flex align-items-center w-100'>
             <label htmlFor='rows-per-page'>Show</label>
             <Input
               className='mx-50'
@@ -50,13 +50,13 @@ const CustomHeader = ({ setAddClassModal, addClassModal, plan, handlePlanChange,
               <option value='50'>50</option>
             </Input>
             <label htmlFor='rows-per-page'>Entries</label>
-          </div>
+          </div> */}
         </Col>
         <Col
           xl='6'
           className='d-flex align-items-sm-center justify-content-lg-end justify-content-start flex-lg-nowrap flex-wrap flex-sm-row flex-column pe-lg-1 p-0 mt-lg-0 mt-1'
         >
-          <div className='d-flex align-items-center mb-sm-0 mb-1 me-1'>
+          {/* <div className='d-flex align-items-center mb-sm-0 mb-1 me-1'>
             <label className='mb-0' htmlFor='search-invoice'>
               Search:
             </label>
@@ -67,14 +67,14 @@ const CustomHeader = ({ setAddClassModal, addClassModal, plan, handlePlanChange,
               className='ms-50 w-100'
               onChange={e => handleFilter(e.target.value)}
             />
-          </div>
-          <Input value={plan} type='select' style={{ width: '10rem' }} onChange={e => handlePlanChange(e.target.value)}>
+          </div> */}
+          {/* <Input value={plan} type='select' style={{ width: '10rem' }} onChange={e => handlePlanChange(e.target.value)}>
             <option value=''>Select Role</option>
             <option value='basic'>Basic</option>
             <option value='company'>Company</option>
             <option value='enterprise'>Enterprise</option>
             <option value='team'>Team</option>
-          </Input>
+          </Input> */}
           <Button className='mx-2' color='primary' onClick={() => setAddClassModal(true)}>Add New Class</Button>
         </Col>
       </Row>
@@ -250,7 +250,7 @@ const Table = () => {
         <DataTable
           noHeader
           subHeader
-          pagination
+          // pagination
           responsive
           selectableRows
           paginationServer
@@ -258,7 +258,7 @@ const Table = () => {
           onSort={handleSort}
           data={allclasses || []}
           sortIcon={<ChevronDown />}
-          paginationComponent={CustomPagination}
+          // paginationComponent={CustomPagination}
           selectableRowsComponent={BootstrapCheckbox}
           className='react-dataTable'
           subHeaderComponent={

@@ -49,9 +49,9 @@ const SidebarLeft = props => {
     <Fragment>
       <Card className='sidebar-wrapper shadow-none'>
         <CardBody className='card-body my-sm-0 mb-3'>
-          <Button color='primary' block onClick={handleAddEventClick}>
+          {/* <Button color='primary' block onClick={handleAddEventClick}>
             <span className='align-middle'>Add Class lecture</span>
-          </Button>
+          </Button> */}
           <Button className='mt-2' color='primary' disabled={loading} block onClick={generateTimetable}>
             <span className='align-middle'>Generate Automatic Time Table </span>
           </Button>

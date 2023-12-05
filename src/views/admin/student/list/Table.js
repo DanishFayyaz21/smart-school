@@ -373,7 +373,7 @@ const UsersList = () => {
 
   return (
     <Fragment>
-      <Card>
+      {/* <Card>
         <CardHeader>
           <CardTitle tag='h4'>Filters</CardTitle>
         </CardHeader>
@@ -459,7 +459,7 @@ const UsersList = () => {
             </Col>
           </Row>
         </CardBody>
-      </Card>
+      </Card> */}
 
 
 

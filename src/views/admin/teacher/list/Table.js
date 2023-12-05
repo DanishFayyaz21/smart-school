@@ -91,7 +91,7 @@ const CustomHeader = ({ store, toggleSidebar, handlePerPage, rowsPerPage, handle
     <div className='invoice-list-table-header w-100 me-1 ms-50 mt-2 mb-75'>
       <Row>
         <Col xl='6' className='d-flex align-items-center p-0'>
-          <div className='d-flex align-items-center w-100'>
+          {/* <div className='d-flex align-items-center w-100'>
             <label htmlFor='rows-per-page'>Show</label>
             <Input
               className='mx-50'
@@ -106,13 +106,13 @@ const CustomHeader = ({ store, toggleSidebar, handlePerPage, rowsPerPage, handle
               <option value='50'>50</option>
             </Input>
             <label htmlFor='rows-per-page'>Entries</label>
-          </div>
+          </div> */}
         </Col>
         <Col
           xl='6'
           className='d-flex align-items-sm-center justify-content-xl-end justify-content-start flex-xl-nowrap flex-wrap flex-sm-row flex-column pe-xl-1 p-0 mt-xl-0 mt-1'
         >
-          <div className='d-flex align-items-center mb-sm-0 mb-1 me-1'>
+          {/* <div className='d-flex align-items-center mb-sm-0 mb-1 me-1'>
             <label className='mb-0' htmlFor='search-invoice'>
               Search:
             </label>
@@ -123,10 +123,10 @@ const CustomHeader = ({ store, toggleSidebar, handlePerPage, rowsPerPage, handle
               value={searchTerm}
               onChange={e => handleFilter(e.target.value)}
             />
-          </div>
+          </div> */}
 
           <div className='d-flex align-items-center table-header-actions'>
-            <UncontrolledDropdown className='me-1'>
+            {/* <UncontrolledDropdown className='me-1'>
               <DropdownToggle color='secondary' caret outline>
                 <Share className='font-small-4 me-50' />
                 <span className='align-middle'>Export</span>
@@ -153,7 +153,7 @@ const CustomHeader = ({ store, toggleSidebar, handlePerPage, rowsPerPage, handle
                   <span className='align-middle'>Copy</span>
                 </DropdownItem>
               </DropdownMenu>
-            </UncontrolledDropdown>
+            </UncontrolledDropdown> */}
 
             <Button className='add-new-user' color='primary' onClick={toggleSidebar}>
               Add Teacher
@@ -348,7 +348,7 @@ const UsersList = () => {
 
   return (
     <Fragment>
-      <Card>
+      {/* <Card>
         <CardHeader>
           <CardTitle tag='h4'>Filters</CardTitle>
         </CardHeader>
@@ -435,7 +435,7 @@ const UsersList = () => {
 
           </Row>
         </CardBody>
-      </Card>
+      </Card> */}
 
       <Card className='overflow-hidden'>
         <div className='react-dataTable'>
@@ -444,14 +444,14 @@ const UsersList = () => {
             noHeader
             subHeader
             sortServer
-            pagination
+            // pagination
             responsive
             paginationServer
             columns={columns}
             onSort={handleSort}
             sortIcon={<ChevronDown />}
             className='react-dataTable'
-            paginationComponent={CustomPagination}
+            // paginationComponent={CustomPagination}
             data={allTeacher}
             subHeaderComponent={
               <CustomHeader
