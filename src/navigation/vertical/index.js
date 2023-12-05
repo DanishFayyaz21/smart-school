@@ -21,7 +21,7 @@ import { useSelector } from "react-redux";
 const VerticalNavigation = () => {
     const { userData } = useSelector(state => state.auth)
     let routes = [...dashboards
-        
+
         //,  ...admin, ...Student(), ...teacher
     ]
     if (userData.role == "Admin") {
@@ -32,7 +32,7 @@ const VerticalNavigation = () => {
     }
 
 
-    if (userData.role == "Student") {
+    if (userData.role == "Student" || userData.role == "Parent") {
         routes = [
             ...routes,
             ...Student(),
